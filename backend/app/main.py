@@ -2,7 +2,7 @@ import logging
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from app.database import create_db_and_tables
-from app.routers import ingestion
+from app.routers import ingestion, leads, companies
 from app.scheduler import start_scheduler, stop_scheduler
 
 logging.basicConfig(level=logging.INFO)
@@ -19,6 +19,8 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 
 app.include_router(ingestion.router)
+app.include_router(leads.router)
+app.include_router(companies.router)
 
 @app.get("/")
 def read_root():
