@@ -12,11 +12,16 @@ class LeadStatus(str, Enum):
 
 class LeadBase(SQLModel):
     status: LeadStatus = Field(default=LeadStatus.NEW)
-    confidence_score: float = Field(default=0.0) # 0 to 100
+    confidence_score: float = Field(default=0.0) # 0 to 1.0
     estimated_volume: Optional[str] = None
     next_action: Optional[str] = None
-    next_action: Optional[str] = None
     notes: Optional[str] = None # Internal notes or AI reasoning
+    
+    # AI-Generated Fields
+    ai_reasoning: Optional[str] = None # Detailed AI explanation
+    recommended_products: Optional[str] = None # JSON string of product recommendations
+    lead_quality: Optional[str] = None # HIGH/MEDIUM/LOW
+    urgency: Optional[str] = None # IMMEDIATE/NEAR_TERM/LONG_TERM
 
 class Lead(LeadBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)

@@ -10,3 +10,7 @@ beautifulsoup4
 lxml_html_clean
 prettytable
 apscheduler
+twilio
+python-dotenv
+groq
+

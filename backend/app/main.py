@@ -1,9 +1,13 @@
 import logging
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
+from dotenv import load_dotenv
 from app.database import create_db_and_tables
-from app.routers import ingestion, leads, companies
+from app.routers import ingestion, leads, companies, whatsapp
 from app.scheduler import start_scheduler, stop_scheduler
+
+# Load environment variables from .env file
+load_dotenv()
 
 logging.basicConfig(level=logging.INFO)
 
@@ -39,6 +43,7 @@ app = FastAPI(lifespan=lifespan)
 app.include_router(ingestion.router)
 app.include_router(leads.router)
 app.include_router(companies.router)
+app.include_router(whatsapp.router)
 
 @app.get("/")
 def read_root():
