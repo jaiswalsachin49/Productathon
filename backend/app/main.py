@@ -12,6 +12,24 @@ async def lifespan(app: FastAPI):
     # Startup
     create_db_and_tables()
     start_scheduler()
+    
+    # Run initial ingestion on startup
+    import logging
+    from app.routers.ingestion import run_ingestion_task
+    logger = logging.getLogger(__name__)
+    logger.info("🚀 Running initial data ingestion on startup...")
+    
+    # Run ingestion in background
+    import threading
+    default_keywords = [
+        "new manufacturing plant India",
+        "boiler commissioning India",
+        "industrial expansion India"
+    ]
+    thread = threading.Thread(target=run_ingestion_task, args=(default_keywords,))
+    thread.daemon = True
+    thread.start()
+    
     yield
     # Shutdown
     stop_scheduler()

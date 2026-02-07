@@ -50,3 +50,114 @@ INFO:app.ingestion.multi_source_monitor:Fetching from Bing News: https://www.bin
 INFO:app.ingestion.multi_source_monitor:  - Analyzing: NLC conducts boiler light-up test for NNTPP's first unit (http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=69879645b9274a2c808ca09701c601a2&url=https%3a%2f%2ftimesofindia.indiatimes.com%2fbusiness%2findia-business%2fnlc-conducts-boiler-light-up-test-for-nntpps-first-unit%2farticleshow%2f67310172.cms&c=13272156603163521814&mkt=en-in)
 INFO:app.ingestion.multi_source_monitor:    -> MATCH (Full Text: 1309)
 INFO:app.routers.ingestion:[DEBUG] News Monitor returned: 16 signals
+INFO:app.routers.ingestion:[DEBUG] Tender Monitor returned: 17 signals
+INFO:app.routers.ingestion:Ingestion complete. Added 20 new signals.
+INFO:app.routers.ingestion:Starting Intelligence Processing...
+INFO:app.services.intelligence:Processing Signal ID 13: Cisco manufacturing unit a testament of India's engineering capabilities: Scindia
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 16: DoP Shortlists Patented, Unlaunched Drugs for Global Tender Exemption, See Full List - Medical Dialogues
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 20: Taural India aluminium casting plant commences operations
+INFO:app.services.intelligence:  -> Extracted Company: Taural India aluminium casting plant
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 18 (Confidence: 0.90)
+INFO:app.services.intelligence:Processing Signal ID 21: Jindal India launches Rs 11,000-crore coating line at Howrah plant
+INFO:app.services.intelligence:  -> Extracted Company: Jindal India
+INFO:app.services.intelligence:  -> Inferred Product: LDO (Light Diesel Oil)
+INFO:app.services.intelligence:  -> Created Lead ID 19 (Confidence: 0.90)
+INFO:app.services.intelligence:Processing Signal ID 22: Supertech EV commissions Karnataka plant with 12,000 annual electric two-wheeler capacity
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 23: India's road construction likely to slide to a 5-year low of 25-26 km per day in FY26: ICRA - The Economic Times
+INFO:app.services.intelligence:  -> Extracted Company: India's road construct
+INFO:app.services.intelligence:  -> Inferred Product: Bitumen
+INFO:app.services.intelligence:  -> Created Lead ID 20 (Confidence: 0.90)
+INFO:app.services.intelligence:Processing Signal ID 24: Press Note Details: Press Information Bureau - PIB
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 25: Govt aims to accelerate pace of highways construction to 60 km/day: Gadkari - ET Infra
+INFO:app.services.intelligence:  -> Extracted Company: Govt aims to accelerate pace of highways construct
+INFO:app.services.intelligence:  -> Inferred Product: Bitumen
+INFO:app.services.intelligence:  -> Created Lead ID 21 (Confidence: 0.90)
+INFO:app.services.intelligence:Processing Signal ID 26: Can skilled workers transform India’s highways? NHAI plans mega training mission
+INFO:app.services.intelligence:  -> Extracted Company: the construct
+INFO:app.services.intelligence:  -> Inferred Product: Bitumen
+INFO:app.services.intelligence:  -> Created Lead ID 22 (Confidence: 0.90)
+INFO:app.services.intelligence:Processing Signal ID 27: India’s Biggest Highway Push Advances: Over 21,700 km Out Of 26,425 km Awarded Projects Under Bharatmala Pariyojana Completed
+INFO:app.services.intelligence:  -> Extracted Company: Km of roads construct
+INFO:app.services.intelligence:  -> Inferred Product: Bitumen
+INFO:app.services.intelligence:  -> Created Lead ID 23 (Confidence: 0.90)
+INFO:app.services.intelligence:Processing Signal ID 28: Pb mins review Sri Anandpur Sahib bridge projects, announce Khuralgarh Sahib road upgrade
+INFO:app.services.intelligence:  -> Extracted Company: Punjab education minister Harjot Bains and finance minister Harpal Singh Cheema on Wednesday visited the Sri Anandpur Sahib assembly constituency to review the progress of major bridge construct
+INFO:app.services.intelligence:  -> Inferred Product: Bitumen
+INFO:app.services.intelligence:  -> Created Lead ID 24 (Confidence: 0.90)
+INFO:app.services.intelligence:Processing Signal ID 29: NLC conducts boiler light-up test for NNTPP's first unit
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 25 (Confidence: 0.90)
+INFO:app.services.intelligence:Processing Signal ID 30: Cisco manufacturing unit a testament of India's engineering capabilities: Scindia
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 31: Rockwool Group’s ₹550 crore Cheyyar plant to be operational from mid-2026
+INFO:app.services.intelligence:  -> Extracted Company: Rockwool Group
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:  -> Created Lead ID 26 (Confidence: 0.60)
+INFO:app.services.intelligence:Processing Signal ID 32: Rockwool Group’s ₹550 crore Cheyyar plant to be operational from mid-2026
+INFO:app.services.intelligence:  -> Extracted Company: Rockwool Group
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:  -> Created Lead ID 27 (Confidence: 0.60)
+INFO:app.services.intelligence:Processing Signal ID 33: Double spending? New tender for Gurgaon road projects already funded - Times of India
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> Inferred Product: Bitumen
+INFO:app.services.intelligence:  -> Created Lead ID 28 (Confidence: 0.90)
+INFO:app.services.intelligence:Processing Signal ID 34: Tender deadline pushed again for Bengaluru Tunnel Road - The New Indian Express
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> Inferred Product: Bitumen
+INFO:app.services.intelligence:  -> Created Lead ID 29 (Confidence: 0.90)
+INFO:app.services.intelligence:Processing Signal ID 35: Tender floated for 3rd line project between Khurda Road & Gangadharpur
+INFO:app.services.intelligence:  -> Extracted Company: km third line construct
+INFO:app.services.intelligence:  -> Inferred Product: Bitumen
+INFO:app.services.intelligence:  -> Created Lead ID 30 (Confidence: 0.90)
+INFO:app.services.intelligence:Processing Signal ID 36: India’s highway construction slows again due to elections, delayed land approvals
+INFO:app.services.intelligence:  -> Extracted Company: highway construct
+INFO:app.services.intelligence:  -> Inferred Product: Bitumen
+INFO:app.services.intelligence:  -> Created Lead ID 31 (Confidence: 0.90)
+INFO:app.services.intelligence:Processing Signal ID 37: BRO Invites Tender for Construction of Dong-Jachep Road (Green-Field Alignment) To Nhsl Specifications - 2024_BRO_679030_1 - The Sentinel - of this Land, for its People
+INFO:app.services.intelligence:  -> Extracted Company: BRO Invites Tender for Construct
+INFO:app.services.intelligence:  -> Inferred Product: Bitumen
+INFO:app.services.intelligence:  -> Created Lead ID 32 (Confidence: 0.90)
+INFO:app.services.intelligence:Processing Signal ID 38: MoRTH Invites Tender for Construction of New 2 Lane with paved shoulders - 2024_MoRTH_815173_1 - The Sentinel - of this Land, for its People
+INFO:app.services.intelligence:  -> Extracted Company: MoRTH Invites Tender for Construct
+INFO:app.services.intelligence:  -> Inferred Product: Bitumen
+INFO:app.services.intelligence:  -> Created Lead ID 33 (Confidence: 0.90)
+INFO:app.services.intelligence:Processing Signal ID 39: 16 road projects worth Rs 13 crore launched in Chas block
+INFO:app.services.intelligence:  -> Extracted Company: The Chas block is set to undergo significant infra
+INFO:app.services.intelligence:  -> Inferred Product: Bitumen
+INFO:app.services.intelligence:  -> Created Lead ID 34 (Confidence: 0.90)
+INFO:app.routers.ingestion:Intelligence complete. Created 22 new leads.
+INFO:apscheduler.executors.default:Job "scheduled_ingestion (trigger: interval[0:30:00], next run at: 2026-02-08 01:44:31 IST)" executed successfully
+Fetching from Google News...
+Fetching from Bing News...
+Fetching from Google News...
+Fetching from Bing News...
+Fetching from Google News...
+Fetching from Bing News...
+Searching Tenders for new manufacturing plant India: https://news.google.com/rss/search?q=new%20manufacturing%20plant%20India%20tender+intitle:tender&hl=en-IN&gl=IN&ceid=IN:en
+Searching Tenders for new manufacturing plant India: https://www.bing.com/news/search?q=new%20manufacturing%20plant%20India%20tender+tender&format=rss
+Searching Tenders for new manufacturing plant India: https://news.google.com/rss/search?q=new%20manufacturing%20plant%20India%20procurement%20notice+intitle:tender&hl=en-IN&gl=IN&ceid=IN:en
+Searching Tenders for new manufacturing plant India: https://www.bing.com/news/search?q=new%20manufacturing%20plant%20India%20procurement%20notice+tender&format=rss
+Searching Tenders for road construction projects India: https://news.google.com/rss/search?q=road%20construction%20projects%20India%20tender+intitle:tender&hl=en-IN&gl=IN&ceid=IN:en
+Searching Tenders for road construction projects India: https://www.bing.com/news/search?q=road%20construction%20projects%20India%20tender+tender&format=rss
+Searching Tenders for road construction projects India: https://news.google.com/rss/search?q=road%20construction%20projects%20India%20procurement%20notice+intitle:tender&hl=en-IN&gl=IN&ceid=IN:en
+Searching Tenders for road construction projects India: https://www.bing.com/news/search?q=road%20construction%20projects%20India%20procurement%20notice+tender&format=rss
+Searching Tenders for boiler commissioning India: https://news.google.com/rss/search?q=boiler%20commissioning%20India%20tender+intitle:tender&hl=en-IN&gl=IN&ceid=IN:en
+Searching Tenders for boiler commissioning India: https://www.bing.com/news/search?q=boiler%20commissioning%20India%20tender+tender&format=rss
+Searching Tenders for boiler commissioning India: https://news.google.com/rss/search?q=boiler%20commissioning%20India%20procurement%20notice+intitle:tender&hl=en-IN&gl=IN&ceid=IN:en
+Searching Tenders for boiler commissioning India: https://www.bing.com/news/search?q=boiler%20commissioning%20India%20procurement%20notice+tender&format=rss
+INFO:     127.0.0.1:59482 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59482 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59482 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59512 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59512 - "GET / HTTP/1.1" 200 OK
