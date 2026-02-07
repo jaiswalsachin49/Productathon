@@ -94,23 +94,75 @@ class IntelligenceService:
 
     def calculate_confidence(self, signal: Signal, product: Product) -> float:
         """
-        Calculate a confidence score (0.0 to 1.0) for this lead.
+        Advanced lead scoring with multiple factors:
+        1. Intent Strength (0-0.35) - Tender vs vague mention
+        2. Freshness (0-0.20) - Days since signal  
+        3. Product Match (0-0.25) - Keyword alignment
+        4. Company Size (0-0.20) - Investment/capacity mentions
         """
-        score = 0.5 # Base score
+        from datetime import datetime, timezone
         
-        # Source trust boost
-        if signal.source and signal.source.trust_score:
-            score += (signal.source.trust_score * 0.2)
-            
-        # Full content availability boost
-        if len(signal.content_summary) > 200:
-            score += 0.1
-            
-        # Product match strength
-        if product:
-            score += 0.2
-            
-        return min(score, 1.0)
+        score = 0.0
+        title_lower = signal.title.lower()
+        content = f"{signal.title} {signal.content_summary or ''}".lower()
+        
+        # 1. INTENT STRENGTH (0-0.35)
+        if any(kw in title_lower for kw in ["tender", "floats tender", "invites tender"]):
+            score += 0.35  # Explicit tender
+        elif any(kw in title_lower for kw in ["mou", "signs", "agreement", "contract"]):
+            score += 0.25  # Formal agreement
+        elif any(kw in title_lower for kw in ["plans", "to set up", "to invest"]):
+            score += 0.15  # Planned project
+        elif any(kw in title_lower for kw in ["commissions", "launches", "opens"]):
+            score += 0.20  # Already operational
+        else:
+            score += 0.05  # Vague mention
+        
+        # 2. FRESHNESS (0-0.20)
+        if signal.pub_date:
+            try:
+                if signal.pub_date.tzinfo is None:
+                    pub_date = signal.pub_date.replace(tzinfo=timezone.utc)
+                else:
+                    pub_date = signal.pub_date
+                now = datetime.now(timezone.utc)
+                days_old = (now - pub_date).days
+                
+                if days_old <= 3:
+                    score += 0.20
+                elif days_old <= 7:
+                    score += 0.15
+                elif days_old <= 30:
+                    score += 0.10
+                else:
+                    score += 0.05
+            except:
+                score += 0.10
+        else:
+            score += 0.10
+        
+        # 3. PRODUCT MATCH (0-0.25)
+        if product and product.keywords:
+            keywords = [kw.strip() for kw in product.keywords.lower().split(',')]
+            matches = sum(1 for kw in keywords if kw in content)
+            score += min(0.25, matches * 0.05)
+        
+        # 4. COMPANY SIZE (0-0.20)
+        if any(ind in content for ind in ["crore", "₹", "rs.", "investment"]):
+            crore_pattern = r'(\d+(?:,\d+)*)\s*crore'
+            match = re.search(crore_pattern, content)
+            if match:
+                amount = int(match.group(1).replace(',', ''))
+                if amount >= 1000:
+                    score += 0.20
+                elif amount >= 100:
+                    score += 0.15
+                else:
+                    score += 0.10
+            else:
+                score += 0.10
+                
+        return min(1.0, score)
 
     def process_signal(self, signal: Signal) -> Optional[Lead]:
         """
