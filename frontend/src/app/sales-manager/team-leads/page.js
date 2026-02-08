@@ -114,6 +114,8 @@ export default function TeamLeads() {
         return styles[status] || styles.Active;
     };
 
+    const [showToast, setShowToast] = useState(false);
+
     const handleExportCSV = () => {
         const headers = ['ID', 'Company', 'Location', 'Product', 'Priority', 'Officer', 'Status', 'Last Updated'];
         const csvContent = [
@@ -141,6 +143,10 @@ export default function TeamLeads() {
             link.click();
             document.body.removeChild(link);
         }
+
+        // Show toast
+        setShowToast(true);
+        setTimeout(() => setShowToast(false), 3000);
     };
 
     const [searchQuery, setSearchQuery] = useState('');
@@ -161,6 +167,31 @@ export default function TeamLeads() {
     return (
 
         <div style={{ padding: '24px', maxWidth: '1600px', margin: '0 auto' }}>
+            {/* Toast Notification */}
+            {showToast && (
+                <div style={{
+                    position: 'fixed',
+                    top: '24px',
+                    right: '24px',
+                    background: '#28A745',
+                    color: '#FFF',
+                    padding: '16px 24px',
+                    borderRadius: '12px',
+                    boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '12px',
+                    zIndex: 1000,
+                    animation: 'slideIn 0.3s ease-out'
+                }}>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                        <polyline points="22 4 12 14.01 9 11.01" />
+                    </svg>
+                    <span style={{ fontWeight: '600' }}>CSV Exported Successfully!</span>
+                </div>
+            )}
+
             {/* Header */}
             <div style={{
                 display: 'flex',

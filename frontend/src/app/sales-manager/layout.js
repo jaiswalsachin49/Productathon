@@ -4,12 +4,12 @@ import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import {
     LayoutDashboard,
-    BarChart2,
     Users,
     PieChart,
     Settings,
     LogOut,
-    Bell
+    BarChart2,
+    Target
 } from '../../components/Icons';
 import { useAuth } from '../../context/AuthContext';
 import { COLORS } from '../../styles/theme';
@@ -148,20 +148,6 @@ export default function SalesManagerLayout({ children }) {
                     top: 0,
                     zIndex: 40
                 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
-                        <button style={{ position: 'relative', background: 'none', border: 'none', cursor: 'pointer' }}>
-                            <Bell size={20} color="#666" />
-                            <span style={{
-                                position: 'absolute',
-                                top: '-2px',
-                                right: '-2px',
-                                width: '8px',
-                                height: '8px',
-                                background: '#E31E24',
-                                borderRadius: '50%'
-                            }} />
-                        </button>
-                    </div>
                 </header>
 
                 <main style={{ padding: '32px' }}>

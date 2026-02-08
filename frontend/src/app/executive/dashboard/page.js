@@ -87,6 +87,41 @@ export default function ExecutiveDashboard() {
         { name: 'Jun', revenue: stats?.revenue || 6800000, pipeline: stats?.pipeline_value || 9000000 },
     ];
 
+    // Toast notification state
+    const [showToast, setShowToast] = useState(false);
+
+    // Download report handler
+    const handleDownloadReport = () => {
+        const csvContent = [
+            ['Executive Report - ' + new Date().toLocaleDateString()],
+            [''],
+            ['Key Metrics'],
+            ['Metric', 'Value', 'Change'],
+            ['Total Revenue', metrics?.revenue?.value || '₹0L', metrics?.revenue?.change || 'N/A'],
+            ['Pipeline Value', metrics?.pipeline?.value || '₹0L', metrics?.pipeline?.change || 'N/A'],
+            ['Conversion Rate', metrics?.conversion?.value || '0%', metrics?.conversion?.change || 'N/A'],
+            ['Deals Won', metrics?.deals?.value || '0', metrics?.deals?.change || 'N/A'],
+            [''],
+            ['Top Products'],
+            ['Product', 'Leads'],
+            ...topProducts.map(p => [p.name, p.count]),
+            [''],
+            ['Geographic Performance'],
+            ['State', 'Leads'],
+            ...geoData.map(g => [g.name, g.count])
+        ].map(row => row.join(',')).join('\n');
+
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = `executive-report-${new Date().toISOString().split('T')[0]}.csv`;
+        link.click();
+
+        // Show toast
+        setShowToast(true);
+        setTimeout(() => setShowToast(false), 3000);
+    };
+
     if (loading) {
         return (
             <div style={{ padding: '60px', textAlign: 'center', color: '#666', fontSize: '18px' }}>
@@ -110,14 +145,39 @@ export default function ExecutiveDashboard() {
                     </p>
                 </div>
                 <div style={{ display: 'flex', gap: '12px' }}>
-                    <button style={{ padding: '10px 20px', background: '#FFF', border: '1px solid #E0E0E0', borderRadius: '8px', fontWeight: '600', color: '#444', cursor: 'pointer' }}>
+                    <button
+                        onClick={handleDownloadReport}
+                        style={{ padding: '10px 20px', background: '#FFF', border: '1px solid #E0E0E0', borderRadius: '8px', fontWeight: '600', color: '#444', cursor: 'pointer' }}
+                    >
                         Download Report
-                    </button>
-                    <button style={{ padding: '10px 20px', background: 'rgb(0, 91, 172)', border: 'none', borderRadius: '8px', fontWeight: '600', color: '#FFF', cursor: 'pointer' }}>
-                        Live View
                     </button>
                 </div>
             </div>
+
+            {/* Toast Notification */}
+            {showToast && (
+                <div style={{
+                    position: 'fixed',
+                    top: '24px',
+                    right: '24px',
+                    background: '#28A745',
+                    color: '#FFF',
+                    padding: '16px 24px',
+                    borderRadius: '12px',
+                    boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '12px',
+                    zIndex: 1000,
+                    animation: 'slideIn 0.3s ease-out'
+                }}>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                        <polyline points="22 4 12 14.01 9 11.01" />
+                    </svg>
+                    <span style={{ fontWeight: '600' }}>Report Downloaded Successfully!</span>
+                </div>
+            )}
 
             {/* KPI Cards Row */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px', marginBottom: '32px' }}>

@@ -5,6 +5,7 @@ import { COLORS } from '../../../styles/theme';
 import SalesManagerLayout from '../../../components/SalesManagerLayout';
 import api from '../../../services/api';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 // --- Premium Icon Components ---
 const TrendingIcon = ({ color = "currentColor", size = 20 }) => (
@@ -124,7 +125,7 @@ const KPICard = ({ title, value, change, changeLabel, icon: Icon, color, isAlert
     </div>
 );
 
-const ActivityItem = ({ user, action, target, time, type }) => (
+const ActivityItem = ({ user, action, target, time, type, onView }) => (
     <div style={{
         display: 'flex',
         alignItems: 'center',
@@ -153,23 +154,29 @@ const ActivityItem = ({ user, action, target, time, type }) => (
             </div>
             <div style={{ fontSize: '11px', color: '#999', marginTop: '2px' }}>{time}</div>
         </div>
-        <button style={{
-            padding: '6px 12px',
-            border: '1px solid #E0E0E0',
-            borderRadius: '6px',
-            background: 'transparent',
-            fontSize: '11px',
-            fontWeight: '600',
-            color: '#666',
-            cursor: 'pointer'
-        }}>View</button>
+        <button
+            onClick={onView}
+            style={{
+                padding: '6px 12px',
+                border: '1px solid #E0E0E0',
+                borderRadius: '6px',
+                background: 'transparent',
+                fontSize: '11px',
+                fontWeight: '600',
+                color: '#666',
+                cursor: 'pointer'
+            }}
+        >View</button>
     </div>
 );
 
 export default function SalesManagerDashboard() {
+    const router = useRouter();
     const [loading, setLoading] = useState(true);
     const [stats, setStats] = useState(null);
     const [topProducts, setTopProducts] = useState([]);
+    const [showDateFilter, setShowDateFilter] = useState(false);
+    const [dateRange, setDateRange] = useState({ start: '', end: '' });
 
     useEffect(() => {
         loadData();
@@ -191,61 +198,209 @@ export default function SalesManagerDashboard() {
         }
     };
 
-    if (loading) {
-        return (
-            <SalesManagerLayout>
-                <div style={{
-                    height: '100vh',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#666',
-                    fontSize: '16px',
-                    fontWeight: '500'
-                }}>
-                    Loading Dashboard...
-                </div>
-            </SalesManagerLayout>
-        );
-    }
+    // Schedule meeting in Outlook
+    const handleScheduleMeeting = () => {
+        const meetingDetails = {
+            subject: 'Weekly Team Meeting - Q3 Targets Review',
+            body: 'Meeting to review Q3 targets with all regional sales officers.\n\nAgenda:\n1. Performance Review\n2. Target Assessment\n3. Action Items',
+            startTime: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(), // Tomorrow
+            endTime: new Date(Date.now() + 24 * 60 * 60 * 1000 + 60 * 60 * 1000).toISOString(), // 1 hour later
+        };
+
+        // Create Outlook calendar URL
+        const subject = "Weekly Team Review";
+        const body = "Let's review the Q3 targets and discuss regional performance.";
+        const mailtoLink = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.location.href = mailtoLink;
+    };
+
+    // Toast notification state
+    const [showToast, setShowToast] = useState(false);
+
+    // Download report as CSV
+    const handleDownloadReport = () => {
+        const csvContent = [
+            ['Metric', 'Value'],
+            ['Total Leads', stats?.total || 0],
+            ['High Priority', stats?.highPriority || 0],
+            ['Conversion Rate', `${stats?.conversionRate || 0}%`],
+            ['Active Officers', 8],
+            [''],
+            ['Top Products'],
+            ...topProducts.map(p => [p.name, `${p.count} leads`])
+        ].map(row => row.join(',')).join('\n');
+
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = `dashboard-report-${new Date().toISOString().split('T')[0]}.csv`;
+        link.click();
+
+        // Show toast
+        setShowToast(true);
+        setTimeout(() => setShowToast(false), 3000);
+    };
+
+    // Filter by date
+    const handleApplyDateFilter = () => {
+        setShowDateFilter(false);
+        // Reload data with date filter (would need API support)
+        alert(`Filter applied: ${dateRange.start} to ${dateRange.end}`);
+        loadData();
+    };
+
+    // View lead/activity detail
+    const handleViewActivity = () => {
+        // Navigate to detail page
+        router.push('/sales-manager/team-leads');
+    };
+
+    // View all activity
+    const handleViewAllActivity = () => {
+        router.push('/sales-manager/team-leads');
+    };
+
+    if (loading) return (
+        <div style={{ padding: '60px', textAlign: 'center', color: '#666', fontSize: '18px' }}>
+            Loading Dashboard...
+        </div>
+    );
 
     if (!stats) return null;
 
     return (
-
-        <div style={{ padding: '32px', maxWidth: '1600px', margin: '0 auto' }}>
-            {/* Header Section */}
-            <div style={{ marginBottom: '32px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
-                <div>
-                    <div style={{ fontSize: '12px', fontWeight: '700', color: COLORS.hpclBlue, letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '8px' }}>West Zone • Gujarat</div>
-                    <h1 style={{ fontSize: '32px', fontWeight: '800', color: '#1A1A1A', letterSpacing: '-0.5px' }}>Dashboard Overview</h1>
+        <div style={{ maxWidth: '1600px', margin: '0 auto' }}>
+            {/* Toast Notification */}
+            {showToast && (
+                <div style={{
+                    position: 'fixed',
+                    top: '80px', // Below header
+                    right: '24px',
+                    background: '#28A745',
+                    color: '#FFF',
+                    padding: '16px 24px',
+                    borderRadius: '12px',
+                    boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '12px',
+                    zIndex: 1000,
+                    animation: 'slideIn 0.3s ease-out'
+                }}>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                        <polyline points="22 4 12 14.01 9 11.01" />
+                    </svg>
+                    <span style={{ fontWeight: '600' }}>Report Downloaded Successfully!</span>
                 </div>
+            )}
+
+            {/* Header Section */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '32px' }}>
+                <div>
+                    <div style={{ fontSize: '12px', fontWeight: '700', color: '#666', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '8px' }}>
+                        WEST ZONE • GUJARAT
+                    </div>
+                    <h1 style={{ fontSize: '32px', fontWeight: '800', color: '#1A1A1A', letterSpacing: '-1px', margin: 0 }}>
+                        Dashboard Overview
+                    </h1>
+                </div>
+
                 <div style={{ display: 'flex', gap: '12px' }}>
-                    <button style={{
-                        padding: '10px 20px',
-                        background: '#FFFFFF',
-                        border: '1px solid #E0E0E0',
-                        borderRadius: '8px',
-                        color: '#666',
-                        fontWeight: '600',
-                        fontSize: '13px',
-                        cursor: 'pointer'
-                    }}>Filter Date</button>
-                    <button style={{
-                        padding: '10px 20px',
-                        background: '#1A1A1A',
-                        border: 'none',
-                        borderRadius: '8px',
-                        color: '#FFFFFF',
-                        fontWeight: '600',
-                        fontSize: '13px',
-                        cursor: 'pointer',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '8px'
-                    }}>
+                    <div style={{ position: 'relative' }}>
+                        <button
+                            onClick={() => setShowDateFilter(!showDateFilter)}
+                            style={{
+                                padding: '12px 20px',
+                                background: '#FFFFFF',
+                                border: '1px solid #E0E0E0',
+                                borderRadius: '12px',
+                                fontSize: '14px',
+                                fontWeight: '600',
+                                color: '#1A1A1A',
+                                cursor: 'pointer',
+                                boxShadow: '0 2px 4px rgba(0,0,0,0.02)',
+                                transition: 'all 0.2s'
+                            }}>
+                            Filter Date
+                        </button>
+
+                        {/* Date Filter Dropdown */}
+                        {showDateFilter && (
+                            <div style={{
+                                position: 'absolute',
+                                top: '100%',
+                                right: 0,
+                                marginTop: '8px',
+                                background: 'white',
+                                padding: '16px',
+                                borderRadius: '12px',
+                                boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
+                                border: '1px solid #E0E0E0',
+                                width: '300px',
+                                zIndex: 10
+                            }}>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                                    <div>
+                                        <label style={{ display: 'block', fontSize: '12px', marginBottom: '4px', color: '#666' }}>Start Date</label>
+                                        <input
+                                            type="date"
+                                            value={dateRange.start}
+                                            onChange={(e) => setDateRange({ ...dateRange, start: e.target.value })}
+                                            style={{ width: '100%', padding: '8px', borderRadius: '6px', border: '1px solid #ddd' }}
+                                        />
+                                    </div>
+                                    <div>
+                                        <label style={{ display: 'block', fontSize: '12px', marginBottom: '4px', color: '#666' }}>End Date</label>
+                                        <input
+                                            type="date"
+                                            value={dateRange.end}
+                                            onChange={(e) => setDateRange({ ...dateRange, end: e.target.value })}
+                                            style={{ width: '100%', padding: '8px', borderRadius: '6px', border: '1px solid #ddd' }}
+                                        />
+                                    </div>
+                                    <button
+                                        onClick={handleApplyDateFilter}
+                                        style={{
+                                            background: '#1A1A1A',
+                                            color: 'white',
+                                            padding: '8px',
+                                            borderRadius: '6px',
+                                            border: 'none',
+                                            cursor: 'pointer',
+                                            fontSize: '13px',
+                                            fontWeight: '600'
+                                        }}>
+                                        Apply Filter
+                                    </button>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+
+                    <button
+                        onClick={handleDownloadReport}
+                        style={{
+                            padding: '12px 24px',
+                            background: '#1A1A1A',
+                            border: 'none',
+                            borderRadius: '12px',
+                            fontSize: '14px',
+                            fontWeight: '600',
+                            color: '#FFFFFF',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '8px',
+                            boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                            transition: 'all 0.2s'
+                        }}>
                         Download Report
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" /></svg>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            <path d="M7 10L12 15L17 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            <path d="M12 15V3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
                     </button>
                 </div>
             </div>
@@ -355,13 +510,13 @@ export default function SalesManagerDashboard() {
                             <h3 style={{ fontSize: '16px', fontWeight: '700', color: '#1A1A1A' }}>Recent Activity</h3>
                         </div>
                         <div>
-                            <ActivityItem user="System" action="ingested" target="New Market Signal" time="2 mins ago" />
-                            <ActivityItem user="Amit Verma" action="closed" target="TechSolutions Ltd" time="25 mins ago" />
-                            <ActivityItem user="System" action="flagged" target="High Priority Lead" time="1 hour ago" type="warning" />
-                            <ActivityItem user="Priya Sharma" action="updated" target="Global Logistics" time="2 hours ago" />
+                            <ActivityItem user="System" action="ingested" target="New Market Signal" time="2 mins ago" onView={() => handleViewActivity('signal')} />
+                            <ActivityItem user="Amit Verma" action="closed" target="TechSolutions Ltd" time="25 mins ago" onView={() => handleViewActivity('lead')} />
+                            <ActivityItem user="System" action="flagged" target="High Priority Lead" time="1 hour ago" type="warning" onView={() => handleViewActivity('priority')} />
+                            <ActivityItem user="Priya Sharma" action="updated" target="Global Logistics" time="2 hours ago" onView={() => handleViewActivity('lead')} />
                         </div>
                         <div style={{ padding: '16px', textAlign: 'center', borderTop: '1px solid #F0F0F0' }}>
-                            <button style={{ background: 'none', border: 'none', color: COLORS.hpclBlue, fontSize: '13px', fontWeight: '600', cursor: 'pointer' }}>View All Activity</button>
+                            <Link href="/sales-manager/team-leads" style={{ background: 'none', border: 'none', color: COLORS.hpclBlue, fontSize: '13px', fontWeight: '600', cursor: 'pointer', textDecoration: 'none' }}>View All Activity</Link>
                         </div>
                     </div>
 
@@ -374,17 +529,20 @@ export default function SalesManagerDashboard() {
                     }}>
                         <div style={{ fontSize: '18px', fontWeight: '700', marginBottom: '8px' }}>Weekly Team Meeting</div>
                         <div style={{ fontSize: '13px', opacity: 0.9, marginBottom: '20px' }}>Schedule time to review Q3 targets with all regional officers.</div>
-                        <button style={{
-                            width: '100%',
-                            padding: '12px',
-                            background: 'rgba(255,255,255,0.1)',
-                            border: '1px solid rgba(255,255,255,0.2)',
-                            borderRadius: '8px',
-                            color: '#FFFFFF',
-                            fontWeight: '600',
-                            fontSize: '13px',
-                            cursor: 'pointer'
-                        }}>Schedule Now</button>
+                        <button
+                            onClick={handleScheduleMeeting}
+                            style={{
+                                width: '100%',
+                                padding: '12px',
+                                background: 'rgba(255,255,255,0.1)',
+                                border: '1px solid rgba(255,255,255,0.2)',
+                                borderRadius: '8px',
+                                color: '#FFFFFF',
+                                fontWeight: '600',
+                                fontSize: '13px',
+                                cursor: 'pointer'
+                            }}
+                        >Schedule Now</button>
                     </div>
                 </div>
             </div>
