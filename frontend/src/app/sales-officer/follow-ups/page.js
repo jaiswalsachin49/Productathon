@@ -15,9 +15,7 @@ import { COLORS } from '../../../styles/theme';
 
 export default function FollowUpsPage() {
     const [activeTab, setActiveTab] = useState('Today');
-
-    // Mock data for hackathon demo
-    const tasks = [
+    const [taskList, setTaskList] = useState([
         {
             id: 1,
             company: 'Reliance Industries',
@@ -58,7 +56,41 @@ export default function FollowUpsPage() {
             status: 'UPCOMING',
             date: 'Upcoming' // Tomorrow
         }
-    ];
+    ]);
+
+    // Handler functions for quick actions
+    const handleMarkComplete = (taskId) => {
+        const task = taskList.find(t => t.id === taskId);
+        if (task) {
+            setTaskList(taskList.map(t =>
+                t.id === taskId ? { ...t, status: 'COMPLETED' } : t
+            ));
+            alert(`✅ Marked "${task.company}" follow-up as complete!`);
+        }
+    };
+
+    const handleReschedule = (taskId) => {
+        const task = taskList.find(t => t.id === taskId);
+        if (task) {
+            const newTime = prompt(`Reschedule follow-up with ${task.company}.\nEnter new time (e.g., "03:00 PM"):`, task.time);
+            if (newTime) {
+                setTaskList(taskList.map(t =>
+                    t.id === taskId ? { ...t, time: newTime, date: 'Upcoming', status: 'PENDING' } : t
+                ));
+                alert(`📅 Rescheduled follow-up with "${task.company}" to ${newTime}`);
+            }
+        }
+    };
+
+    const handleViewDetails = (taskId) => {
+        const task = taskList.find(t => t.id === taskId);
+        if (task) {
+            alert(`📋 Task Details:\n\nCompany: ${task.company}\nContact: ${task.contact}\nTime: ${task.time}\nType: ${task.type}\nPriority: ${task.priority}\nStatus: ${task.status}`);
+        }
+    };
+
+    // Filter out completed tasks from display
+    const tasks = taskList.filter(t => t.status !== 'COMPLETED');
 
     const getPriorityColor = (priority) => {
         switch (priority) {
@@ -219,7 +251,7 @@ export default function FollowUpsPage() {
                                 </div>
                                 <div style={{ display: 'flex', gap: '12px' }}>
                                     <button
-                                        onClick={() => alert(`Marked ${task.company} task as complete`)}
+                                        onClick={() => handleMarkComplete(task.id)}
                                         style={{
                                             border: '1px solid #E0E0E0',
                                             background: 'white',
@@ -235,7 +267,7 @@ export default function FollowUpsPage() {
                                         <CheckCircle size={16} />
                                     </button>
                                     <button
-                                        onClick={() => alert(`Rescheduling task for ${task.company}`)}
+                                        onClick={() => handleReschedule(task.id)}
                                         style={{
                                             border: '1px solid #E0E0E0',
                                             background: 'white',
@@ -251,7 +283,7 @@ export default function FollowUpsPage() {
                                         <Calendar size={16} />
                                     </button>
                                     <button
-                                        onClick={() => alert(`Viewing details for ${task.company}`)}
+                                        onClick={() => handleViewDetails(task.id)}
                                         style={{
                                             border: '1px solid #E0E0E0',
                                             background: 'white',
