@@ -40,30 +40,35 @@ The **HPCL B2B Lead Intelligence Agent** is an end-to-end solution that:
 ## ✨ Features
 
 ### 🤖 AI-Powered Lead Discovery
+
 - Multi-source monitoring (Google News, Bing News, Tender Aggregators)
 - Automated keyword-based search every 30 minutes
 - Smart entity extraction using regex and AI patterns
 - Groq LLM integration for intelligent analysis and recommendations
 
 ### 📊 Sales Manager Dashboard
+
 - Executive overview with KPIs (revenue, pipeline, conversion rates)
 - Team performance analytics and regional insights
 - Lead management and assignment workflows
 - Officers management and monitoring
 
 ### 📱 Mobile App (Sales Officers)
+
 - Real-time lead notifications
 - Lead details with AI-generated recommendations
 - Status updates from the field
 - Deep linking support for quick access
 
 ### 💬 WhatsApp Integration
+
 - Automated high-priority lead alerts
 - Daily summary notifications
 - Both mobile app and web links included
 - Region-based officer routing
 
 ### 🔐 Role-Based Access
+
 - **Sales Manager**: Full dashboard access, team management, analytics
 - **Sales Officer**: Lead viewing, status updates, field reporting
 
@@ -110,14 +115,14 @@ The **HPCL B2B Lead Intelligence Agent** is an end-to-end solution that:
 
 ## 🛠️ Tech Stack
 
-| Component | Technology |
-|-----------|------------|
-| **Backend** | FastAPI, SQLModel, SQLite, APScheduler |
-| **AI/ML** | Groq LLM (Llama 3.3 70B), Regex NLP |
-| **Frontend** | Next.js 16, React 19, Recharts |
-| **Mobile** | React Native, Expo |
-| **Notifications** | Twilio WhatsApp API |
-| **Data Sources** | Google News RSS, Bing News, Tender APIs |
+| Component         | Technology                              |
+| ----------------- | --------------------------------------- |
+| **Backend**       | FastAPI, SQLModel, SQLite, APScheduler  |
+| **AI/ML**         | Groq LLM (Llama 3.3 70B), Regex NLP     |
+| **Frontend**      | Next.js 16, React 19, Recharts          |
+| **Mobile**        | React Native, Expo                      |
+| **Notifications** | Twilio WhatsApp API                     |
+| **Data Sources**  | Google News RSS, Bing News, Tender APIs |
 
 ---
 
@@ -205,6 +210,7 @@ python run.py
 ```
 
 The backend will:
+
 - ✅ Create the SQLite database
 - ✅ Seed default users and officers
 - ✅ Start the ingestion scheduler (every 30 minutes)
@@ -274,51 +280,57 @@ Once the backend is running:
 
 ### Key Endpoints
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/auth/login` | POST | User authentication |
-| `/auth/officers` | GET | List all sales officers |
-| `/leads/` | GET | List leads (filterable) |
-| `/leads/{id}` | GET | Get lead details |
-| `/leads/{id}` | PATCH | Update lead status |
-| `/ingestion/trigger` | POST | Manual data ingestion |
-| `/analytics/dashboard` | GET | Dashboard statistics |
-| `/whatsapp/notify/{lead_id}` | POST | Send WhatsApp alert |
+| Endpoint                     | Method | Description             |
+| ---------------------------- | ------ | ----------------------- |
+| `/auth/login`                | POST   | User authentication     |
+| `/auth/officers`             | GET    | List all sales officers |
+| `/leads/`                    | GET    | List leads (filterable) |
+| `/leads/{id}`                | GET    | Get lead details        |
+| `/leads/{id}`                | PATCH  | Update lead status      |
+| `/ingestion/trigger`         | POST   | Manual data ingestion   |
+| `/analytics/dashboard`       | GET    | Dashboard statistics    |
+| `/whatsapp/notify/{lead_id}` | POST   | Send WhatsApp alert     |
 
 ---
 
 ## 👤 User Credentials
 
 ### Sales Manager
+
 - **Email:** rajesh.kumar@hpcl.in
 - **Password:** Manager@123
 
 ### Sales Officers
-| Name | Region | Email | Password |
-|------|--------|-------|----------|
-| Priya Sharma | NORTH | priya.sharma@hpcl.in | Officer@123 |
-| Venkat Rao | SOUTH | venkat.rao@hpcl.in | Officer@123 |
-| Amit Chatterjee | EAST | amit.chatterjee@hpcl.in | Officer@123 |
-| Sandeep Patil | WEST | sandeep.patil@hpcl.in | Officer@123 |
+
+| Name            | Region | Email                   | Password    |
+| --------------- | ------ | ----------------------- | ----------- |
+| Priya Sharma    | NORTH  | priya.sharma@hpcl.in    | Officer@123 |
+| Venkat Rao      | SOUTH  | venkat.rao@hpcl.in      | Officer@123 |
+| Amit Chatterjee | EAST   | amit.chatterjee@hpcl.in | Officer@123 |
+| Sandeep Patil   | WEST   | sandeep.patil@hpcl.in   | Officer@123 |
 
 ---
 
 ## 🎬 Demo
 
 ### Web Application Flow
+
 1. Visit http://localhost:3000
 2. Select role (Sales Manager or Sales Officer)
 3. Login with credentials
 4. Explore dashboard, leads, and analytics
 
 ### Mobile App Flow
+
 1. Login with officer credentials
 2. View assigned leads
 3. Check AI-generated recommendations
 4. Update lead status
 
 ### WhatsApp Notifications
+
 High-priority leads (>75% confidence) automatically trigger WhatsApp alerts with:
+
 - Company details
 - Product recommendations
 - Confidence score
@@ -326,10 +338,22 @@ High-priority leads (>75% confidence) automatically trigger WhatsApp alerts with
 
 ---
 
+## 📸 Screenshots
+
+### Application Interface Demo
+
+![Application Interface](Public/Screenshot%202026-02-08%20at%205.04.34%20PM.png)
+
+### Dashboard and Features Overview
+
+![Dashboard Overview](Public/Screenshot%202026-02-08%20at%205.07.36%20PM.png)
+
+---
+
 ## 👥 Team UrbanIQ
 
 | **Sachin Jaiswal** |
-| **Vansh Sharma** | 
+| **Vansh Sharma** |
 | **Lakshya Bapna** |
 | **Kushal Sarkar** |
 
