@@ -1,66 +1,76 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet, TextInput, Alert, ActivityIndicator } from 'react-native';
-import * as Linking from 'expo-linking';
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Linking, Alert, ActivityIndicator } from 'react-native';
 import { COLORS, SPACING, FONTS } from '../constants/theme';
-import { storageService } from '../services/storage';
-
-const ActionButton = ({ title, icon, color, onPress }) => (
-    <TouchableOpacity
-        style={[styles.actionButton, { backgroundColor: color || COLORS.primary }]}
-        onPress={onPress}
-    >
-        <Text style={styles.actionButtonText}>{title}</Text>
-    </TouchableOpacity>
-);
+import { apiService } from '../services/api';
 
 const LeadDetailsScreen = ({ route, navigation }) => {
-    const { leadId } = route.params;
-    const [lead, setLead] = useState(null);
-    const [note, setNote] = useState('');
-    const [loading, setLoading] = useState(true);
+    const { leadId, lead: initialLead } = route.params || {};
+    const [lead, setLead] = useState(initialLead || null);
+    const [loading, setLoading] = useState(!initialLead);
 
     useEffect(() => {
-        loadLead();
+        const fetchLead = async () => {
+            if (leadId) {
+                try {
+                    const data = await apiService.getLeadDetails(leadId);
+                    setLead(data);
+                } catch (error) {
+                    Alert.alert("Error", "Failed to load lead details.");
+                    navigation.goBack();
+                } finally {
+                    setLoading(false);
+                }
+            }
+        };
+
+        if (!lead && leadId) {
+            fetchLead();
+        }
     }, [leadId]);
 
-    const loadLead = async () => {
-        const leads = await storageService.getLeads();
-        const found = leads.find(l => l.id === leadId);
-        setLead(found);
-        setLoading(false);
+    const handleStatusUpdate = async (newStatus) => {
+        try {
+            if (lead) {
+                // Optimistic update
+                const updatedLead = { ...lead, status: newStatus };
+                setLead(updatedLead);
+                await apiService.updateLeadStatus(lead.id, newStatus);
+                Alert.alert("Success", `Lead marked as ${newStatus}`);
+            }
+        } catch (error) {
+            Alert.alert("Error", "Failed to update status");
+            // Revert optimism if needed
+        }
     };
 
-    const handleStatusChange = async (newStatus) => {
-        await storageService.updateLeadStatus(leadId, newStatus);
-        loadLead();
-        Alert.alert('Success', `Lead marked as ${newStatus}`);
-    };
-
-    const handleAddNote = async () => {
-        if (!note.trim()) return;
-        await storageService.addNote(leadId, note);
-        setNote('');
-        loadLead();
-    };
-
-    const openMap = () => {
-        const query = encodeURIComponent(lead.location);
-        Linking.openURL(`https://www.google.com/maps/search/?api=1&query=${query}`);
-    };
-
-    if (loading || !lead) {
+    if (loading) {
         return (
-            <View style={styles.loadingContainer}>
+            <View style={[styles.container, styles.center]}>
                 <ActivityIndicator size="large" color={COLORS.primary} />
             </View>
         );
     }
 
+    if (!lead) return null;
+
+    const handleCall = () => {
+        Linking.openURL(`tel:${lead.contact?.phone || ''}`);
+    };
+
+    const handleEmail = () => {
+        Linking.openURL(`mailto:${lead.contact?.email || ''}`);
+    };
+
+    const handleMap = () => {
+        const query = lead.companyName || lead.company?.name || lead.location;
+        Linking.openURL(`https://www.google.com/maps/search/?api=1&query=${query}`);
+    };
+
     return (
         <ScrollView style={styles.container}>
             <View style={styles.header}>
-                <Text style={styles.companyName}>{lead.companyName}</Text>
-                <Text style={styles.industry}>{lead.industry} • {lead.location}</Text>
+                <Text style={styles.companyName}>{lead.companyName || lead.company?.name}</Text>
+                <Text style={styles.industry}>{(lead.industry || 'General') + ' • ' + (lead.location || 'Unknown')}</Text>
                 <View style={[styles.statusBadge, {
                     backgroundColor: lead.status === 'Converted' ? COLORS.success :
                         lead.status === 'Rejected' ? COLORS.danger : COLORS.warning
@@ -71,105 +81,76 @@ const LeadDetailsScreen = ({ route, navigation }) => {
 
             <View style={styles.section}>
                 <Text style={styles.sectionTitle}>Why this Lead?</Text>
-                {lead.explainability ? (
-                    lead.explainability.map((item, index) => (
-                        <View key={index} style={styles.bulletItem}>
-                            <Text style={styles.bulletPoint}>•</Text>
-                            <Text style={styles.bulletText}>{item}</Text>
-                        </View>
-                    ))
+                {lead.ai_reasoning || lead.explainability ? (
+                    // Handle both array (mock) and string/text (real) formats roughly
+                    Array.isArray(lead.explainability) ?
+                        lead.explainability.map((item, index) => (
+                            <View key={index} style={styles.bulletItem}>
+                                <Text style={styles.bulletPoint}>•</Text>
+                                <Text style={styles.bulletText}>{item}</Text>
+                            </View>
+                        )) :
+                        <Text style={styles.bulletText}>{lead.ai_reasoning || "High confidence match based on signals."}</Text>
                 ) : (
-                    <Text style={styles.placeholderText}>AI analysis pending...</Text>
+                    <Text style={styles.placeholderText}>AI analysis details unavailable.</Text>
                 )}
             </View>
 
-            {lead.requirements && (
-                <View style={styles.section}>
-                    <Text style={styles.sectionTitle}>Requirements</Text>
-                    <View style={styles.reqRow}>
-                        <Text style={styles.reqLabel}>Volume:</Text>
-                        <Text style={styles.reqValue}>{lead.requirements.volume}</Text>
-                    </View>
-                    <View style={styles.reqRow}>
-                        <Text style={styles.reqLabel}>Frequency:</Text>
-                        <Text style={styles.reqValue}>{lead.requirements.frequency}</Text>
-                    </View>
-                    <View style={styles.reqRow}>
-                        <Text style={styles.reqLabel}>Tankage:</Text>
-                        <Text style={styles.reqValue}>{lead.requirements.tankage}</Text>
-                    </View>
-                </View>
-            )}
-
             <View style={styles.section}>
                 <Text style={styles.sectionTitle}>Lead Dossier</Text>
-                <Text style={styles.summary}>{lead.summary}</Text>
+                <Text style={styles.summary}>{lead.summary || lead.notes || "No additional notes."}</Text>
 
                 <Text style={styles.subTitle}>Inferred Products</Text>
                 <View style={styles.tags}>
-                    {lead.products.map((p, i) => (
-                        <View key={i} style={styles.tag}><Text style={styles.tagText}>{p}</Text></View>
+                    {(lead.products || [lead.product?.name]).map((p, i) => (
+                        p && <View key={i} style={styles.tag}><Text style={styles.tagText}>{p}</Text></View>
                     ))}
                 </View>
 
                 <Text style={styles.subTitle}>Signals</Text>
-                {lead.signals.map((s, i) => (
+                {lead.signals ? lead.signals.map((s, i) => (
                     <View key={i} style={styles.signal}>
                         <Text style={styles.signalType}>{s.type}</Text>
                         <Text style={styles.signalText}>{s.text}</Text>
                     </View>
-                ))}
+                )) : (
+                    <View style={styles.signal}>
+                        <Text style={styles.signalType}>{lead.signal?.type || 'Signal'}</Text>
+                        <Text style={styles.signalText}>{lead.signal?.title || 'Lead generated from signal.'}</Text>
+                    </View>
+                )}
             </View>
 
             <View style={styles.section}>
                 <Text style={styles.sectionTitle}>Contact & Actions</Text>
-                <Text style={styles.contactName}>{lead.contact.name}</Text>
-                <Text style={styles.contactRole}>{lead.contact.role}</Text>
+                <View style={styles.contactRow}>
+                    <View>
+                        <Text style={styles.contactName}>{lead.contact?.name || 'Contact Person'}</Text>
+                        <Text style={styles.contactRole}>{lead.contact?.role || 'Designation'}</Text>
+                    </View>
+                </View>
 
-                <View style={styles.actionsRow}>
-                    <ActionButton title="Call" onPress={() => Linking.openURL(`tel:${lead.contact.phone}`)} />
-                    <ActionButton title="Email" onPress={() => Linking.openURL(`mailto:${lead.contact.email}`)} />
-                    <ActionButton title="Map" color={COLORS.secondary} onPress={openMap} />
+                <View style={styles.actionButtons}>
+                    <TouchableOpacity style={styles.actionBtn} onPress={handleCall}>
+                        <Text style={styles.actionBtnText}>Call</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.actionBtn} onPress={handleEmail}>
+                        <Text style={styles.actionBtnText}>Email</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.actionBtn} onPress={handleMap}>
+                        <Text style={styles.actionBtnText}>Map</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
 
             <View style={styles.section}>
-                <Text style={styles.sectionTitle}>Feedback Loop</Text>
-                <View style={styles.statusActions}>
-                    {lead.status === 'New' && (
-                        <TouchableOpacity style={styles.statusBtn} onPress={() => handleStatusChange('Accepted')}>
-                            <Text style={styles.statusBtnText}>Accept Lead</Text>
-                        </TouchableOpacity>
-                    )}
-                    {lead.status === 'Accepted' && (
-                        <>
-                            <TouchableOpacity style={[styles.statusBtn, { backgroundColor: COLORS.success }]} onPress={() => handleStatusChange('Converted')}>
-                                <Text style={styles.statusBtnText}>Mark Converted</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={[styles.statusBtn, { backgroundColor: COLORS.danger }]} onPress={() => handleStatusChange('Rejected')}>
-                                <Text style={styles.statusBtnText}>Reject</Text>
-                            </TouchableOpacity>
-                        </>
-                    )}
-                </View>
-
-                <Text style={styles.subTitle}>Notes</Text>
-                {lead.notes && lead.notes.map((n, i) => (
-                    <View key={i} style={styles.noteItem}>
-                        <Text style={styles.noteText}>{n.text}</Text>
-                        <Text style={styles.noteDate}>{new Date(n.date).toLocaleDateString()}</Text>
-                    </View>
-                ))}
-
-                <View style={styles.addNote}>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Add a note..."
-                        value={note}
-                        onChangeText={setNote}
-                    />
-                    <TouchableOpacity style={styles.addBtn} onPress={handleAddNote}>
-                        <Text style={styles.addBtnText}>Add</Text>
+                <Text style={styles.sectionTitle}>Update Status</Text>
+                <View style={styles.statusButtons}>
+                    <TouchableOpacity style={[styles.statusBtn, { backgroundColor: COLORS.success }]} onPress={() => handleStatusUpdate('Converted')}>
+                        <Text style={styles.statusBtnText}>Convert</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[styles.statusBtn, { backgroundColor: COLORS.danger }]} onPress={() => handleStatusUpdate('Rejected')}>
+                        <Text style={styles.statusBtnText}>Reject</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -182,10 +163,10 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: COLORS.background,
     },
-    loadingContainer: {
-        flex: 1,
+    center: {
         justifyContent: 'center',
         alignItems: 'center',
+        flex: 1,
     },
     header: {
         backgroundColor: COLORS.surface,
@@ -201,16 +182,17 @@ const styles = StyleSheet.create({
     industry: {
         fontSize: FONTS.body,
         color: COLORS.textSecondary,
-        marginBottom: SPACING.s,
+        marginTop: SPACING.xs,
     },
     statusBadge: {
         alignSelf: 'flex-start',
         paddingHorizontal: SPACING.m,
         paddingVertical: 4,
-        borderRadius: 16,
+        borderRadius: 12,
+        marginTop: SPACING.m,
     },
     statusText: {
-        color: COLORS.surface,
+        color: COLORS.text,
         fontWeight: 'bold',
         fontSize: FONTS.small,
     },
@@ -218,6 +200,9 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.surface,
         marginTop: SPACING.m,
         padding: SPACING.l,
+        borderTopWidth: 1,
+        borderBottomWidth: 1,
+        borderColor: COLORS.border,
     },
     sectionTitle: {
         fontSize: FONTS.h3,
@@ -227,15 +212,31 @@ const styles = StyleSheet.create({
     },
     subTitle: {
         fontSize: FONTS.body,
-        fontWeight: '600',
+        fontWeight: 'bold',
+        color: COLORS.textSecondary,
         marginTop: SPACING.m,
         marginBottom: SPACING.s,
-        color: COLORS.textSecondary,
+    },
+    bulletItem: {
+        flexDirection: 'row',
+        marginBottom: 4,
+    },
+    bulletPoint: {
+        fontSize: FONTS.body,
+        color: COLORS.primary,
+        marginRight: 8,
+        fontWeight: 'bold',
+    },
+    bulletText: {
+        fontSize: FONTS.body,
+        color: COLORS.text,
+        flex: 1,
+        lineHeight: 20,
     },
     summary: {
         fontSize: FONTS.body,
-        lineHeight: 22,
         color: COLORS.text,
+        lineHeight: 22,
     },
     tags: {
         flexDirection: 'row',
@@ -243,8 +244,9 @@ const styles = StyleSheet.create({
     },
     tag: {
         backgroundColor: '#e3f2fd',
-        padding: SPACING.s,
-        borderRadius: 8,
+        paddingHorizontal: SPACING.m,
+        paddingVertical: 6,
+        borderRadius: 16,
         marginRight: SPACING.s,
         marginBottom: SPACING.s,
     },
@@ -263,124 +265,63 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: COLORS.primary,
         marginBottom: 4,
+        textTransform: 'uppercase',
     },
     signalText: {
         fontSize: FONTS.body,
         color: COLORS.text,
     },
-    contactName: {
-        fontSize: FONTS.h3,
-        fontWeight: 'bold',
-    },
-    contactRole: {
-        fontSize: FONTS.body,
-        color: COLORS.textSecondary,
-        marginBottom: SPACING.m,
-    },
-    actionsRow: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
-    actionButton: {
-        flex: 1,
-        padding: SPACING.m,
-        borderRadius: 8,
-        alignItems: 'center',
-        marginHorizontal: 4,
-    },
-    actionButtonText: {
-        color: COLORS.surface,
-        fontWeight: 'bold',
-    },
-    statusActions: {
-        flexDirection: 'row',
-        marginBottom: SPACING.l,
-    },
-    statusBtn: {
-        backgroundColor: COLORS.primary,
-        padding: SPACING.m,
-        borderRadius: 8,
-        flex: 1,
-        alignItems: 'center',
-        marginHorizontal: 4,
-    },
-    statusBtnText: {
-        color: COLORS.surface,
-        fontWeight: 'bold',
-    },
-    noteItem: {
-        borderLeftWidth: 3,
-        borderLeftColor: COLORS.border,
-        paddingLeft: SPACING.s,
-        marginBottom: SPACING.m,
-    },
-    noteText: {
-        fontSize: FONTS.body,
-        color: COLORS.text,
-    },
-    noteDate: {
-        fontSize: FONTS.small,
-        color: COLORS.textSecondary,
-        marginTop: 4,
-    },
-    addNote: {
-        flexDirection: 'row',
-        marginTop: SPACING.s,
-    },
-    input: {
-        flex: 1,
-        backgroundColor: COLORS.background,
-        padding: SPACING.s,
-        borderRadius: 8,
-        borderWidth: 1,
-        borderColor: COLORS.border,
-        marginRight: SPACING.s,
-    },
-    bulletItem: {
-        flexDirection: 'row',
-        marginBottom: 4,
-    },
-    bulletPoint: {
-        fontSize: FONTS.body,
-        color: COLORS.primary,
-        marginRight: 8,
-        fontWeight: 'bold',
-    },
-    bulletText: {
-        fontSize: FONTS.body,
-        color: COLORS.text,
-        flex: 1,
-    },
-    reqRow: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingVertical: SPACING.s,
-        borderBottomWidth: 1,
-        borderBottomColor: COLORS.background,
-    },
-    reqLabel: {
-        fontSize: FONTS.body,
-        color: COLORS.textSecondary,
-    },
-    reqValue: {
-        fontSize: FONTS.body,
-        color: COLORS.text,
-        fontWeight: 'bold',
-    },
     placeholderText: {
         fontStyle: 'italic',
         color: COLORS.textSecondary,
     },
-    addBtn: {
-        backgroundColor: COLORS.secondary,
-        padding: SPACING.s,
-        borderRadius: 8,
-        justifyContent: 'center',
-        paddingHorizontal: SPACING.m,
+    contactRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: SPACING.l,
     },
-    addBtnText: {
+    contactName: {
+        fontSize: FONTS.h3,
+        fontWeight: 'bold',
+        color: COLORS.text,
+    },
+    contactRole: {
+        fontSize: FONTS.body,
+        color: COLORS.textSecondary,
+    },
+    actionButtons: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    actionBtn: {
+        flex: 1,
+        marginHorizontal: SPACING.xs,
+        backgroundColor: COLORS.background, // Light gray for actions
+        borderWidth: 1,
+        borderColor: COLORS.primary,
+        padding: SPACING.m,
+        borderRadius: 8,
+        alignItems: 'center',
+    },
+    actionBtnText: {
+        color: COLORS.primary,
+        fontWeight: 'bold',
+    },
+    statusButtons: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    statusBtn: {
+        flex: 1,
+        marginHorizontal: SPACING.xs,
+        padding: SPACING.m,
+        borderRadius: 8,
+        alignItems: 'center',
+    },
+    statusBtnText: {
         color: COLORS.surface,
         fontWeight: 'bold',
+        fontSize: FONTS.body,
     },
 });
 

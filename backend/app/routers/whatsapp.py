@@ -73,7 +73,7 @@ def notify_lead(
 📊 *Signal Source:*
 {lead.signal.title if lead.signal else 'N/A'}
 
-🔗 View details: http://localhost:8000/leads/{lead.id}
+🔗 Open in App: hpclconnect://leads/{lead.id}
 
 _Powered by B2B Lead Intelligence Agent_
     """.strip()
@@ -142,7 +142,7 @@ def send_daily_summary(
             company = lead.company.name if lead.company else "Unknown"
             summary_lines.append(f"  • {company} ({lead.confidence_score:.0%})")
     
-    summary_lines.append(f"\n🔗 View all: http://localhost:8000/leads/")
+    summary_lines.append(f"\n🔗 Open App: hpclconnect://leads")
     
     message = "\n".join(summary_lines)
     success = whatsapp_service.send_message(message, to=recipient)
