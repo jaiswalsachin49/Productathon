@@ -1,12 +1,14 @@
 from datetime import datetime
-from typing import Optional
+from typing import Optional, TYPE_CHECKING
 from sqlmodel import SQLModel, Field, Relationship
 from enum import Enum
 
 class LeadStatus(str, Enum):
-    NEW = "new"
-    CONTACTED = "contacted"
-    QUALIFIED = "qualified"
+    NEW = "NEW"
+    CONTACTED = "CONTACTED"
+    QUALIFIED = "QUALIFIED"
+    WON = "WON"
+    LOST = "LOST" 
     CONVERTED = "converted" # Good lead
     REJECTED = "rejected" # Bad lead
 
@@ -22,6 +24,12 @@ class LeadBase(SQLModel):
     recommended_products: Optional[str] = None # JSON string of product recommendations
     lead_quality: Optional[str] = None # HIGH/MEDIUM/LOW
     urgency: Optional[str] = None # IMMEDIATE/NEAR_TERM/LONG_TERM
+    
+    # Assignment & Feedback
+    assigned_officer: Optional[str] = None # Name/ID of assigned sales officer
+    feedback_status: Optional[str] = None # PENDING/ACCEPTED/REJECTED/CONVERTED
+    feedback_date: Optional[datetime] = None # When feedback was provided
+    feedback_notes: Optional[str] = None # Reason for acceptance/rejection
 
 class Lead(LeadBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)

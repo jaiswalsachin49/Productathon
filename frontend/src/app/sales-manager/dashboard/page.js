@@ -1,7 +1,9 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { COLORS } from '../../../styles/theme';
 import SalesManagerLayout from '../../../components/SalesManagerLayout';
+import api from '../../../services/api';
 
 // Professional Product Category Icons
 const FuelIcon = () => (
@@ -50,7 +52,7 @@ const ConvertedIcon = ({ color, opacity = 1 }) => (
 
 const PendingIcon = ({ color, opacity = 1 }) => (
     <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ opacity }}>
-        <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" fill={color} />
+        <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" fill={color} />
     </svg>
 );
 
@@ -63,32 +65,69 @@ const PetrolTankerIcon = ({ color }) => (
 );
 
 export default function SalesManagerDashboard() {
-    // Mock data - in production, fetch from backend
-    const metrics = {
-        totalLeads: { value: 1284, change: '+12%', label: 'vs last month' },
-        highPriority: { value: 42, label: 'REQUIRES ACTION', isAlert: true },
-        converted: { value: 856, change: '+5%', rate: '66.7%' },
-        pending: { value: 386, change: '-2%', avgAge: '4.2 days' },
+    const [loading, setLoading] = useState(true);
+    const [stats, setStats] = useState(null);
+    const [topProductsData, setTopProductsData] = useState([]);
+
+    useEffect(() => {
+        loadData();
+    }, []);
+
+    const loadData = async () => {
+        try {
+            setLoading(true);
+            const [statsData, productsData] = await Promise.all([
+                api.getDashboardStats(),
+                api.getTopProducts()
+            ]);
+            setStats(statsData);
+            setTopProductsData(productsData.products || []);
+        } catch (error) {
+            console.error('Failed to load dashboard data:', error);
+        } finally {
+            setLoading(false);
+        }
     };
 
-    const leadsBreakdown = [
-        { status: 'New', count: 385, color: '#005BAC' },
-        { status: 'Qualified', count: 385, color: '#4A90E2' },
-        { status: 'Contacted', count: 257, color: '#FFB800' },
-        { status: 'Lost', count: 128, color: '#E31E24' },
-    ];
+    // Derived metrics from real data
+    const metrics = stats ? {
+        totalLeads: { value: stats.total, change: '+0%', label: 'vs last month' },
+        highPriority: { value: stats.highPriority, label: 'REQUIRES ACTION', isAlert: true },
+        converted: { value: stats.won, change: '+0%', rate: `${stats.conversionRate}%` },
+        pending: { value: stats.pending, change: '-0%', avgAge: '0.0 days' },
+    } : null;
 
-    const topProducts = [
-        { name: 'High Speed Diesel (HSD)', icon: FuelIcon, units: '4,520 KL', target: 85, status: 'ON TRACK', statusColor: '#28A745' },
-        { name: 'Lubricants & Grease', icon: LubricantIcon, units: '1,240 MT', target: 62, status: 'GROWING', statusColor: '#4A90E2' },
-        { name: 'Industrial LPG', icon: LPGIcon, units: '890 KL', target: 42, status: 'DELAYED', statusColor: '#E31E24' },
-        { name: 'Bitumen', icon: BitumenIcon, units: '3,110 MT', target: 91, status: 'ON TRACK', statusColor: '#28A745' },
-    ];
+    const leadsBreakdown = stats ? [
+        { status: 'New', count: stats.new, color: '#005BAC' },
+        { status: 'Qualified', count: stats.qualified, color: '#4A90E2' },
+        { status: 'Contacted', count: stats.contacted, color: '#FFB800' },
+        { status: 'Lost', count: stats.lost, color: '#E31E24' },
+    ] : [];
+
+    const topProducts = topProductsData.map(p => ({
+        name: p.name,
+        icon: FuelIcon, // Default icon
+        units: `${p.count} Leads`,
+        target: Math.min(Math.round((p.count / (stats?.total || 1)) * 100), 100),
+        status: 'ACTIVE',
+        statusColor: '#28A745'
+    }));
 
     const recentActivity = [
-        { user: 'Rahul Verma', action: 'converted a lead for', entity: 'Adani Ports', category: '(HSD Category)', time: '2 hours ago', location: 'Ahmedabad District', type: 'success' },
-        { user: 'Suresh Mehta', action: 'flagged a', highlight: 'High Priority', entity: 'Kandla Refinery Maintenance', time: '5 hours ago', location: 'Gandhidham Branch', type: 'warning' },
+        { user: 'System', action: 'ingested', highlight: 'New Signal', entity: 'Market Update', time: 'Just now', location: 'Auto-Ingestion', type: 'success' },
     ];
+
+    if (loading) {
+        return (
+            <SalesManagerLayout>
+                <div style={{ padding: '60px', textAlign: 'center', color: '#666' }}>
+                    Loading HPCL Intelligence Dashboard...
+                </div>
+            </SalesManagerLayout>
+        );
+    }
+
+    if (!stats) return null;
 
     return (
         <SalesManagerLayout>

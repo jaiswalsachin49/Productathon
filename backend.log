@@ -1,0 +1,299 @@
+INFO:     Will watch for changes in these directories: ['/Users/sachinjaiswal/Desktop/Productathon/backend']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [86710] using StatReload
+🚀 Starting B2B Lead Intelligence Agent Backend...
+📊 Server will be available at: http://localhost:8000
+📚 API Documentation: http://localhost:8000/docs
+
+⏰ Scheduler will run ingestion every 30 minutes
+🔄 Auto-reload enabled for development
+
+INFO:     Started server process [86782]
+INFO:     Waiting for application startup.
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "scheduled_ingestion" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+INFO:app.scheduler:Scheduler started. Ingestion will run every 30 minutes.
+INFO:app.main:🚀 Running initial data ingestion on startup...
+INFO:app.routers.ingestion:Starting ingestion for keywords: ['new manufacturing plant India', 'boiler commissioning India', 'industrial expansion India']
+INFO:app.ingestion.multi_source_monitor:Fetching from Google News: https://news.google.com/rss/search?q=new%20manufacturing%20plant%20India&hl=en-IN&gl=IN&ceid=IN:en
+INFO:     Application startup complete.
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Mahindra to Set Up its Largest Integrated Auto & Tractor Manufacturing Facility in Maharashtra - Mahindra (https://news.google.com/rss/articles/CBMi4gFBVV95cUxQa3llX2FwMXBBRlFVN2NkTWpxajdDUmtaeDdCTlV1SFVPcTVfdFo1YVBkRVExd3FzbHdUdC1vWWlJQ1dfYk43bjVxQ2VmdXZmUVBtQi1LVl9sVVVmS1RyeWNCYlE4NDFmVmRObFhzV1N1WEpSTjFBb0hHZ3d0dU9EZEx6ZEVLUDgyVjdLajJjRlpJeEE4RGJ3X21veGRPQ3ZidVkyT3BHeDlHdWlGOXBtRG05UTRVVFdIRDBwb3pXZW0xR1otQmZHakdCSnhsVjh2Y2xqUUN5cE1takczd3Z4QVJR?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 524)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Stallion India Fluorochemicals Signs ₹200 Crore MoU with Rajasthan Government for HFO Manufacturing Plant - scanx.trade (https://news.google.com/rss/articles/CBMi7wFBVV95cUxNZWRLdXVtbVF5bnlwRWhnaEZTN05DV2FLU054cVlBdmh4YUMxQVE0dG5NLVQ3UzZrYjhwUVpsbGEtR2FTTHlucEFOVXFuQWtOZ1RRb2xYN1R2bFFjb1FsaDJtbEhRbC1adlNSbWpibk5TUGllWlF2Y3N2eDJMenVSNElrNFlma0paWjh5S0ZVaUNtNTJadFBreHd4TW10cXdRSU9Kek1YdC1EMFZNNXJMdTR4RVJYcWZrSlVUcG5GOVZmMjdnOEFjQVJVQXNRVXBUdEp3cHJKMmVHQkE3bkE5RlJqckF3WUktNkY3THlTYw?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 556)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Tata Chemicals to invest Rs 515 cr in new manufacturing unit in Tamil Nadu - The Economic Times (https://news.google.com/rss/articles/CBMigAJBVV95cUxOdnNITU1jMnFyZlpVZmVsLXNKbE5XVWQ5UVZMdDNUN2dVMkU2ZTR6R1B6Y3VjQ1AtcWRhN0J0cUZabkEyeVdwNVhfc2JkWUxiLW02VEZsZDU0Z210azdsYWRBUlNVZWFhMUU1NkNfbG5WdEdjS0ljalBzRWN3UzVjRzdBRmJiNjFHUWNoV0ZBV3E1ZndtQVZ3VVJmTnJ4TU53MHZ0eTZWSDh3OFVqdXBzNHQ5ZnBJOHNuUkNXZzdMd2ZlYVNBcTJhUzY2WGlGRFYtOEk5cWxGZFV1Mmt6S25HY0Y0R0pQYl9BS0F0SDFCV1plUHluWEEwd0lfWFhZbFJ40gGGAkFVX3lxTE5IUnd2VWVfUEFCdTAyM1JIMXVEQWFXS1U1ZFVOaG00eW1RYnZhWU9xM3o2bFNBVm5mcFNpUzIzSkQ0THdSTWNZX2ZQWTJhMGFsbUtlWk1ZS2RuVWpyZFk4R3FXeUFUUmtCVlpEVFNSYTB5dXdXRlk1b2o4T0JFZFNfNUhWOGZEQ0hnLWZpeWxxMFk3UUZuMnhlMnNYb0Fpanp0emttVUl5WHYxRHNFMU9uNW8xMTROME03dGZBSHJGeENYOXFYUDdiSmotUGNxOHV3OXFoUnFIUC1VZEJHYXlLeGhUM1VLc0hCbWU1RGM3cVlfMHNnSFg5SVlvOFZFM1hJVjRSdHc?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 909)
+INFO:app.ingestion.multi_source_monitor:Fetching from Bing News: https://www.bing.com/news/search?q=new%20manufacturing%20plant%20India&format=rss
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Taural India aluminium casting plant commences operations (http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6987e868978342c699d4ba00e6689dce&url=https%3a%2f%2fwww.financialexpress.com%2fbusiness%2fnews%2ftaural-india-aluminium-casting-plant-commences-operations%2f4134020%2f&c=17595086066895855137&mkt=en-in)
+INFO:app.ingestion.multi_source_monitor:    -> MATCH (Full Text: 2302)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Supertech EV commissions Karnataka plant with 12,000 annual electric two-wheeler capacity (http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6987e868978342c699d4ba00e6689dce&url=https%3a%2f%2fauto.economictimes.indiatimes.com%2fnews%2ftwo-wheelers%2fsupertech-ev-launches-new-manufacturing-plant-in-karnataka-for-electric-two-wheelers%2f127977974&c=17922782404122701780&mkt=en-in)
+INFO:app.ingestion.multi_source_monitor:    -> MATCH (Full Text: 122)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Range Rover Evoque to Roll Out of Tata’s New Tamil Nadu Plant (http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6987e868978342c699d4ba00e6689dce&url=https%3a%2f%2findianautosblog.com%2frange-rover-evoque-to-roll-out-of-tatas-new-tamil-nadu-plant-p328252&c=10868503469311341768&mkt=en-in)
+INFO:app.ingestion.multi_source_monitor:    -> MATCH (Full Text: 1703)
+INFO:app.ingestion.multi_source_monitor:Fetching from Google News: https://news.google.com/rss/search?q=boiler%20commissioning%20India&hl=en-IN&gl=IN&ceid=IN:en
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Thermax Secures ₹580 Crore Boiler Order From Dangote Industries for Nigeria Refinery - India Infoline (https://news.google.com/rss/articles/CBMixwFBVV95cUxQc0RDaFBkV00wSWJRYjdUU0JuaGpMcUdPaDRoSzc1eVlUVm5wcVNxWmwtN1hna0ZBWDV6Sml3di1LRGtKM3lCei0tNWlMV1hPRjFrWm54VlBoVEFtak1IekFHcVowOXZGQ21WQThQM2FELXdfbjRwWl9PS2FRRHM0aFBJR2VMeERNd0VxdlN5Zm8tRTBZR2tkQy1JRHNkSFdHZF82ZjZfcUNiOGR4cG1fUDNGSm12WDM4Z19qYUw4cGo4OFAwcjNF?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 484)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Ramsarup Industries set to commission high-tech modern blast furnace and linear sinter plant - Manufacturing Today India (https://news.google.com/rss/articles/CBMifkFVX3lxTE0xT0htcU5Tb2NOY09Gc2Y5QkRqdGtEQmI5UEJQdUdzcHI5aHJQdnl0R0JINXI2TlVpOVJLYlhwbkFRMlFSemxrWGdVaUJaeERNMmc1VmU2d2YxdUVTd0RxZUNmU21odlZMdGpwa0xjR3NGSEw2QnZnUGhoZ3U2dw?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 405)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: CBI books BHEL, NTPC officials for Rs 35 cr ‘fraud’ at Ramagundam plant - Times of India (https://news.google.com/rss/articles/CBMi3gFBVV95cUxQWnZ1bmhwM1djNFp6YmFvYzdlSzF6ZFk4WXg2RXRNaHdPYTZNSmtHclVfN01haWFNbE9aQUtIRmxkalVjN0xTbGpDb3pteE1iNmUwbzJtcWpmVC03Q3dqSm5GMU5fSVF3SlRWM1VsZG1PM05KM3prNkIxd3RMZ2hhY0hwZktORS0yX2ZtOFV6QUl6TS1kWjFBR1h4UWNhN1J0ZEdvZDliNFdEc1FxNG9tb20tdS0yWU1Ob25WWHJBMkt3Uy1aZXUyYl83bE01UG1HWFlvMThuOXp5NjV4Q3fSAeMBQVVfeXFMTV8ydVpuRENTZVh5VlpTZW1abm1PLTJ3MlB6QUo1VjhXcjM5MUh5bnZYOTVsVGFWbEtIeG5QUjJ0MFlpemwxX1ZwTE9LNld3UDRuSnFKVDVsUTdJTWlNeXAya0tmdjhCSU9XdWt4Y29lVldLWkhUZkNCaUJYdHl0dVFVOVFQckNjVU9jbnpGY2MyemZGTUJvUWRhdkFqS01BaENpQXhNdDA2SVUyQ3c2TmpnZTNzUWo3LW1MYWlmVzhhV29qZjJoOVg3NG4zLWVEYVFpcGh3WTBvQnRQeGRXVFN5ODA?oc=5)
+WARNING:  StatReload detected changes in 'update_schema.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:app.scheduler:Scheduler shut down.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [86782]
+INFO:     Started server process [86797]
+INFO:     Waiting for application startup.
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "scheduled_ingestion" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+INFO:app.scheduler:Scheduler started. Ingestion will run every 30 minutes.
+INFO:app.main:🚀 Running initial data ingestion on startup...
+INFO:app.routers.ingestion:Starting ingestion for keywords: ['new manufacturing plant India', 'boiler commissioning India', 'industrial expansion India']
+INFO:app.ingestion.multi_source_monitor:Fetching from Google News: https://news.google.com/rss/search?q=new%20manufacturing%20plant%20India&hl=en-IN&gl=IN&ceid=IN:en
+INFO:     Application startup complete.
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Mahindra to Set Up its Largest Integrated Auto & Tractor Manufacturing Facility in Maharashtra - Mahindra (https://news.google.com/rss/articles/CBMi4gFBVV95cUxQa3llX2FwMXBBRlFVN2NkTWpxajdDUmtaeDdCTlV1SFVPcTVfdFo1YVBkRVExd3FzbHdUdC1vWWlJQ1dfYk43bjVxQ2VmdXZmUVBtQi1LVl9sVVVmS1RyeWNCYlE4NDFmVmRObFhzV1N1WEpSTjFBb0hHZ3d0dU9EZEx6ZEVLUDgyVjdLajJjRlpJeEE4RGJ3X21veGRPQ3ZidVkyT3BHeDlHdWlGOXBtRG05UTRVVFdIRDBwb3pXZW0xR1otQmZHakdCSnhsVjh2Y2xqUUN5cE1takczd3Z4QVJR?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 524)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Stallion India Fluorochemicals Signs ₹200 Crore MoU with Rajasthan Government for HFO Manufacturing Plant - scanx.trade (https://news.google.com/rss/articles/CBMi7wFBVV95cUxNZWRLdXVtbVF5bnlwRWhnaEZTN05DV2FLU054cVlBdmh4YUMxQVE0dG5NLVQ3UzZrYjhwUVpsbGEtR2FTTHlucEFOVXFuQWtOZ1RRb2xYN1R2bFFjb1FsaDJtbEhRbC1adlNSbWpibk5TUGllWlF2Y3N2eDJMenVSNElrNFlma0paWjh5S0ZVaUNtNTJadFBreHd4TW10cXdRSU9Kek1YdC1EMFZNNXJMdTR4RVJYcWZrSlVUcG5GOVZmMjdnOEFjQVJVQXNRVXBUdEp3cHJKMmVHQkE3bkE5RlJqckF3WUktNkY3THlTYw?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 556)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Tata Chemicals to invest Rs 515 cr in new manufacturing unit in Tamil Nadu - The Economic Times (https://news.google.com/rss/articles/CBMigAJBVV95cUxOdnNITU1jMnFyZlpVZmVsLXNKbE5XVWQ5UVZMdDNUN2dVMkU2ZTR6R1B6Y3VjQ1AtcWRhN0J0cUZabkEyeVdwNVhfc2JkWUxiLW02VEZsZDU0Z210azdsYWRBUlNVZWFhMUU1NkNfbG5WdEdjS0ljalBzRWN3UzVjRzdBRmJiNjFHUWNoV0ZBV3E1ZndtQVZ3VVJmTnJ4TU53MHZ0eTZWSDh3OFVqdXBzNHQ5ZnBJOHNuUkNXZzdMd2ZlYVNBcTJhUzY2WGlGRFYtOEk5cWxGZFV1Mmt6S25HY0Y0R0pQYl9BS0F0SDFCV1plUHluWEEwd0lfWFhZbFJ40gGGAkFVX3lxTE5IUnd2VWVfUEFCdTAyM1JIMXVEQWFXS1U1ZFVOaG00eW1RYnZhWU9xM3o2bFNBVm5mcFNpUzIzSkQ0THdSTWNZX2ZQWTJhMGFsbUtlWk1ZS2RuVWpyZFk4R3FXeUFUUmtCVlpEVFNSYTB5dXdXRlk1b2o4T0JFZFNfNUhWOGZEQ0hnLWZpeWxxMFk3UUZuMnhlMnNYb0Fpanp0emttVUl5WHYxRHNFMU9uNW8xMTROME03dGZBSHJGeENYOXFYUDdiSmotUGNxOHV3OXFoUnFIUC1VZEJHYXlLeGhUM1VLc0hCbWU1RGM3cVlfMHNnSFg5SVlvOFZFM1hJVjRSdHc?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 909)
+INFO:app.ingestion.multi_source_monitor:Fetching from Bing News: https://www.bing.com/news/search?q=new%20manufacturing%20plant%20India&format=rss
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Taural India aluminium casting plant commences operations (http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6987e877be7d430ab354c24648db19c3&url=https%3a%2f%2fwww.financialexpress.com%2fbusiness%2fnews%2ftaural-india-aluminium-casting-plant-commences-operations%2f4134020%2f&c=17595086066895855137&mkt=en-in)
+INFO:app.ingestion.multi_source_monitor:    -> MATCH (Full Text: 2302)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Supertech EV commissions Karnataka plant with 12,000 annual electric two-wheeler capacity (http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6987e877be7d430ab354c24648db19c3&url=https%3a%2f%2fauto.economictimes.indiatimes.com%2fnews%2ftwo-wheelers%2fsupertech-ev-launches-new-manufacturing-plant-in-karnataka-for-electric-two-wheelers%2f127977974&c=17922782404122701780&mkt=en-in)
+INFO:app.ingestion.multi_source_monitor:    -> MATCH (Full Text: 122)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Range Rover Evoque to Roll Out of Tata’s New Tamil Nadu Plant (http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6987e877be7d430ab354c24648db19c3&url=https%3a%2f%2findianautosblog.com%2frange-rover-evoque-to-roll-out-of-tatas-new-tamil-nadu-plant-p328252&c=10868503469311341768&mkt=en-in)
+INFO:app.ingestion.multi_source_monitor:    -> MATCH (Full Text: 1703)
+INFO:app.ingestion.multi_source_monitor:Fetching from Google News: https://news.google.com/rss/search?q=boiler%20commissioning%20India&hl=en-IN&gl=IN&ceid=IN:en
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Thermax Secures ₹580 Crore Boiler Order From Dangote Industries for Nigeria Refinery - India Infoline (https://news.google.com/rss/articles/CBMixwFBVV95cUxQc0RDaFBkV00wSWJRYjdUU0JuaGpMcUdPaDRoSzc1eVlUVm5wcVNxWmwtN1hna0ZBWDV6Sml3di1LRGtKM3lCei0tNWlMV1hPRjFrWm54VlBoVEFtak1IekFHcVowOXZGQ21WQThQM2FELXdfbjRwWl9PS2FRRHM0aFBJR2VMeERNd0VxdlN5Zm8tRTBZR2tkQy1JRHNkSFdHZF82ZjZfcUNiOGR4cG1fUDNGSm12WDM4Z19qYUw4cGo4OFAwcjNF?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 484)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Ramsarup Industries set to commission high-tech modern blast furnace and linear sinter plant - Manufacturing Today India (https://news.google.com/rss/articles/CBMifkFVX3lxTE0xT0htcU5Tb2NOY09Gc2Y5QkRqdGtEQmI5UEJQdUdzcHI5aHJQdnl0R0JINXI2TlVpOVJLYlhwbkFRMlFSemxrWGdVaUJaeERNMmc1VmU2d2YxdUVTd0RxZUNmU21odlZMdGpwa0xjR3NGSEw2QnZnUGhoZ3U2dw?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 405)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: CBI books BHEL, NTPC officials for Rs 35 cr ‘fraud’ at Ramagundam plant - Times of India (https://news.google.com/rss/articles/CBMi3gFBVV95cUxQWnZ1bmhwM1djNFp6YmFvYzdlSzF6ZFk4WXg2RXRNaHdPYTZNSmtHclVfN01haWFNbE9aQUtIRmxkalVjN0xTbGpDb3pteE1iNmUwbzJtcWpmVC03Q3dqSm5GMU5fSVF3SlRWM1VsZG1PM05KM3prNkIxd3RMZ2hhY0hwZktORS0yX2ZtOFV6QUl6TS1kWjFBR1h4UWNhN1J0ZEdvZDliNFdEc1FxNG9tb20tdS0yWU1Ob25WWHJBMkt3Uy1aZXUyYl83bE01UG1HWFlvMThuOXp5NjV4Q3fSAeMBQVVfeXFMTV8ydVpuRENTZVh5VlpTZW1abm1PLTJ3MlB6QUo1VjhXcjM5MUh5bnZYOTVsVGFWbEtIeG5QUjJ0MFlpemwxX1ZwTE9LNld3UDRuSnFKVDVsUTdJTWlNeXAya0tmdjhCSU9XdWt4Y29lVldLWkhUZkNCaUJYdHl0dVFVOVFQckNjVU9jbnpGY2MyemZGTUJvUWRhdkFqS01BaENpQXhNdDA2SVUyQ3c2TmpnZTNzUWo3LW1MYWlmVzhhV29qZjJoOVg3NG4zLWVEYVFpcGh3WTBvQnRQeGRXVFN5ODA?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 810)
+INFO:app.ingestion.multi_source_monitor:Fetching from Bing News: https://www.bing.com/news/search?q=boiler%20commissioning%20India&format=rss
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: NLC conducts boiler light-up test for NNTPP's first unit (http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6987e8805a484d8291ba016d79e920c8&url=https%3a%2f%2ftimesofindia.indiatimes.com%2fbusiness%2findia-business%2fnlc-conducts-boiler-light-up-test-for-nntpps-first-unit%2farticleshow%2f67310172.cms&c=13272156603163521814&mkt=en-in)
+INFO:app.ingestion.multi_source_monitor:    -> MATCH (Full Text: 1309)
+INFO:app.ingestion.multi_source_monitor:Fetching from Google News: https://news.google.com/rss/search?q=industrial%20expansion%20India&hl=en-IN&gl=IN&ceid=IN:en
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: IAFS 2026: A Co-Development Inflection Point - orfonline.org (https://news.google.com/rss/articles/CBMiigFBVV95cUxNMHBTR2pFYjg0M2FONG1rMFh0QjN3UGtZMnhWV01hX3lSSUJTM3FlM2ZacEFudDVSNzY4ZUhGNmRJdTJ6VzRMWDVXU0ZoR1RwYnY1eXE5c0diVkpVX0J2bTFONmN6a3JKNDRiR1p5WWFYaThmTktfTkRtRkZ4dVhMVHo4TngtSE1aMGc?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 362)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Budget 2026: Manufacturing takes centre stage in India’s growth blueprint - kpmg.com (https://news.google.com/rss/articles/CBMiswFBVV95cUxORW5xQTdYeEREOTJSUUYtN1dRelo4Q0JyMncxQjJpRkZZZUhWQU9LczlROTFPaEtkYXFDdTMxWkp0Wk0waGVMd1pqUmtWNnl2UWp1UVZDSDhQZmdiU3o0ZDVfd2J0Wm9McjFSUkFTSmd0YjlGMkRJbXp1MWhUQzdleXJCNHQ0aFpoWHVLRjNibjR2NzgwMkJkUkVTUmRuNUFHclhUaE5yeDF3dXZ5SUFLSUlEZw?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 441)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Odisha’s Industrial Scale and Skilled Workforce to Anchor India’s Next Growth Phase: CM Majhi - KalingaTV (https://news.google.com/rss/articles/CBMivwFBVV95cUxQZnBUUDN4cXZlOG5US2U4aktxRFU5cUItQkRtMHVWV0tlR0lxRWQ1QndkN3FCTTh0emlOUlBTa1FHMERReXdtSGdUZ0I0VnBHVnBnVmZ0MEY1YkJNMTEwalhFX1RqdWx2VlNCQXJpVElubEVCb3NtNC1NdnZJUHplYVpFeTg3ZUtZSFNQMVJRZUVLd09XTDl0cmp2bmNyQ3FUZ2Q4LWZITjhFWTg4UW9Od2t2b1NmS1owRGxlelFsUQ?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 478)
+INFO:app.ingestion.multi_source_monitor:Fetching from Bing News: https://www.bing.com/news/search?q=industrial%20expansion%20India&format=rss
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: India’s Industrial Output Climbs 7.8% in December 2025, Highest in Over Two Years (http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6987e887d0eb4067bd9d281c8c01db1e&url=https%3a%2f%2fwww.republicworld.com%2fbusiness%2findias-industrial-output-climbs-78-in-december-2025-highest-in-over-two-years&c=16827952512176158708&mkt=en-in)
+INFO:app.ingestion.multi_source_monitor:    -> MATCH (Full Text: 1567)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Industrial expansion in Tamil Nadu set to boost employment with 55,000 jobs expected (http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6987e887d0eb4067bd9d281c8c01db1e&url=https%3a%2f%2fenglish.mathrubhumi.com%2fnews%2findia%2ftamil-nadu-cabinet-approves-15-industrial-projects-34237-crore-uks7qvhi&c=17908692034955451174&mkt=en-in)
+INFO:app.ingestion.multi_source_monitor:    -> MATCH (Full Text: 2288)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Industrial output expands 7.8% in December (http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6987e887d0eb4067bd9d281c8c01db1e&url=https%3a%2f%2fwww.livemint.com%2feconomy%2findia-industrial-production-december-manufacturing-mining-consumer-durables-gst-11769595565495.html&c=2045881576295439239&mkt=en-in)
+INFO:app.ingestion.multi_source_monitor:    -> MATCH (Full Text: 5108)
+INFO:app.routers.ingestion:[DEBUG] News Monitor returned: 16 signals
+INFO:app.routers.ingestion:[DEBUG] Tender Monitor returned: 14 signals
+INFO:app.routers.ingestion:Ingestion complete. Added 10 new signals.
+INFO:app.routers.ingestion:Starting Intelligence Processing...
+INFO:app.services.intelligence:Processing Signal ID 11: IAFS 2026: A Co-Development Inflection Point - orfonline.org
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 12: Budget 2026: Manufacturing takes centre stage in India’s growth blueprint - kpmg.com
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 13: Odisha’s Industrial Scale and Skilled Workforce to Anchor India’s Next Growth Phase: CM Majhi - KalingaTV
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 14: India’s Industrial Output Climbs 7.8% in December 2025, Highest in Over Two Years
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 19: Cisco manufacturing unit a testament of India's engineering capabilities: Scindia
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 22: DoP Shortlists Patented, Unlaunched Drugs for Global Tender Exemption, See Full List - Medical Dialogues
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 25: Navi Mumbai upgrade plan: CIDCO floats tender for third-runway study; feasibility report to shape future - Times of India
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 26: Favouritism? GNIDA’s Rs 241-crore trash tender under Allahabad high court scanner - Times of India
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 32: Press Note Details: Press Information Bureau - PIB
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 38: Cisco manufacturing unit a testament of India's engineering capabilities: Scindia
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 54: India’s Industrial Output Climbs 7.8% in December 2025, Highest in Over Two Years
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 57: Cisco manufacturing unit a testament of India's engineering capabilities: Scindia
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 64: India’s Industrial Output Climbs 7.8% in December 2025, Highest in Over Two Years
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 67: Cisco manufacturing unit a testament of India's engineering capabilities: Scindia
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 72: Supertech EV commissions Karnataka plant with 12,000 annual electric two-wheeler capacity
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 77: Cisco manufacturing unit a testament of India's engineering capabilities: Scindia
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 88: India’s Industrial Output Climbs 7.8% in December 2025, Highest in Over Two Years
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 91: Cisco manufacturing unit a testament of India's engineering capabilities: Scindia
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 94: EPI Issues Empanelment Tender for Solar EPC Projects Across India - Mercomindia.com
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 99: India’s Industrial Output Climbs 7.8% in December 2025, Highest in Over Two Years
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 102: Cisco manufacturing unit a testament of India's engineering capabilities: Scindia
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 109: India’s Industrial Output Climbs 7.8% in December 2025, Highest in Over Two Years
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 112: Cisco manufacturing unit a testament of India's engineering capabilities: Scindia
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 119: India’s Industrial Output Climbs 7.8% in December 2025, Highest in Over Two Years
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 122: Cisco manufacturing unit a testament of India's engineering capabilities: Scindia
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 125: Taural India aluminium casting plant commences operations
+INFO:app.services.intelligence:  -> Extracted Company: Taural India aluminium casting plant
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 100 (Confidence: 0.30)
+INFO:app.services.intelligence:Processing Signal ID 126: Supertech EV commissions Karnataka plant with 12,000 annual electric two-wheeler capacity
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 127: Range Rover Evoque to Roll Out of Tata’s New Tamil Nadu Plant
+INFO:app.services.intelligence:  -> Extracted Company: Jaguar Land Rover is set to begin local assembly of the Range Rover Evoque at Tata Motors
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 101 (Confidence: 0.30)
+INFO:app.services.intelligence:Processing Signal ID 128: NLC conducts boiler light-up test for NNTPP's first unit
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 102 (Confidence: 0.20)
+INFO:app.services.intelligence:Processing Signal ID 129: India’s Industrial Output Climbs 7.8% in December 2025, Highest in Over Two Years
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 130: Industrial expansion in Tamil Nadu set to boost employment with 55,000 jobs expected
+INFO:app.services.intelligence:  -> Extracted Company: state Industries
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:  -> Created Lead ID 103 (Confidence: 0.45)
+INFO:app.services.intelligence:Processing Signal ID 131: Industrial output expands 7.8% in December
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 104 (Confidence: 0.20)
+INFO:app.services.intelligence:Processing Signal ID 132: Cisco manufacturing unit a testament of India's engineering capabilities: Scindia
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 133: Rockwool Group’s ₹550 crore Cheyyar plant to be operational from mid-2026
+INFO:app.services.intelligence:  -> Extracted Company: Rockwool Group
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:  -> Created Lead ID 105 (Confidence: 0.25)
+INFO:app.services.intelligence:Processing Signal ID 134: Rockwool Group’s ₹550 crore Cheyyar plant to be operational from mid-2026
+INFO:app.services.intelligence:  -> Extracted Company: Rockwool Group
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:  -> Created Lead ID 106 (Confidence: 0.25)
+INFO:app.routers.ingestion:Intelligence complete. Created 35 new leads.
+DATABASE PATH: sqlite:////Users/sachinjaiswal/Desktop/Productathon/backend/database.db
+Fetching from Google News...
+Fetching from Bing News...
+Fetching from Google News...
+Fetching from Bing News...
+Fetching from Google News...
+Fetching from Bing News...
+Searching Tenders for new manufacturing plant India: https://news.google.com/rss/search?q=new%20manufacturing%20plant%20India%20tender+intitle:tender&hl=en-IN&gl=IN&ceid=IN:en
+Searching Tenders for new manufacturing plant India: https://www.bing.com/news/search?q=new%20manufacturing%20plant%20India%20tender+tender&format=rss
+Searching Tenders for new manufacturing plant India: https://news.google.com/rss/search?q=new%20manufacturing%20plant%20India%20procurement%20notice+intitle:tender&hl=en-IN&gl=IN&ceid=IN:en
+Searching Tenders for new manufacturing plant India: https://www.bing.com/news/search?q=new%20manufacturing%20plant%20India%20procurement%20notice+tender&format=rss
+Searching Tenders for boiler commissioning India: https://news.google.com/rss/search?q=boiler%20commissioning%20India%20tender+intitle:tender&hl=en-IN&gl=IN&ceid=IN:en
+Searching Tenders for boiler commissioning India: https://www.bing.com/news/search?q=boiler%20commissioning%20India%20tender+tender&format=rss
+Searching Tenders for boiler commissioning India: https://news.google.com/rss/search?q=boiler%20commissioning%20India%20procurement%20notice+intitle:tender&hl=en-IN&gl=IN&ceid=IN:en
+Searching Tenders for boiler commissioning India: https://www.bing.com/news/search?q=boiler%20commissioning%20India%20procurement%20notice+tender&format=rss
+Searching Tenders for industrial expansion India: https://news.google.com/rss/search?q=industrial%20expansion%20India%20tender+intitle:tender&hl=en-IN&gl=IN&ceid=IN:en
+Searching Tenders for industrial expansion India: https://www.bing.com/news/search?q=industrial%20expansion%20India%20tender+tender&format=rss
+Searching Tenders for industrial expansion India: https://news.google.com/rss/search?q=industrial%20expansion%20India%20procurement%20notice+intitle:tender&hl=en-IN&gl=IN&ceid=IN:en
+Searching Tenders for industrial expansion India: https://www.bing.com/news/search?q=industrial%20expansion%20India%20procurement%20notice+tender&format=rss
+INFO:     127.0.0.1:50844 - "OPTIONS /analytics/dashboard-stats HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:50846 - "OPTIONS /analytics/top-products?limit=5 HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:50861 - "GET /companies/?offset=0&limit=100 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50887 - "OPTIONS /analytics/dashboard-stats HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:50889 - "OPTIONS /analytics/top-products?limit=5 HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:50928 - "OPTIONS /leads/1 HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:50935 - "OPTIONS /analytics/dashboard-stats HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:50937 - "OPTIONS /analytics/top-products?limit=5 HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:50938 - "OPTIONS /analytics/dashboard-stats HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:50939 - "OPTIONS /analytics/top-products?limit=5 HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:51070 - "OPTIONS /analytics/dashboard-stats HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:51071 - "OPTIONS /analytics/top-products?limit=5 HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:51974 - "OPTIONS /leads/1 HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:51981 - "OPTIONS /leads/1 HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:52075 - "OPTIONS /analytics/dashboard-stats HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:52076 - "OPTIONS /analytics/top-products?limit=5 HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:52079 - "OPTIONS /analytics/dashboard-stats HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:52080 - "OPTIONS /analytics/top-products?limit=5 HTTP/1.1" 405 Method Not Allowed
+WARNING:  StatReload detected changes in 'app/routers/analytics.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:apscheduler.scheduler:Scheduler has been shut down
+INFO:app.scheduler:Scheduler shut down.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [86797]
+Process SpawnProcess-3:
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/Users/sachinjaiswal/Desktop/Productathon/backend/venv/lib/python3.12/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/Users/sachinjaiswal/Desktop/Productathon/backend/venv/lib/python3.12/site-packages/uvicorn/server.py", line 67, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/runners.py", line 194, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/base_events.py", line 664, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/Users/sachinjaiswal/Desktop/Productathon/backend/venv/lib/python3.12/site-packages/uvicorn/server.py", line 71, in serve
+    await self._serve(sockets)
+  File "/Users/sachinjaiswal/Desktop/Productathon/backend/venv/lib/python3.12/site-packages/uvicorn/server.py", line 78, in _serve
+    config.load()
+  File "/Users/sachinjaiswal/Desktop/Productathon/backend/venv/lib/python3.12/site-packages/uvicorn/config.py", line 439, in load
+    self.loaded_app = import_from_string(self.app)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sachinjaiswal/Desktop/Productathon/backend/venv/lib/python3.12/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1381, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1354, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1325, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 929, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 994, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/Users/sachinjaiswal/Desktop/Productathon/backend/app/main.py", line 47, in <module>
+    from app.routers import analytics
+  File "/Users/sachinjaiswal/Desktop/Productathon/backend/app/routers/analytics.py", line 11
+    except Exception as e:
+IndentationError: unexpected indent
+DATABASE PATH: sqlite:////Users/sachinjaiswal/Desktop/Productathon/backend/database.db

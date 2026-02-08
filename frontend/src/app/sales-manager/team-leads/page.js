@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import Link from 'next/link';
 import { COLORS } from '../../../styles/theme';
 import SalesManagerLayout from '../../../components/SalesManagerLayout';
@@ -38,56 +38,61 @@ export default function TeamLeads() {
     });
 
 
-    // Mock data
-    const leads = [
-        {
-            id: 'HP-88291',
-            company: 'Reliance Logistics Ltd.',
-            location: 'Mumbai, MH',
-            product: 'Industrial Lubricants',
-            priority: 'High',
-            officer: { name: 'Rajesh Kumar', avatar: 'RK' },
-            status: 'Negotiation',
-            lastUpdated: '2 hours ago',
-        },
-        {
-            id: 'HP-77402',
-            company: 'Tata Motors Hub',
-            location: 'Pune, MH',
-            product: 'Bulk Diesel',
-            priority: 'Medium',
-            officer: { name: 'Priya Sharma', avatar: 'PS' },
-            status: 'Active',
-            lastUpdated: '5 hours ago',
-        },
-        {
-            id: 'HP-11204',
-            company: 'Adani Port Services',
-            location: 'Mundra, GJ',
-            product: 'Marine Fuel',
-            priority: 'High',
-            officer: { name: 'Amit Verma', avatar: 'AV' },
-            status: 'Delayed',
-            lastUpdated: '1 day ago',
-        },
-        {
-            id: 'HP-55391',
-            company: 'Indigo Aviation Fleet',
-            location: 'Delhi, DL',
-            product: 'ATF Fueling',
-            priority: 'Low',
-            officer: { name: 'Anjali Gupta', avatar: 'AG' },
-            status: 'On Hold',
-            lastUpdated: '3 days ago',
-        },
-    ];
-
-    const metrics = [
-        { label: 'Total Leads', value: '1,284', change: '+12%', sub: 'vs last month', color: COLORS.hpclBlue, Icon: LeadsIcon },
-        { label: 'High Priority', value: '42', change: 'Action Required', sub: 'Immediate', color: COLORS.hpclRed, Icon: AlertIcon, isAlert: true },
+    const [loading, setLoading] = useState(true);
+    const [leads, setLeads] = useState([]);
+    const [metrics, setMetrics] = useState([
+        { label: 'Total Leads', value: '0', change: '+0%', sub: 'vs last month', color: COLORS.hpclBlue, Icon: LeadsIcon },
+        { label: 'High Priority', value: '0', change: 'Action Required', sub: 'Immediate', color: COLORS.hpclRed, Icon: AlertIcon, isAlert: true },
         { label: 'Avg. Response', value: '4.2 hrs', change: '-18m', sub: 'Improvement', color: '#F59E0B', Icon: TimeIcon },
-        { label: 'Closure Rate', value: '68%', change: 'Target: 75%', sub: 'On Track', color: '#28A745', Icon: CheckIcon },
-    ];
+        { label: 'Closure Rate', value: '0%', change: 'Target: 75%', sub: 'On Track', color: '#28A745', Icon: CheckIcon },
+    ]);
+
+    useEffect(() => {
+        loadLeads();
+    }, []);
+
+    const loadLeads = async () => {
+        try {
+            setLoading(true);
+            const data = await import('../../../services/api').then(m => m.default.getLeads({ limit: 100 }));
+
+            // Transform API data to component format
+            const transformedLeads = data.map(lead => ({
+                id: `HP-${lead.id}`,
+                dbId: lead.id,
+                company: lead.company_name || 'Unknown',
+                location: lead.company?.state ? `${lead.company.city}, ${lead.company.state}` : 'Unknown Location',
+                product: lead.product_name || 'General',
+                priority: lead.lead_quality === 'HIGH' ? 'High' : lead.lead_quality === 'LOW' ? 'Low' : 'Medium',
+                officer: { name: lead.assigned_officer || 'Unassigned', avatar: (lead.assigned_officer || 'U').charAt(0) },
+                status: lead.status === 'NEW' ? 'Active' : lead.status === 'CONTACTED' ? 'Negotiation' : lead.status,
+                lastUpdated: new Date(lead.updated_at || lead.created_at).toLocaleDateString(),
+            }));
+
+            setLeads(transformedLeads);
+            calculateMetrics(transformedLeads);
+        } catch (error) {
+            console.error('Failed to load leads', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const calculateMetrics = (data) => {
+        const total = data.length;
+        const high = data.filter(l => l.priority === 'High').length;
+        const won = data.filter(l => l.status === 'WON').length;
+        const lost = data.filter(l => l.status === 'LOST').length;
+        const decided = won + lost;
+        const rate = decided > 0 ? Math.round((won / decided) * 100) : 0;
+
+        setMetrics([
+            { label: 'Total Leads', value: total.toString(), change: '+12%', sub: 'vs last month', color: COLORS.hpclBlue, Icon: LeadsIcon },
+            { label: 'High Priority', value: high.toString(), change: 'Action Required', sub: 'Immediate', color: COLORS.hpclRed, Icon: AlertIcon, isAlert: true },
+            { label: 'Avg. Response', value: '4.2 hrs', change: '-18m', sub: 'Improvement', color: '#F59E0B', Icon: TimeIcon },
+            { label: 'Closure Rate', value: `${rate}%`, change: 'Target: 75%', sub: 'On Track', color: '#28A745', Icon: CheckIcon },
+        ]);
+    };
 
     const getPriorityStyle = (priority) => {
         const styles = {
@@ -104,6 +109,8 @@ export default function TeamLeads() {
             Active: { color: '#28A745', text: 'Active' },
             Delayed: { color: '#FFB800', text: 'Delayed' },
             'On Hold': { color: '#999999', text: 'On Hold' },
+            WON: { color: '#28A745', text: 'Won' },
+            LOST: { color: '#E31E24', text: 'Lost' }
         };
         return styles[status] || styles.Active;
     };
@@ -143,7 +150,9 @@ export default function TeamLeads() {
     const filteredLeads = leads.filter(lead => {
         const matchOfficer = filters.officer === 'All' || lead.officer.name === filters.officer;
         const matchProduct = filters.product === 'All' || lead.product === filters.product;
+        // Map status filter to logic
         const matchStatus = filters.status === 'All' || lead.status === filters.status;
+
         const matchSearch = searchQuery === '' ||
             lead.company.toLowerCase().includes(searchQuery.toLowerCase()) ||
             lead.location.toLowerCase().includes(searchQuery.toLowerCase());
@@ -483,7 +492,7 @@ export default function TeamLeads() {
                                 </div>
                                 <div style={{ fontSize: '12px', color: '#999999' }}>{lead.lastUpdated}</div>
                                 <div style={{ textAlign: 'right' }}>
-                                    <Link href="/sales-manager/lead-detail">
+                                    <Link href={`/sales-manager/lead-detail?id=${lead.dbId}`}>
                                         <button style={{
                                             background: COLORS.hpclRed,
                                             color: '#FFFFFF',

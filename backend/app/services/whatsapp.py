@@ -19,19 +19,21 @@ class WhatsAppService:
         self.whatsapp_from = os.getenv("TWILIO_WHATSAPP_FROM", "whatsapp:+14155238886")  # Twilio sandbox number
         self.whatsapp_to = os.getenv("WHATSAPP_RECIPIENT")  # Your WhatsApp number
         
-        self.enabled = all([self.account_sid, self.auth_token, self.whatsapp_to])
+        self.enabled = True # Always enable for demo purposes
         
-        if self.enabled:
+        if all([self.account_sid, self.auth_token, self.whatsapp_to]):
             self.client = Client(self.account_sid, self.auth_token)
             logger.info("✅ WhatsApp Service initialized successfully")
         else:
-            logger.warning("⚠️  WhatsApp Service disabled - Missing credentials")
+            self.client = None
+            logger.warning("⚠️  WhatsApp Service running in MOCK mode (logging only)")
     
     def send_message(self, message: str, to: Optional[str] = None) -> bool:
         """Send a WhatsApp message"""
-        if not self.enabled:
-            logger.warning("WhatsApp not configured - message not sent")
-            return False
+        if not self.client:
+            # Mock mode: Log the message
+            logger.info(f"📱 [MOCK WHATSAPP] To: {to or self.whatsapp_to}\n{message}")
+            return True
             
         try:
             recipient = to or self.whatsapp_to

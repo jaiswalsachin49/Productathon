@@ -1,0 +1,14 @@
+
+> frontend@0.1.0 dev
+> next dev
+
+▲ Next.js 16.1.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://10.108.119.60:3000
+- Environments: .env.local
+
+✓ Starting...
+✓ Ready in 498ms
+ GET /role-selection 200 in 1365ms (compile: 1261ms, render: 103ms)
+ GET / 200 in 88ms (compile: 52ms, render: 35ms)
+[?25h

@@ -1,7 +1,9 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { COLORS } from '../../../styles/theme';
 import SalesManagerLayout from '../../../components/SalesManagerLayout';
+import IndiaHeatMap from '../../../components/IndiaHeatMap';
 
 // --- Custom Icons ---
 
@@ -34,40 +36,107 @@ const GroupIcon = ({ color, opacity = 1 }) => (
 
 export default function PerformanceDashboard() {
 
+    const [loading, setLoading] = useState(true);
+    const [stats, setStats] = useState(null);
+    const [funnelData, setFunnelData] = useState([]);
+    const [topProductsData, setTopProductsData] = useState([]);
+    const [officerStats, setOfficerStats] = useState([]);
+    const [sectorStats, setSectorStats] = useState([]);
+    const [geoData, setGeoData] = useState([]);
+
+    useEffect(() => {
+        loadData();
+    }, []);
+
+    const loadData = async () => {
+        try {
+            setLoading(true);
+            const [dashboardStats, funnel, products, leads, geography] = await Promise.all([
+                import('../../../services/api').then(m => m.default.getDashboardStats()),
+                import('../../../services/api').then(m => m.default.getConversionFunnel()),
+                import('../../../services/api').then(m => m.default.getTopProducts(5)),
+                import('../../../services/api').then(m => m.default.getLeads({ limit: 500 })), // Fetch enough for aggregation
+                import('../../../services/api').then(m => m.default.getGeographyBreakdown())
+            ]);
+
+            setStats(dashboardStats);
+
+            // Format Funnel  
+            const phases = funnel.stages || [
+                { name: 'New', count: dashboardStats.new },
+                { name: 'Contacted', count: dashboardStats.contacted },
+                { name: 'Qualified', count: dashboardStats.qualified },
+                { name: 'Won', count: dashboardStats.won }
+            ];
+
+            const maxCount = Math.max(...phases.map(p => p.count));
+            setFunnelData(phases.map(p => ({
+                label: p.name.toUpperCase(),
+                value: p.count.toString(),
+                width: maxCount > 0 ? (p.count / maxCount) * 100 : 0,
+                color: p.name === 'Won' ? COLORS.hpclBlue : '#E3F2FD',
+                highlight: p.name === 'Won'
+            })));
+
+            // Top Products
+            setTopProductsData(products.products || []);
+
+            // Aggregate Officer Performance
+            const officerCounts = {};
+            leads.forEach(l => {
+                const name = l.assigned_officer || 'Unassigned';
+                officerCounts[name] = (officerCounts[name] || 0) + 1;
+            });
+            const officerList = Object.entries(officerCounts)
+                .map(([name, count]) => ({ name, leads: count }))
+                .sort((a, b) => b.leads - a.leads)
+                .slice(0, 5);
+            const maxOfficerLeads = Math.max(...officerList.map(o => o.leads), 1);
+            setOfficerStats(officerList.map(o => ({
+                ...o,
+                percentage: (o.leads / maxOfficerLeads) * 100
+            })));
+
+            // Aggregate Industries (Sectors) from backend
+            const industries = await import('../../../services/api').then(m => m.default.getTopIndustries(5));
+            const totalIndustryCount = (industries.industries || []).reduce((sum, ind) => sum + ind.count, 0);
+            const sectors = (industries.industries || []).map((ind, idx) => ({
+                name: ind.name,
+                percentage: totalIndustryCount > 0 ? Math.round((ind.count / totalIndustryCount) * 100) : 0,
+                color: ['#005BAC', '#E31E24', '#F59E0B', '#6c757d', '#28A745'][idx % 5]
+            }));
+            setSectorStats(sectors.length > 0 ? sectors : [
+                { name: 'No Data', percentage: 100, color: '#E0E0E0' }
+            ]);
+
+            // Set Geography Data
+            setGeoData(geography.states || []);
+
+        } catch (error) {
+            console.error('Failed to load performance data:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     // Top KPIs
-    const metrics = [
-        { label: 'TOTAL REVENUE', value: '₹45.2', unit: 'Cr', change: '+5.2%', sub: 'vs last Qtr', color: COLORS.hpclBlue, Icon: RevenueIcon },
-        { label: 'TARGET ACHIEVEMENT', value: '92.0', unit: '%', change: '+1.8%', sub: 'On Track', color: COLORS.hpclRed, Icon: TargetIcon },
-        { label: 'CONVERSION RATE', value: '14.5', unit: '%', change: '-0.4%', sub: 'Slight Dip', color: '#F59E0B', Icon: FunnelIcon },
-        { label: 'ACTIVE LEADS', value: '1,280', unit: '', change: '+12.0%', sub: 'Pipeline Growth', color: '#28A745', Icon: GroupIcon },
-    ];
+    const metrics = stats ? [
+        { label: 'TOTAL LEADS', value: stats.total, unit: '', change: '+5.2%', sub: 'vs last month', color: COLORS.hpclBlue, Icon: GroupIcon },
+        { label: 'CONVERSION RATE', value: stats.conversionRate, unit: '%', change: '+1.8%', sub: 'On Track', color: COLORS.hpclRed, Icon: TargetIcon },
+        { label: 'HIGH PRIORITY', value: stats.highPriority, unit: '', change: '-0.4%', sub: 'Needs Action', color: '#F59E0B', Icon: FunnelIcon },
+        { label: 'WON LEADS', value: stats.won, unit: '', change: '+12.0%', sub: 'Growth', color: '#28A745', Icon: RevenueIcon }, // Recycled icon
+    ] : [];
 
-    // Conversion Funnel Data
-    const funnelStages = [
-        { label: 'TOTAL LEADS', value: '1,280', width: 100, color: '#E3F2FD' },
-        { label: 'QUALIFIED', value: '840', width: 65, color: '#BBDEFB' },
-        { label: 'NEGOTIATION', value: '312', width: 40, color: '#64B5F6' },
-        { label: 'CONVERTED', value: '186', width: 25, color: COLORS.hpclBlue, highlight: true },
-    ];
+    // Conversion Funnel Data (Use state)
+    const funnelStages = funnelData;
 
-    // Sales Officer Performance
-    const salesOfficers = [
-        { name: 'A. Deshmukh', leads: 245, percentage: 100 },
-        { name: 'R. Verma', leads: 212, percentage: 87 },
-        { name: 'M. Singhania', leads: 198, percentage: 81 },
-        { name: 'P. Kulkarni', leads: 156, percentage: 64 },
-        { name: 'S. Patil', leads: 142, percentage: 58 },
-    ];
+    // Sales Officer Performance (Use state)
+    const salesOfficers = officerStats;
 
-    // Sector Breakdown (Donut approximation via conic gradient)
-    const sectors = [
-        { name: 'B2B/Industrial', percentage: 42, color: '#005BAC' }, // HPCL Blue
-        { name: 'Retail/B2C', percentage: 28, color: '#E31E24' },     // HPCL Red
-        { name: 'Government', percentage: 18, color: '#F59E0B' },     // Amber
-        { name: 'Aviation', percentage: 12, color: '#6c757d' },       // Gray
-    ];
+    // Sector Breakdown (Use state or mock)
+    const sectors = sectorStats;
 
-    // District Intensity
+    // District Intensity (Mocked for now as we don't have geo data easily aggregated yet)
     const districts = [
         { name: 'Mumbai', intensity: 'HIGH' },
         { name: 'Pune', intensity: 'HIGH' },
@@ -78,13 +147,22 @@ export default function PerformanceDashboard() {
     ];
 
     // Top Products
-    const topProducts = [
-        { name: 'HP Power 95', category: 'Premium Petrol', value: '₹18.2 Cr', change: '+2.8%' },
-        { name: 'HP Racer 4T', category: 'Engine Lubricant', value: '₹9.5 Cr', change: '+3.1%' },
-        { name: 'HP Gas (Bulk)', category: 'Industrial LPG', value: '₹7.1 Cr', change: '+1.4%' },
-        { name: 'Furnace Oil', category: 'Heavy Fuel', value: '₹5.4 Cr', change: '-0.8%' },
-    ];
+    const topProducts = topProductsData.map(p => ({
+        name: p.name,
+        category: 'Industrial', // Category not in simple agg
+        value: `${p.count} Leads`,
+        change: '+2.8%'
+    }));
 
+    if (loading) return (
+        <SalesManagerLayout>
+            <div style={{ padding: '60px', textAlign: 'center', color: '#666' }}>
+                Loading Performance Data...
+            </div>
+        </SalesManagerLayout>
+    );
+
+    /* Helper function for styles */
     const getIntensityStyle = (intensity) => {
         switch (intensity) {
             case 'HIGH': return { bg: COLORS.hpclRed, color: '#FFFFFF' };
@@ -120,7 +198,7 @@ export default function PerformanceDashboard() {
                             Region: West Zone
                         </h1>
                         <p style={{ fontSize: '14px', color: '#666666' }}>
-                            Comprehensive performance overview for Q3 2023.
+                            Comprehensive performance overview based on real-time data.
                         </p>
                     </div>
                     <div style={{ display: 'flex', gap: '12px' }}>
@@ -138,7 +216,7 @@ export default function PerformanceDashboard() {
                             color: '#333333',
                             transition: 'all 0.2s',
                         }}>
-                            <span>📅</span> Q3 2023
+                            <span>📅</span> Current Period
                         </button>
                         <button style={{
                             padding: '10px 20px',
@@ -279,7 +357,7 @@ export default function PerformanceDashboard() {
                                 <div style={{ fontSize: '11px', color: '#555', fontWeight: '600' }}>OVERALL EFFICIENCY</div>
                                 <div style={{ fontSize: '13px', color: '#777' }}>Lead to Conversion</div>
                             </div>
-                            <div style={{ fontSize: '24px', fontWeight: '800', color: COLORS.hpclBlue }}>68%</div>
+                            <div style={{ fontSize: '24px', fontWeight: '800', color: COLORS.hpclBlue }}>{stats?.conversionRate || 0}%</div>
                         </div>
                     </div>
 
@@ -359,12 +437,12 @@ export default function PerformanceDashboard() {
                                 width: '140px',
                                 height: '140px',
                                 borderRadius: '50%',
-                                background: `conic-gradient(
-                  ${sectors[0].color} 0deg 151deg,
-                  ${sectors[1].color} 151deg 252deg,
-                  ${sectors[2].color} 252deg 317deg,
-                  ${sectors[3].color} 317deg 360deg
-                )`,
+                                background: sectors.length >= 4 ? `conic-gradient(
+                  ${sectors[0]?.color || '#005BAC'} 0deg ${sectors[0]?.percentage * 3.6 || 151}deg,
+                  ${sectors[1]?.color || '#E31E24'} ${sectors[0]?.percentage * 3.6 || 151}deg ${(sectors[0]?.percentage + sectors[1]?.percentage) * 3.6 || 252}deg,
+                  ${sectors[2]?.color || '#F59E0B'} ${(sectors[0]?.percentage + sectors[1]?.percentage) * 3.6 || 252}deg ${(sectors[0]?.percentage + sectors[1]?.percentage + sectors[2]?.percentage) * 3.6 || 317}deg,
+                  ${sectors[3]?.color || '#6c757d'} ${(sectors[0]?.percentage + sectors[1]?.percentage + sectors[2]?.percentage) * 3.6 || 317}deg 360deg
+                )` : '#E0E0E0',
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center'
@@ -412,7 +490,7 @@ export default function PerformanceDashboard() {
                     gridTemplateColumns: '1.5fr 1fr',
                     gap: '24px',
                 }}>
-                    {/* District Intensity Heatmap */}
+                    {/* India Heat Map */}
                     <div style={{
                         background: '#FFFFFF',
                         borderRadius: '12px',
@@ -422,11 +500,11 @@ export default function PerformanceDashboard() {
                     }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
                             <h3 style={{ fontSize: '16px', fontWeight: '700', color: '#1A1A1A', margin: 0 }}>
-                                District Sales Intensity
+                                Lead Distribution Heat Map
                             </h3>
                             <div style={{ display: 'flex', gap: '12px', fontSize: '10px', fontWeight: '600' }}>
                                 <span style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#666' }}>
-                                    <span style={{ width: '8px', height: '8px', background: '#E0E0E0', borderRadius: '50%' }}></span> LOW
+                                    <span style={{ width: '8px', height: '8px', background: '#E3F2FD', borderRadius: '50%' }}></span> LOW
                                 </span>
                                 <span style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#666' }}>
                                     <span style={{ width: '8px', height: '8px', background: '#FFB74D', borderRadius: '50%' }}></span> MID
@@ -437,36 +515,14 @@ export default function PerformanceDashboard() {
                             </div>
                         </div>
 
-                        <div style={{
-                            display: 'grid',
-                            gridTemplateColumns: 'repeat(3, 1fr)',
-                            gap: '12px',
-                        }}>
-                            {districts.map((district, idx) => {
-                                const style = getIntensityStyle(district.intensity);
-                                return (
-                                    <div
-                                        key={idx}
-                                        style={{
-                                            padding: '24px 12px',
-                                            background: style.bg,
-                                            borderRadius: '8px',
-                                            textAlign: 'center',
-                                            color: style.color,
-                                            fontSize: '13px',
-                                            fontWeight: '700',
-                                            letterSpacing: '0.5px',
-                                            cursor: 'default',
-                                            transition: 'transform 0.2s',
-                                        }}
-                                        onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.02)'}
-                                        onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1.0)'}
-                                    >
-                                        {district.name}
-                                    </div>
-                                );
-                            })}
-                        </div>
+                        <IndiaHeatMap
+                            stateData={geoData}
+                            colors={{
+                                high: COLORS.hpclRed,
+                                mid: '#FFB74D',
+                                low: '#E3F2FD'
+                            }}
+                        />
                     </div>
 
                     {/* Top Products */}
