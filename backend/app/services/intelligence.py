@@ -119,12 +119,12 @@ class IntelligenceService:
             score += 0.05  # Vague mention
         
         # 2. FRESHNESS (0-0.20)
-        if signal.pub_date:
+        if signal.published_date:
             try:
-                if signal.pub_date.tzinfo is None:
-                    pub_date = signal.pub_date.replace(tzinfo=timezone.utc)
+                if signal.published_date.tzinfo is None:
+                    pub_date = signal.published_date.replace(tzinfo=timezone.utc)
                 else:
-                    pub_date = signal.pub_date
+                    pub_date = signal.published_date
                 now = datetime.now(timezone.utc)
                 days_old = (now - pub_date).days
                 
