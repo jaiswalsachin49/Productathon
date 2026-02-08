@@ -14,7 +14,7 @@ export default function RoleSelection() {
         {
             id: 'sales-officer',
             title: 'Sales Officer',
-            icon: '�',
+            icon: '📋',
             description: 'Manage individual leads, perform site visits, and track your daily performance targets.',
             features: ['Lead Tracking', 'Field Reporting'],
         },
@@ -24,13 +24,6 @@ export default function RoleSelection() {
             icon: '📊',
             description: 'Review regional team performance, approve critical leads, and monitor KPI dashboards.',
             features: ['Team Approvals', 'Regional Insights'],
-        },
-        {
-            id: 'system-admin',
-            title: 'System Admin',
-            icon: '⚙️',
-            description: 'Configure portal settings, manage user permissions, and export bulk enterprise data.',
-            features: ['User Access', 'Data Security'],
         },
     ];
 
@@ -54,9 +47,9 @@ export default function RoleSelection() {
                         <h1 style={{
                             fontSize: '42px',
                             fontWeight: '700',
-                            background: 'linear-gradient(135deg, #E31E24 0%, #B01119 100%)',
-                            WebkitBackgroundClip: 'text',
-                            WebkitTextFillColor: 'transparent',
+                            background: 'linear-gradient(135deg, rgb(0, 91, 172) 0%, rgb(0, 91, 172) 100%)',
+                            // WebkitBackgroundClip: 'text',
+                            // WebkitTextFillColor: 'transparent',
                             marginBottom: '16px',
                             letterSpacing: '-0.5px',
                         }}>
@@ -75,10 +68,13 @@ export default function RoleSelection() {
 
                     {/* Role Cards */}
                     <div style={{
-                        display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
+                        display: 'flex',
+                        justifyContent: 'center',
                         gap: '32px',
                         marginBottom: '56px',
+                        flexWrap: 'wrap',
+                        maxWidth: '900px',
+                        margin: '0 auto 56px',
                     }}>
                         {roles.map((role) => {
                             const isSelected = selectedRole === role.id;
@@ -92,15 +88,18 @@ export default function RoleSelection() {
                                     onMouseLeave={() => setHoveredRole(null)}
                                     style={{
                                         background: '#FFFFFF',
-                                        border: isSelected ? '3px solid #E31E24' : '2px solid #F0F0F0',
+                                        border: isSelected ? '3px solid rgb(0, 91, 172)' : '2px solid #F0F0F0',
                                         borderRadius: '16px',
                                         padding: '36px 28px',
                                         cursor: 'pointer',
                                         transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                                         position: 'relative',
                                         overflow: 'hidden',
+                                        flex: '1',
+                                        minWidth: '340px',
+                                        maxWidth: '420px',
                                         boxShadow: isSelected
-                                            ? '0 12px 40px rgba(227, 30, 36, 0.25)'
+                                            ? '0 12px 40px rgba(30, 37, 227, 0.25)'
                                             : isHovered
                                                 ? '0 8px 24px rgba(0, 0, 0, 0.12)'
                                                 : '0 4px 12px rgba(0, 0, 0, 0.06)',
@@ -129,14 +128,14 @@ export default function RoleSelection() {
                                             width: '32px',
                                             height: '32px',
                                             borderRadius: '50%',
-                                            background: '#E31E24',
+                                            background: 'rgb(0, 91, 172)',
                                             display: 'flex',
                                             alignItems: 'center',
                                             justifyContent: 'center',
                                             color: '#FFFFFF',
                                             fontSize: '16px',
                                             fontWeight: 'bold',
-                                            boxShadow: '0 4px 12px rgba(227, 30, 36, 0.4)',
+                                            boxShadow: '0 4px 12px rgba(0, 92, 172, 0.38)',
                                         }}>
                                             ✓
                                         </div>
@@ -148,7 +147,7 @@ export default function RoleSelection() {
                                         height: '72px',
                                         borderRadius: '16px',
                                         background: isSelected
-                                            ? 'linear-gradient(135deg, #E31E24 0%, #FF4D52 100%)'
+                                            ? 'linear-gradient(135deg, rgb(0, 91, 172) 0%, rgb(0, 91, 172) 100%)'
                                             : '#FFF5F5',
                                         display: 'flex',
                                         alignItems: 'center',
@@ -156,7 +155,7 @@ export default function RoleSelection() {
                                         fontSize: '36px',
                                         marginBottom: '24px',
                                         transition: 'all 0.3s',
-                                        boxShadow: isSelected ? '0 8px 20px rgba(227, 30, 36, 0.25)' : 'none',
+                                        boxShadow: isSelected ? '0 8px 20px rgba(0, 92, 172, 0.33)' : 'none',
                                     }}>
                                         <span style={{ filter: isSelected ? 'brightness(0) invert(1)' : 'none' }}>
                                             {role.icon}
@@ -167,7 +166,7 @@ export default function RoleSelection() {
                                     <h3 style={{
                                         fontSize: '22px',
                                         fontWeight: '700',
-                                        color: isSelected ? '#E31E24' : '#333333',
+                                        color: isSelected ? 'rgb(0, 91, 172)' : 'rgba(70, 71, 72, 1)',
                                         marginBottom: '12px',
                                         transition: 'color 0.3s',
                                     }}>
@@ -206,7 +205,7 @@ export default function RoleSelection() {
                                                     width: '6px',
                                                     height: '6px',
                                                     borderRadius: '50%',
-                                                    background: isSelected ? '#E31E24' : '#CCCCCC',
+                                                    background: isSelected ? 'rgb(0, 91, 172)' : '#CCCCCC',
                                                     transition: 'background 0.3s',
                                                 }} />
                                                 {feature}
@@ -223,7 +222,7 @@ export default function RoleSelection() {
                         <button
                             onClick={handleContinue}
                             style={{
-                                background: 'linear-gradient(135deg, #E31E24 0%, #B01119 100%)',
+                                background: 'linear-gradient(135deg, rgb(0, 91, 172) 0%, rgb(0, 91, 172) 100%)',
                                 color: '#FFFFFF',
                                 border: 'none',
                                 padding: '16px 48px',
@@ -235,16 +234,16 @@ export default function RoleSelection() {
                                 alignItems: 'center',
                                 gap: '10px',
                                 transition: 'all 0.3s',
-                                boxShadow: '0 8px 24px rgba(227, 30, 36, 0.3)',
+                                boxShadow: '0 8px 24px rgba(30, 46, 227, 0.3)',
                                 letterSpacing: '0.3px',
                             }}
                             onMouseOver={(e) => {
                                 e.target.style.transform = 'translateY(-2px)';
-                                e.target.style.boxShadow = '0 12px 32px rgba(227, 30, 36, 0.4)';
+                                e.target.style.boxShadow = '0 12px 32px rgba(60, 30, 227, 0.4)';
                             }}
                             onMouseOut={(e) => {
                                 e.target.style.transform = 'translateY(0)';
-                                e.target.style.boxShadow = '0 8px 24px rgba(227, 30, 36, 0.3)';
+                                e.target.style.boxShadow = '0 8px 24px rgba(43, 30, 227, 0.3)';
                             }}
                         >
                             Continue to Dashboard
@@ -253,7 +252,7 @@ export default function RoleSelection() {
 
                         <div style={{ marginTop: '28px', fontSize: '14px', color: '#888888' }}>
                             Need help? <a href="#" style={{
-                                color: '#E31E24',
+                                color: 'rgb(0, 91, 172)',
                                 textDecoration: 'none',
                                 fontWeight: '600',
                             }}>Contact System Support</a>
