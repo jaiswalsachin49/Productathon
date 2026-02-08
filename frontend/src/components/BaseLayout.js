@@ -41,11 +41,11 @@ export default function BaseLayout({ children, showNavbar = true, showFooter = t
                     </div>
 
                     <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
-                        <div style={{ textAlign: 'right' }}>
+                        {/* <div style={{ textAlign: 'right' }}>
                             <div style={{ fontSize: '14px', fontWeight: '500' }}>Amit Kumar</div>
                             <div style={{ fontSize: '11px', opacity: 0.8 }}>Employee ID: 49201</div>
-                        </div>
-                        <div style={{
+                        </div> */}
+                        {/* <div style={{
                             width: '40px',
                             height: '40px',
                             borderRadius: '50%',
@@ -58,7 +58,7 @@ export default function BaseLayout({ children, showNavbar = true, showFooter = t
                             color: COLORS.textPrimary,
                         }}>
                             AK
-                        </div>
+                        </div> */}
                     </div>
                 </nav>
             )}
