@@ -76,7 +76,9 @@ class WhatsAppService:
 📊 *Signal Source:*
 {lead.signal.title if lead.signal else 'N/A'}
 
-🔗 Open in App: hpclconnect://leads/{lead.id}
+🔗 *View Lead:*
+📱 Mobile: hpclconnect://leads/{lead.id}
+💻 Web: http://localhost:3000/sales-manager/lead-detail?id={lead.id}
 
 _Powered by B2B Lead Intelligence Agent_
         """.strip()
@@ -106,7 +108,9 @@ _Powered by B2B Lead Intelligence Agent_
                 company = lead.company.name if lead.company else "Unknown"
                 summary_lines.append(f"  • {company} ({lead.confidence_score:.0%})")
         
-        summary_lines.append(f"\n🔗 Open App: hpclconnect://leads")
+        summary_lines.append(f"\n🔗 *View All Leads:*")
+        summary_lines.append(f"📱 Mobile: hpclconnect://leads")
+        summary_lines.append(f"💻 Web: http://localhost:3000/sales-manager/team-leads")
         
         message = "\n".join(summary_lines)
         return self.send_message(message, to=to)

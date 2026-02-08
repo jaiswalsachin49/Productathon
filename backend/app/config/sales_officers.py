@@ -8,7 +8,7 @@ SALES_OFFICERS = {
     # Format: "REGION_CODE": {"name": "Name", "phone": "+91XXXXXXXXXX", "products": ["Product1", "Product2"]}
     
     "NORTH": {
-        "name": "Rajesh Kumar",
+        "name": "Priya Sharma",
         "phone": "+919875877807",  # Replace with actual number
         "products": ["Furnace Oil", "Bitumen", "LDO (Light Diesel Oil)"],
         "states": ["Delhi", "Punjab", "Haryana", "Himachal Pradesh", "Jammu", "Uttarakhand", "UP"]

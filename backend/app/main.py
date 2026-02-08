@@ -36,18 +36,30 @@ async def lifespan(app: FastAPI):
             )
             session.add(manager)
             print("👤 Seeded Manager: Rajesh Kumar")
+        
+        # Seed officers from sales_officers config
+        from app.config.sales_officers import SALES_OFFICERS
+        officer_id_counter = 88291
+        for region, officer_data in SALES_OFFICERS.items():
+            if region == "DEFAULT":
+                continue  # Skip the default/fallback entry
             
-        if not session.exec(select(User).where(User.email == "amit.sharma@hpcl.in")).first():
-            officer = User(
-                name="Amit Sharma",
-                email="amit.sharma@hpcl.in",
-                password_hash=get_password_hash("Officer@123"),
-                role=UserRole.OFFICER,
-                employee_id="HPCL88291",
-                phone_number="+91 98765-12345"
-            )
-            session.add(officer)
-            print("👤 Seeded Officer: Amit Sharma")
+            # Create email from name
+            name = officer_data["name"]
+            email = name.lower().replace(" ", ".") + "@hpcl.in"
+            
+            if not session.exec(select(User).where(User.email == email)).first():
+                officer = User(
+                    name=name,
+                    email=email,
+                    password_hash=get_password_hash("Officer@123"),
+                    role=UserRole.OFFICER,
+                    employee_id=f"HPCL{officer_id_counter}",
+                    phone_number=officer_data.get("phone", "+91 98765-00000")
+                )
+                session.add(officer)
+                print(f"👤 Seeded Officer: {name} ({region})")
+                officer_id_counter += 1
             
         session.commit()
     
