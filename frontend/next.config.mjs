@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  transpilePackages: [],
   reactCompiler: true,
   async rewrites() {
     return [

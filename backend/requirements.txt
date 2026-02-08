@@ -1,6 +1,7 @@
 fastapi
 uvicorn
 pydantic
+pydantic-settings
 sqlmodel
 aiosqlite
 feedparser
@@ -13,4 +14,6 @@ apscheduler
 twilio
 python-dotenv
 groq
-
+python-jose[cryptography]
+passlib[bcrypt]
+python-multipart

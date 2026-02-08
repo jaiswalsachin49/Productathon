@@ -58,6 +58,12 @@ export default function SalesManagerSidebar() {
             path: '/sales-manager/team-leads'
         },
         {
+            id: 'officers',
+            label: 'Officers',
+            icon: UserIcon,
+            path: '/sales-manager/officers'
+        },
+        {
             id: 'performance',
             label: 'Performance',
             icon: PerformanceIcon,
