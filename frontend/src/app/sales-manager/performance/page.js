@@ -42,6 +42,7 @@ export default function PerformanceDashboard() {
     const [officerStats, setOfficerStats] = useState([]);
     const [sectorStats, setSectorStats] = useState([]);
     const [geoData, setGeoData] = useState([]);
+    const [showToast, setShowToast] = useState(false);
 
     useEffect(() => {
         loadData();
@@ -169,8 +170,51 @@ export default function PerformanceDashboard() {
         }
     };
 
+    // Toast notification state
+    const handleExportReport = () => {
+        // Mock export functionality
+        const headers = ['Metric', 'Value', 'Change'];
+        const csvContent = [
+            headers.join(','),
+            ...metrics.map(m => [m.label, m.value, m.change].join(','))
+        ].join('\n');
+
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = `performance-report-${new Date().toISOString().split('T')[0]}.csv`;
+        link.click();
+
+        setShowToast(true);
+        setTimeout(() => setShowToast(false), 3000);
+    };
+
     return (
         <div style={{ padding: '24px', maxWidth: '1600px', margin: '0 auto' }}>
+            {/* Toast Notification */}
+            {showToast && (
+                <div style={{
+                    position: 'fixed',
+                    top: '24px',
+                    right: '24px',
+                    background: '#28A745',
+                    color: '#FFF',
+                    padding: '16px 24px',
+                    borderRadius: '12px',
+                    boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '12px',
+                    zIndex: 1000,
+                    animation: 'slideIn 0.3s ease-out'
+                }}>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                        <polyline points="22 4 12 14.01 9 11.01" />
+                    </svg>
+                    <span style={{ fontWeight: '600' }}>Performance Report Exported!</span>
+                </div>
+            )}
 
             {/* Header Section */}
             <div style={{
@@ -214,21 +258,23 @@ export default function PerformanceDashboard() {
                     }}>
                         <span>📅</span> Current Period
                     </button>
-                    <button style={{
-                        padding: '10px 20px',
-                        background: COLORS.hpclRed,
-                        border: 'none',
-                        borderRadius: '8px',
-                        color: '#FFFFFF',
-                        fontSize: '13px',
-                        fontWeight: '600',
-                        cursor: 'pointer',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '8px',
-                        boxShadow: '0 2px 8px rgba(227, 30, 36, 0.2)',
-                        transition: 'all 0.2s',
-                    }}>
+                    <button
+                        onClick={handleExportReport}
+                        style={{
+                            padding: '10px 20px',
+                            background: COLORS.hpclRed,
+                            border: 'none',
+                            borderRadius: '8px',
+                            color: '#FFFFFF',
+                            fontSize: '13px',
+                            fontWeight: '600',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '8px',
+                            boxShadow: '0 2px 8px rgba(227, 30, 36, 0.2)',
+                            transition: 'all 0.2s',
+                        }}>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" fill="currentColor" />
                         </svg>
