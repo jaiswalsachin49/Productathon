@@ -31,6 +31,16 @@ def read_leads(
     for lead in leads:
         lead_dict = lead.model_dump()
         lead_dict["company_name"] = lead.company.name if lead.company else None
+        # Include full company details for location
+        if lead.company:
+            lead_dict["company"] = {
+                "name": lead.company.name,
+                "city": lead.company.city,
+                "state": lead.company.state
+            }
+        else:
+            lead_dict["company"] = None
+            
         lead_dict["company_industry"] = lead.company.industry if lead.company else None
         lead_dict["company_city"] = lead.company.city if lead.company else None
         lead_dict["company_state"] = lead.company.state if lead.company else None

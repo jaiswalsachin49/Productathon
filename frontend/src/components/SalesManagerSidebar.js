@@ -22,6 +22,12 @@ const PerformanceIcon = ({ color = 'currentColor', size = 20 }) => (
     </svg>
 );
 
+const ChartPieIcon = ({ color = 'currentColor', size = 20 }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21.21 15.89A10 10 0 1 1 8 2.83V11a3 3 0 0 0 3 3h8.21zM22 12A10 10 0 0 0 12 2v10h10z" fill={color} />
+    </svg>
+);
+
 const UserIcon = ({ size = 24 }) => (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" fill={COLORS.hpclBlue} />
@@ -38,6 +44,12 @@ export default function SalesManagerSidebar() {
             label: 'Dashboard',
             icon: DashboardIcon,
             path: '/sales-manager/dashboard'
+        },
+        {
+            id: 'executive',
+            label: 'Executive',
+            icon: ChartPieIcon,
+            path: '/executive/dashboard'
         },
         {
             id: 'team-leads',

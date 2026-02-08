@@ -40,10 +40,22 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000", "http://localhost:8000", "http://127.0.0.1:8000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 app.include_router(ingestion.router)
 app.include_router(leads.router)
 app.include_router(companies.router)
 app.include_router(whatsapp.router)
+from app.routers import analytics
+app.include_router(analytics.router)
 
 @app.get("/")
 def read_root():

@@ -46,8 +46,10 @@ def run_ingestion_task(keywords: List[str]):
                 session.commit()
                 session.refresh(source)
             
-            # 2. Check deduplication (by URL)
-            existing = session.exec(select(Signal).where(Signal.url == data["url"])).first()
+            # 2. Check deduplication (by URL or Title)
+            existing = session.exec(select(Signal).where(
+                (Signal.url == data["url"]) | (Signal.title == data["title"])
+            )).first()
             if not existing:
                 # 3. Create Signal
                 signal = Signal(

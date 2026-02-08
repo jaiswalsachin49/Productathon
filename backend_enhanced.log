@@ -1,0 +1,159 @@
+INFO:     Will watch for changes in these directories: ['/Users/sachinjaiswal/Desktop/Productathon/backend']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [72938] using StatReload
+🚀 Starting B2B Lead Intelligence Agent Backend...
+📊 Server will be available at: http://localhost:8000
+📚 API Documentation: http://localhost:8000/docs
+
+⏰ Scheduler will run ingestion every 30 minutes
+🔄 Auto-reload enabled for development
+
+INFO:     Started server process [73010]
+INFO:     Waiting for application startup.
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "scheduled_ingestion" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+INFO:app.scheduler:Scheduler started. Ingestion will run every 30 minutes.
+INFO:app.main:🚀 Running initial data ingestion on startup...
+INFO:app.routers.ingestion:Starting ingestion for keywords: ['new manufacturing plant India', 'boiler commissioning India', 'industrial expansion India']
+INFO:app.ingestion.multi_source_monitor:Fetching from Google News: https://news.google.com/rss/search?q=new%20manufacturing%20plant%20India&hl=en-IN&gl=IN&ceid=IN:en
+INFO:     Application startup complete.
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Mahindra to Set Up its Largest Integrated Auto & Tractor Manufacturing Facility in Maharashtra - Mahindra (https://news.google.com/rss/articles/CBMi4gFBVV95cUxQa3llX2FwMXBBRlFVN2NkTWpxajdDUmtaeDdCTlV1SFVPcTVfdFo1YVBkRVExd3FzbHdUdC1vWWlJQ1dfYk43bjVxQ2VmdXZmUVBtQi1LVl9sVVVmS1RyeWNCYlE4NDFmVmRObFhzV1N1WEpSTjFBb0hHZ3d0dU9EZEx6ZEVLUDgyVjdLajJjRlpJeEE4RGJ3X21veGRPQ3ZidVkyT3BHeDlHdWlGOXBtRG05UTRVVFdIRDBwb3pXZW0xR1otQmZHakdCSnhsVjh2Y2xqUUN5cE1takczd3Z4QVJR?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 524)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Stallion India Fluorochemicals Signs ₹200 Crore MoU with Rajasthan Government for HFO Manufacturing Plant - scanx.trade (https://news.google.com/rss/articles/CBMi7wFBVV95cUxNZWRLdXVtbVF5bnlwRWhnaEZTN05DV2FLU054cVlBdmh4YUMxQVE0dG5NLVQ3UzZrYjhwUVpsbGEtR2FTTHlucEFOVXFuQWtOZ1RRb2xYN1R2bFFjb1FsaDJtbEhRbC1adlNSbWpibk5TUGllWlF2Y3N2eDJMenVSNElrNFlma0paWjh5S0ZVaUNtNTJadFBreHd4TW10cXdRSU9Kek1YdC1EMFZNNXJMdTR4RVJYcWZrSlVUcG5GOVZmMjdnOEFjQVJVQXNRVXBUdEp3cHJKMmVHQkE3bkE5RlJqckF3WUktNkY3THlTYw?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 556)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Tata Chemicals to invest Rs 515 cr in new manufacturing unit in Tamil Nadu - The Economic Times (https://news.google.com/rss/articles/CBMigAJBVV95cUxOdnNITU1jMnFyZlpVZmVsLXNKbE5XVWQ5UVZMdDNUN2dVMkU2ZTR6R1B6Y3VjQ1AtcWRhN0J0cUZabkEyeVdwNVhfc2JkWUxiLW02VEZsZDU0Z210azdsYWRBUlNVZWFhMUU1NkNfbG5WdEdjS0ljalBzRWN3UzVjRzdBRmJiNjFHUWNoV0ZBV3E1ZndtQVZ3VVJmTnJ4TU53MHZ0eTZWSDh3OFVqdXBzNHQ5ZnBJOHNuUkNXZzdMd2ZlYVNBcTJhUzY2WGlGRFYtOEk5cWxGZFV1Mmt6S25HY0Y0R0pQYl9BS0F0SDFCV1plUHluWEEwd0lfWFhZbFJ40gGGAkFVX3lxTE5IUnd2VWVfUEFCdTAyM1JIMXVEQWFXS1U1ZFVOaG00eW1RYnZhWU9xM3o2bFNBVm5mcFNpUzIzSkQ0THdSTWNZX2ZQWTJhMGFsbUtlWk1ZS2RuVWpyZFk4R3FXeUFUUmtCVlpEVFNSYTB5dXdXRlk1b2o4T0JFZFNfNUhWOGZEQ0hnLWZpeWxxMFk3UUZuMnhlMnNYb0Fpanp0emttVUl5WHYxRHNFMU9uNW8xMTROME03dGZBSHJGeENYOXFYUDdiSmotUGNxOHV3OXFoUnFIUC1VZEJHYXlLeGhUM1VLc0hCbWU1RGM3cVlfMHNnSFg5SVlvOFZFM1hJVjRSdHc?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 909)
+INFO:app.ingestion.multi_source_monitor:Fetching from Bing News: https://www.bing.com/news/search?q=new%20manufacturing%20plant%20India&format=rss
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Jindal India launches Rs 1,100 crore coating line at Howrah plant (http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6987b52f272440c1bca2db02ca928db9&url=https%3a%2f%2ftimesofindia.indiatimes.com%2fcity%2fkolkata%2fjindal-india-launches-rs1100-crore-crore-coating-line-at-howrah-plants%2farticleshow%2f128006561.cms&c=3627171305041800006&mkt=en-in)
+INFO:app.ingestion.multi_source_monitor:    -> MATCH (Full Text: 1160)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Taural India aluminium casting plant commences operations (http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6987b52f272440c1bca2db02ca928db9&url=https%3a%2f%2fwww.financialexpress.com%2fbusiness%2fnews%2ftaural-india-aluminium-casting-plant-commences-operations%2f4134020%2f&c=17595086066895855137&mkt=en-in)
+INFO:app.ingestion.multi_source_monitor:    -> MATCH (Full Text: 2302)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Range Rover Evoque to Roll Out of Tata’s New Tamil Nadu Plant (http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6987b52f272440c1bca2db02ca928db9&url=https%3a%2f%2findianautosblog.com%2frange-rover-evoque-to-roll-out-of-tatas-new-tamil-nadu-plant-p328252&c=10868503469311341768&mkt=en-in)
+INFO:app.ingestion.multi_source_monitor:    -> MATCH (Full Text: 1703)
+INFO:app.ingestion.multi_source_monitor:Fetching from Google News: https://news.google.com/rss/search?q=boiler%20commissioning%20India&hl=en-IN&gl=IN&ceid=IN:en
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Thermax Secures ₹580 Crore Boiler Order From Dangote Industries for Nigeria Refinery - India Infoline (https://news.google.com/rss/articles/CBMixwFBVV95cUxQc0RDaFBkV00wSWJRYjdUU0JuaGpMcUdPaDRoSzc1eVlUVm5wcVNxWmwtN1hna0ZBWDV6Sml3di1LRGtKM3lCei0tNWlMV1hPRjFrWm54VlBoVEFtak1IekFHcVowOXZGQ21WQThQM2FELXdfbjRwWl9PS2FRRHM0aFBJR2VMeERNd0VxdlN5Zm8tRTBZR2tkQy1JRHNkSFdHZF82ZjZfcUNiOGR4cG1fUDNGSm12WDM4Z19qYUw4cGo4OFAwcjNF?oc=5)
+DATABASE PATH: sqlite:////Users/sachinjaiswal/Desktop/Productathon/backend/database.db
+Fetching from Google News...
+Fetching from Bing News...
+Fetching from Google News...
+INFO:     127.0.0.1:63547 - "GET /health HTTP/1.1" 200 OK
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 484)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Thermax bags Rs. 580 crore+ utility boilers order from Dangote - Indian Chemical News (https://news.google.com/rss/articles/CBMirgFBVV95cUxNdzhrTE5tQ24xSjJ3TVdXRnY2TlkyZW9Va2dzN3ZZWm4zNy12ckI4N2d2WVNJeTh4NWpiMXZVT29vYVpsVHVnY1RFbjgwYktYd0dnMk5GbWZDQWR1V2RtdDkyb0VwUWJob01ZcTVXUXYyZ3VBd3dudjdLdUtKLW5DUUw4NktKZ1I0b3NvZHNZaE94WVFzRWRIYXpmcHQzMmZteTYwR2RPSEsxQ3ZqWFHSAbQBQVVfeXFMUEViSFNiWkUxVlBmcmxQX3FtdDZleXhyZ3AwN0JIS1NSakVDem9UZFZfdV9lWjk2bm0xVWJkNy1LSl92ckstWUNOT0hiVDNJZTlhd0JKOUtpeWhtcXBERXZrUWVzQ2tZWEdMNzBZSFRmNXp2WmxaNTM0aWcxdVJmZGw3YnV2SkJId3hlOHR6ZGFhVnFiSWdTNFZSY0hTWW5FekxCZFpmd3haeEJPUkFUNUd0WHBR?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 680)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Ramsarup Industries set to commission high-tech modern blast furnace and linear sinter plant - Manufacturing Today India (https://news.google.com/rss/articles/CBMifkFVX3lxTE0xT0htcU5Tb2NOY09Gc2Y5QkRqdGtEQmI5UEJQdUdzcHI5aHJQdnl0R0JINXI2TlVpOVJLYlhwbkFRMlFSemxrWGdVaUJaeERNMmc1VmU2d2YxdUVTd0RxZUNmU21odlZMdGpwa0xjR3NGSEw2QnZnUGhoZ3U2dw?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 405)
+INFO:app.ingestion.multi_source_monitor:Fetching from Bing News: https://www.bing.com/news/search?q=boiler%20commissioning%20India&format=rss
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: NLC conducts boiler light-up test for NNTPP's first unit (http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6987b53873364291b4214b45790dfa96&url=https%3a%2f%2ftimesofindia.indiatimes.com%2fbusiness%2findia-business%2fnlc-conducts-boiler-light-up-test-for-nntpps-first-unit%2farticleshow%2f67310172.cms&c=13272156603163521814&mkt=en-in)
+INFO:app.ingestion.multi_source_monitor:    -> MATCH (Full Text: 1309)
+INFO:app.ingestion.multi_source_monitor:Fetching from Google News: https://news.google.com/rss/search?q=industrial%20expansion%20India&hl=en-IN&gl=IN&ceid=IN:en
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: IAFS 2026: A Co-Development Inflection Point - orfonline.org (https://news.google.com/rss/articles/CBMiigFBVV95cUxNMHBTR2pFYjg0M2FONG1rMFh0QjN3UGtZMnhWV01hX3lSSUJTM3FlM2ZacEFudDVSNzY4ZUhGNmRJdTJ6VzRMWDVXU0ZoR1RwYnY1eXE5c0diVkpVX0J2bTFONmN6a3JKNDRiR1p5WWFYaThmTktfTkRtRkZ4dVhMVHo4TngtSE1aMGc?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 362)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Budget 2026: Manufacturing takes centre stage in India’s growth blueprint - kpmg.com (https://news.google.com/rss/articles/CBMiswFBVV95cUxORW5xQTdYeEREOTJSUUYtN1dRelo4Q0JyMncxQjJpRkZZZUhWQU9LczlROTFPaEtkYXFDdTMxWkp0Wk0waGVMd1pqUmtWNnl2UWp1UVZDSDhQZmdiU3o0ZDVfd2J0Wm9McjFSUkFTSmd0YjlGMkRJbXp1MWhUQzdleXJCNHQ0aFpoWHVLRjNibjR2NzgwMkJkUkVTUmRuNUFHclhUaE5yeDF3dXZ5SUFLSUlEZw?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 441)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Odisha’s Industrial Scale and Skilled Workforce to Anchor India’s Next Growth Phase: CM Majhi - KalingaTV (https://news.google.com/rss/articles/CBMivwFBVV95cUxQZnBUUDN4cXZlOG5US2U4aktxRFU5cUItQkRtMHVWV0tlR0lxRWQ1QndkN3FCTTh0emlOUlBTa1FHMERReXdtSGdUZ0I0VnBHVnBnVmZ0MEY1YkJNMTEwalhFX1RqdWx2VlNCQXJpVElubEVCb3NtNC1NdnZJUHplYVpFeTg3ZUtZSFNQMVJRZUVLd09XTDl0cmp2bmNyQ3FUZ2Q4LWZITjhFWTg4UW9Od2t2b1NmS1owRGxlelFsUQ?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 478)
+INFO:app.ingestion.multi_source_monitor:Fetching from Bing News: https://www.bing.com/news/search?q=industrial%20expansion%20India&format=rss
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: India’s Industrial Output Climbs 7.8% in December 2025, Highest in Over Two Years (http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6987b53f30b145aa8d9c31dfc282084b&url=https%3a%2f%2fwww.republicworld.com%2fbusiness%2findias-industrial-output-climbs-78-in-december-2025-highest-in-over-two-years&c=16827952512176158708&mkt=en-in)
+INFO:app.ingestion.multi_source_monitor:    -> MATCH (Full Text: 1567)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Industrial expansion in Tamil Nadu set to boost employment with 55,000 jobs expected (http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6987b53f30b145aa8d9c31dfc282084b&url=https%3a%2f%2fenglish.mathrubhumi.com%2fnews%2findia%2ftamil-nadu-cabinet-approves-15-industrial-projects-34237-crore-uks7qvhi&c=17908692034955451174&mkt=en-in)
+INFO:app.ingestion.multi_source_monitor:    -> MATCH (Full Text: 2288)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Industrial output expands 7.8% in December (http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6987b53f30b145aa8d9c31dfc282084b&url=https%3a%2f%2fwww.livemint.com%2feconomy%2findia-industrial-production-december-manufacturing-mining-consumer-durables-gst-11769595565495.html&c=2045881576295439239&mkt=en-in)
+INFO:app.ingestion.multi_source_monitor:    -> MATCH (Full Text: 5108)
+INFO:app.routers.ingestion:[DEBUG] News Monitor returned: 16 signals
+INFO:app.routers.ingestion:[DEBUG] Tender Monitor returned: 14 signals
+INFO:app.routers.ingestion:Ingestion complete. Added 27 new signals.
+INFO:app.routers.ingestion:Starting Intelligence Processing...
+INFO:app.services.intelligence:Processing Signal ID 1: Mahindra to Set Up its Largest Integrated Auto & Tractor Manufacturing Facility in Maharashtra - Mahindra
+INFO:app.services.intelligence:  -> Extracted Company: Mahindra
+INFO:app.services.intelligence:  -> Inferred Product: LDO (Light Diesel Oil)
+Exception in thread Thread-1 (run_ingestion_task):
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/threading.py", line 1052, in _bootstrap_inner
+    self.run()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/threading.py", line 989, in run
+    self._target(*self._args, **self._kwargs)
+  File "/Users/sachinjaiswal/Desktop/Productathon/backend/app/routers/ingestion.py", line 71, in run_ingestion_task
+    leads_created = intel_service.process_all_new_signals()
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sachinjaiswal/Desktop/Productathon/backend/app/services/intelligence.py", line 233, in process_all_new_signals
+    self.process_signal(sig)
+  File "/Users/sachinjaiswal/Desktop/Productathon/backend/app/services/intelligence.py", line 203, in process_signal
+    confidence = self.calculate_confidence(signal, product)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sachinjaiswal/Desktop/Productathon/backend/app/services/intelligence.py", line 122, in calculate_confidence
+    if signal.pub_date:
+       ^^^^^^^^^^^^^^^
+  File "/Users/sachinjaiswal/Desktop/Productathon/backend/venv/lib/python3.12/site-packages/pydantic/main.py", line 1026, in __getattr__
+    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+AttributeError: 'Signal' object has no attribute 'pub_date'
+INFO:apscheduler.executors.default:Running job "scheduled_ingestion (trigger: interval[0:30:00], next run at: 2026-02-08 03:56:58 IST)" (scheduled at 2026-02-08 03:56:58.900488+05:30)
+INFO:app.scheduler:Running scheduled ingestion...
+INFO:app.routers.ingestion:Starting ingestion for keywords: ['new manufacturing plant India', 'road construction projects India', 'boiler commissioning India']
+INFO:app.ingestion.multi_source_monitor:Fetching from Google News: https://news.google.com/rss/search?q=new%20manufacturing%20plant%20India&hl=en-IN&gl=IN&ceid=IN:en
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Mahindra to Set Up its Largest Integrated Auto & Tractor Manufacturing Facility in Maharashtra - Mahindra (https://news.google.com/rss/articles/CBMi4gFBVV95cUxQa3llX2FwMXBBRlFVN2NkTWpxajdDUmtaeDdCTlV1SFVPcTVfdFo1YVBkRVExd3FzbHdUdC1vWWlJQ1dfYk43bjVxQ2VmdXZmUVBtQi1LVl9sVVVmS1RyeWNCYlE4NDFmVmRObFhzV1N1WEpSTjFBb0hHZ3d0dU9EZEx6ZEVLUDgyVjdLajJjRlpJeEE4RGJ3X21veGRPQ3ZidVkyT3BHeDlHdWlGOXBtRG05UTRVVFdIRDBwb3pXZW0xR1otQmZHakdCSnhsVjh2Y2xqUUN5cE1takczd3Z4QVJR?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 524)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Stallion India Fluorochemicals Signs ₹200 Crore MoU with Rajasthan Government for HFO Manufacturing Plant - scanx.trade (https://news.google.com/rss/articles/CBMi7wFBVV95cUxNZWRLdXVtbVF5bnlwRWhnaEZTN05DV2FLU054cVlBdmh4YUMxQVE0dG5NLVQ3UzZrYjhwUVpsbGEtR2FTTHlucEFOVXFuQWtOZ1RRb2xYN1R2bFFjb1FsaDJtbEhRbC1adlNSbWpibk5TUGllWlF2Y3N2eDJMenVSNElrNFlma0paWjh5S0ZVaUNtNTJadFBreHd4TW10cXdRSU9Kek1YdC1EMFZNNXJMdTR4RVJYcWZrSlVUcG5GOVZmMjdnOEFjQVJVQXNRVXBUdEp3cHJKMmVHQkE3bkE5RlJqckF3WUktNkY3THlTYw?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 556)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Tata Chemicals to invest Rs 515 cr in new manufacturing unit in Tamil Nadu - The Economic Times (https://news.google.com/rss/articles/CBMigAJBVV95cUxOdnNITU1jMnFyZlpVZmVsLXNKbE5XVWQ5UVZMdDNUN2dVMkU2ZTR6R1B6Y3VjQ1AtcWRhN0J0cUZabkEyeVdwNVhfc2JkWUxiLW02VEZsZDU0Z210azdsYWRBUlNVZWFhMUU1NkNfbG5WdEdjS0ljalBzRWN3UzVjRzdBRmJiNjFHUWNoV0ZBV3E1ZndtQVZ3VVJmTnJ4TU53MHZ0eTZWSDh3OFVqdXBzNHQ5ZnBJOHNuUkNXZzdMd2ZlYVNBcTJhUzY2WGlGRFYtOEk5cWxGZFV1Mmt6S25HY0Y0R0pQYl9BS0F0SDFCV1plUHluWEEwd0lfWFhZbFJ40gGGAkFVX3lxTE5IUnd2VWVfUEFCdTAyM1JIMXVEQWFXS1U1ZFVOaG00eW1RYnZhWU9xM3o2bFNBVm5mcFNpUzIzSkQ0THdSTWNZX2ZQWTJhMGFsbUtlWk1ZS2RuVWpyZFk4R3FXeUFUUmtCVlpEVFNSYTB5dXdXRlk1b2o4T0JFZFNfNUhWOGZEQ0hnLWZpeWxxMFk3UUZuMnhlMnNYb0Fpanp0emttVUl5WHYxRHNFMU9uNW8xMTROME03dGZBSHJGeENYOXFYUDdiSmotUGNxOHV3OXFoUnFIUC1VZEJHYXlLeGhUM1VLc0hCbWU1RGM3cVlfMHNnSFg5SVlvOFZFM1hJVjRSdHc?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 909)
+INFO:app.ingestion.multi_source_monitor:Fetching from Bing News: https://www.bing.com/news/search?q=new%20manufacturing%20plant%20India&format=rss
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Jindal India launches Rs 1,100 crore coating line at Howrah plant (http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6987bc390eb241039011b88fd94535d3&url=https%3a%2f%2ftimesofindia.indiatimes.com%2fcity%2fkolkata%2fjindal-india-launches-rs1100-crore-crore-coating-line-at-howrah-plants%2farticleshow%2f128006561.cms&c=3627171305041800006&mkt=en-in)
+INFO:app.ingestion.multi_source_monitor:    -> MATCH (Full Text: 1160)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Taural India aluminium casting plant commences operations (http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6987bc390eb241039011b88fd94535d3&url=https%3a%2f%2fwww.financialexpress.com%2fbusiness%2fnews%2ftaural-india-aluminium-casting-plant-commences-operations%2f4134020%2f&c=17595086066895855137&mkt=en-in)
+INFO:app.ingestion.multi_source_monitor:    -> MATCH (Full Text: 2302)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Range Rover Evoque to Roll Out of Tata’s New Tamil Nadu Plant (http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6987bc390eb241039011b88fd94535d3&url=https%3a%2f%2findianautosblog.com%2frange-rover-evoque-to-roll-out-of-tatas-new-tamil-nadu-plant-p328252&c=10868503469311341768&mkt=en-in)
+INFO:app.ingestion.multi_source_monitor:    -> MATCH (Full Text: 1703)
+INFO:app.ingestion.multi_source_monitor:Fetching from Google News: https://news.google.com/rss/search?q=road%20construction%20projects%20India&hl=en-IN&gl=IN&ceid=IN:en
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: India's road construction likely to slide to a 5-year low of 25-26 km per day in FY26: ICRA - The Economic Times (https://news.google.com/rss/articles/CBMijAJBVV95cUxNSmhpWnN3X3dwWTl1T1d1MFFHR1VQTUpYQlVtaF9ETjdGVW9NS2tSTlJIR0kyOVhJMWpaa0c2dkU3Y0d6YllYdHVJSFlORV9zU1ZMVXhnMTduTjlHWUl5S2FPZlhOR2Etd2phMkJjOXhIRml2N2VVQU92Y1BhQkViM1R2SWtxdlN4YS1QbkhkZUpubElqdjRya2g0aVZRcFlwWVE5VGstUkNra1czX0VZLXZqc1pncjJjRkpnYUZFUHlwcXpkWThETDhnbXo2WVEwZ1ZrSmZjZU5LbjYza2JwUG5fUDVRekxuNGJFYlpmang4VzMteTZGbjFNNjhBMy16UHctUjNybzhkWmU30gGSAkFVX3lxTE9jQm1waUlfU2lYX3lORFp6QW5pNGJ4U241NVhlYVdKQ3Fua2RwTk9NbTNIRVdMOW1yTG94ZFZfcVkxemlUa3VvdWItV2RzeWktVzZzR1ZJTDhsSkFPSW1xQy1ZVC1iWjJtdHNFZDdjYVBEcXJBVERtelF3YXpQRHlUcnJjc3pMOWEyWHZLc0VwVklrNGtsTE1Dc0VoNTBROFlfZHpwU3F4SVpOQ2QtZWRQajZpaEdUYjJyLWprZTQzUWRVc3ZDbEU4Q1pkNXNWQlJDRHpDRmZZS0M3UEU1bG41akxsb0drTS0xZVRJR2NzNDg3QWROZ1R6YTJiZTJkbm45bmxHLXJjWnlpRlBFWGU3ckE?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 958)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Press Note Details: Press Information Bureau - PIB (https://news.google.com/rss/articles/CBMieEFVX3lxTE5YTm54RTcyZGJqdkFRSWdrazY1Qk5OeEhuV1c2OFFQSVk3Ym1Pa0tZdlIwaHlqMkJlSjlvU19pUlNZWERtSDF3T0sxdjNRUzVyaXJCTHBCd1FzUl94a1JzbjJ4cFE3LTdLbVpHV2VMYklFUURPMEQ3bw?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 327)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Govt aims to accelerate pace of highways construction to 60 km/day: Gadkari - ET Infra (https://news.google.com/rss/articles/CBMi1gFBVV95cUxORXpVUWxuR0pTS3hpNTZYZDZxUXM5V3UtQnlrLTlOV2cxNnJGZHh4MTF3YUVnMHJFQUFvLWMyZjFadnpCRW83QnlMUVpLNktnU1pIYS1sOFo5YTRwUjNNWExxTnp2OVI0VDRGQ2tvQ203MDJNbDBiSGpFXy1qd2hiUXNESlNnOUVQU3RKMW1lc3M1Qmh4bDd1UEN6WXFlb0ZFby1xRk1DYXFlX1ZhUDB6RWJqajBpdGZNSGN6QnEzeXhKNkhCZWNuRXR0SjlNWktZTXlxelRR?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 489)
+INFO:app.ingestion.multi_source_monitor:Fetching from Bing News: https://www.bing.com/news/search?q=road%20construction%20projects%20India&format=rss
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: India's Mega Infrastructure Push: NPG Reviews Seven Key Road Projects To Strengthen Multimodal Connectivity Under PM GatiShakti (http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6987bc430b6b43239ced3c8de8b966b4&url=https%3a%2f%2fswarajyamag.com%2finfrastructure%2findias-mega-infrastructure-push-npg-reviews-seven-key-road-projects-to-strengthen-multimodal-connectivity-under-pm-gatishakti&c=2984861551991390608&mkt=en-in)
+INFO:app.ingestion.multi_source_monitor:    -> MATCH (Full Text: 4994)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Can skilled workers transform India’s highways? NHAI plans mega training mission (http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6987bc430b6b43239ced3c8de8b966b4&url=https%3a%2f%2fwww.zeebiz.com%2feconomy-infra%2froadways%2fnews-can-skilled-workers-transform-india-s-highways-nhai-plans-mega-training-mission-389866&c=11336891555635997842&mkt=en-in)
+INFO:app.ingestion.multi_source_monitor:    -> MATCH (Full Text: 4149)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: India’s Biggest Highway Push Advances: Over 21,700 km Out Of 26,425 km Awarded Projects Under Bharatmala Pariyojana Completed (http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6987bc430b6b43239ced3c8de8b966b4&url=https%3a%2f%2fswarajyamag.com%2finfrastructure%2findias-biggest-highway-push-advances-over-21700-km-out-of-26425-km-awarded-projects-under-bharatmala-pariyojana-completed&c=13037540990555386662&mkt=en-in)
+INFO:app.ingestion.multi_source_monitor:    -> MATCH (Full Text: 2564)
+INFO:app.ingestion.multi_source_monitor:Fetching from Google News: https://news.google.com/rss/search?q=boiler%20commissioning%20India&hl=en-IN&gl=IN&ceid=IN:en
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Thermax Secures ₹580 Crore Boiler Order From Dangote Industries for Nigeria Refinery - India Infoline (https://news.google.com/rss/articles/CBMixwFBVV95cUxQc0RDaFBkV00wSWJRYjdUU0JuaGpMcUdPaDRoSzc1eVlUVm5wcVNxWmwtN1hna0ZBWDV6Sml3di1LRGtKM3lCei0tNWlMV1hPRjFrWm54VlBoVEFtak1IekFHcVowOXZGQ21WQThQM2FELXdfbjRwWl9PS2FRRHM0aFBJR2VMeERNd0VxdlN5Zm8tRTBZR2tkQy1JRHNkSFdHZF82ZjZfcUNiOGR4cG1fUDNGSm12WDM4Z19qYUw4cGo4OFAwcjNF?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 484)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Thermax bags Rs. 580 crore+ utility boilers order from Dangote - Indian Chemical News (https://news.google.com/rss/articles/CBMirgFBVV95cUxNdzhrTE5tQ24xSjJ3TVdXRnY2TlkyZW9Va2dzN3ZZWm4zNy12ckI4N2d2WVNJeTh4NWpiMXZVT29vYVpsVHVnY1RFbjgwYktYd0dnMk5GbWZDQWR1V2RtdDkyb0VwUWJob01ZcTVXUXYyZ3VBd3dudjdLdUtKLW5DUUw4NktKZ1I0b3NvZHNZaE94WVFzRWRIYXpmcHQzMmZteTYwR2RPSEsxQ3ZqWFHSAbQBQVVfeXFMUEViSFNiWkUxVlBmcmxQX3FtdDZleXhyZ3AwN0JIS1NSakVDem9UZFZfdV9lWjk2bm0xVWJkNy1LSl92ckstWUNOT0hiVDNJZTlhd0JKOUtpeWhtcXBERXZrUWVzQ2tZWEdMNzBZSFRmNXp2WmxaNTM0aWcxdVJmZGw3YnV2SkJId3hlOHR6ZGFhVnFiSWdTNFZSY0hTWW5FekxCZFpmd3haeEJPUkFUNUd0WHBR?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 680)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Ramsarup Industries set to commission high-tech modern blast furnace and linear sinter plant - Manufacturing Today India (https://news.google.com/rss/articles/CBMifkFVX3lxTE0xT0htcU5Tb2NOY09Gc2Y5QkRqdGtEQmI5UEJQdUdzcHI5aHJQdnl0R0JINXI2TlVpOVJLYlhwbkFRMlFSemxrWGdVaUJaeERNMmc1VmU2d2YxdUVTd0RxZUNmU21odlZMdGpwa0xjR3NGSEw2QnZnUGhoZ3U2dw?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 405)
+INFO:app.ingestion.multi_source_monitor:Fetching from Bing News: https://www.bing.com/news/search?q=boiler%20commissioning%20India&format=rss
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: NLC conducts boiler light-up test for NNTPP's first unit (http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6987bc50a4f0475da478850ffcbe1d83&url=https%3a%2f%2ftimesofindia.indiatimes.com%2fbusiness%2findia-business%2fnlc-conducts-boiler-light-up-test-for-nntpps-first-unit%2farticleshow%2f67310172.cms&c=13272156603163521814&mkt=en-in)
+INFO:app.ingestion.multi_source_monitor:    -> MATCH (Full Text: 1309)
+INFO:app.routers.ingestion:[DEBUG] News Monitor returned: 16 signals
+INFO:app.routers.ingestion:[DEBUG] Tender Monitor returned: 17 signals
+INFO:app.routers.ingestion:Ingestion complete. Added 21 new signals.
+INFO:app.routers.ingestion:Starting Intelligence Processing...
+INFO:app.services.intelligence:Processing Signal ID 1: Mahindra to Set Up its Largest Integrated Auto & Tractor Manufacturing Facility in Maharashtra - Mahindra
+INFO:app.services.intelligence:  -> Extracted Company: Mahindra
+INFO:app.services.intelligence:  -> Inferred Product: LDO (Light Diesel Oil)
+ERROR:apscheduler.executors.default:Job "scheduled_ingestion (trigger: interval[0:30:00], next run at: 2026-02-08 04:26:58 IST)" raised an exception
+Traceback (most recent call last):
+  File "/Users/sachinjaiswal/Desktop/Productathon/backend/venv/lib/python3.12/site-packages/apscheduler/executors/base.py", line 131, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sachinjaiswal/Desktop/Productathon/backend/app/scheduler.py", line 16, in scheduled_ingestion
+    run_ingestion_task(keywords)
+  File "/Users/sachinjaiswal/Desktop/Productathon/backend/app/routers/ingestion.py", line 71, in run_ingestion_task
+    leads_created = intel_service.process_all_new_signals()
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sachinjaiswal/Desktop/Productathon/backend/app/services/intelligence.py", line 233, in process_all_new_signals
+    self.process_signal(sig)
+  File "/Users/sachinjaiswal/Desktop/Productathon/backend/app/services/intelligence.py", line 203, in process_signal
+    confidence = self.calculate_confidence(signal, product)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/sachinjaiswal/Desktop/Productathon/backend/app/services/intelligence.py", line 122, in calculate_confidence
+    if signal.pub_date:
+       ^^^^^^^^^^^^^^^
+  File "/Users/sachinjaiswal/Desktop/Productathon/backend/venv/lib/python3.12/site-packages/pydantic/main.py", line 1026, in __getattr__
+    raise AttributeError(f'{type(self).__name__!r} object has no attribute {item!r}')
+AttributeError: 'Signal' object has no attribute 'pub_date'
+WARNING:apscheduler.executors.default:Run time of job "scheduled_ingestion (trigger: interval[0:30:00], next run at: 2026-02-08 04:56:58 IST)" was missed by 0:06:57.242305

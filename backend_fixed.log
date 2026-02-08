@@ -1,0 +1,500 @@
+INFO:     Will watch for changes in these directories: ['/Users/sachinjaiswal/Desktop/Productathon/backend']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [84883] using StatReload
+🚀 Starting B2B Lead Intelligence Agent Backend...
+📊 Server will be available at: http://localhost:8000
+📚 API Documentation: http://localhost:8000/docs
+
+⏰ Scheduler will run ingestion every 30 minutes
+🔄 Auto-reload enabled for development
+
+INFO:     Started server process [84955]
+INFO:     Waiting for application startup.
+INFO:apscheduler.scheduler:Adding job tentatively -- it will be properly scheduled when the scheduler starts
+INFO:apscheduler.scheduler:Added job "scheduled_ingestion" to job store "default"
+INFO:apscheduler.scheduler:Scheduler started
+INFO:app.scheduler:Scheduler started. Ingestion will run every 30 minutes.
+INFO:app.main:🚀 Running initial data ingestion on startup...
+INFO:app.routers.ingestion:Starting ingestion for keywords: ['new manufacturing plant India', 'boiler commissioning India', 'industrial expansion India']
+INFO:app.ingestion.multi_source_monitor:Fetching from Google News: https://news.google.com/rss/search?q=new%20manufacturing%20plant%20India&hl=en-IN&gl=IN&ceid=IN:en
+INFO:     Application startup complete.
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Mahindra to Set Up its Largest Integrated Auto & Tractor Manufacturing Facility in Maharashtra - Mahindra (https://news.google.com/rss/articles/CBMi4gFBVV95cUxQa3llX2FwMXBBRlFVN2NkTWpxajdDUmtaeDdCTlV1SFVPcTVfdFo1YVBkRVExd3FzbHdUdC1vWWlJQ1dfYk43bjVxQ2VmdXZmUVBtQi1LVl9sVVVmS1RyeWNCYlE4NDFmVmRObFhzV1N1WEpSTjFBb0hHZ3d0dU9EZEx6ZEVLUDgyVjdLajJjRlpJeEE4RGJ3X21veGRPQ3ZidVkyT3BHeDlHdWlGOXBtRG05UTRVVFdIRDBwb3pXZW0xR1otQmZHakdCSnhsVjh2Y2xqUUN5cE1takczd3Z4QVJR?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 524)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Stallion India Fluorochemicals Signs ₹200 Crore MoU with Rajasthan Government for HFO Manufacturing Plant - scanx.trade (https://news.google.com/rss/articles/CBMi7wFBVV95cUxNZWRLdXVtbVF5bnlwRWhnaEZTN05DV2FLU054cVlBdmh4YUMxQVE0dG5NLVQ3UzZrYjhwUVpsbGEtR2FTTHlucEFOVXFuQWtOZ1RRb2xYN1R2bFFjb1FsaDJtbEhRbC1adlNSbWpibk5TUGllWlF2Y3N2eDJMenVSNElrNFlma0paWjh5S0ZVaUNtNTJadFBreHd4TW10cXdRSU9Kek1YdC1EMFZNNXJMdTR4RVJYcWZrSlVUcG5GOVZmMjdnOEFjQVJVQXNRVXBUdEp3cHJKMmVHQkE3bkE5RlJqckF3WUktNkY3THlTYw?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 556)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Tata Chemicals to invest Rs 515 cr in new manufacturing unit in Tamil Nadu - The Economic Times (https://news.google.com/rss/articles/CBMigAJBVV95cUxOdnNITU1jMnFyZlpVZmVsLXNKbE5XVWQ5UVZMdDNUN2dVMkU2ZTR6R1B6Y3VjQ1AtcWRhN0J0cUZabkEyeVdwNVhfc2JkWUxiLW02VEZsZDU0Z210azdsYWRBUlNVZWFhMUU1NkNfbG5WdEdjS0ljalBzRWN3UzVjRzdBRmJiNjFHUWNoV0ZBV3E1ZndtQVZ3VVJmTnJ4TU53MHZ0eTZWSDh3OFVqdXBzNHQ5ZnBJOHNuUkNXZzdMd2ZlYVNBcTJhUzY2WGlGRFYtOEk5cWxGZFV1Mmt6S25HY0Y0R0pQYl9BS0F0SDFCV1plUHluWEEwd0lfWFhZbFJ40gGGAkFVX3lxTE5IUnd2VWVfUEFCdTAyM1JIMXVEQWFXS1U1ZFVOaG00eW1RYnZhWU9xM3o2bFNBVm5mcFNpUzIzSkQ0THdSTWNZX2ZQWTJhMGFsbUtlWk1ZS2RuVWpyZFk4R3FXeUFUUmtCVlpEVFNSYTB5dXdXRlk1b2o4T0JFZFNfNUhWOGZEQ0hnLWZpeWxxMFk3UUZuMnhlMnNYb0Fpanp0emttVUl5WHYxRHNFMU9uNW8xMTROME03dGZBSHJGeENYOXFYUDdiSmotUGNxOHV3OXFoUnFIUC1VZEJHYXlLeGhUM1VLc0hCbWU1RGM3cVlfMHNnSFg5SVlvOFZFM1hJVjRSdHc?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 909)
+INFO:app.ingestion.multi_source_monitor:Fetching from Bing News: https://www.bing.com/news/search?q=new%20manufacturing%20plant%20India&format=rss
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Taural India aluminium casting plant commences operations (http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6987e471aea44c95ad71ee146e2aed8c&url=https%3a%2f%2fwww.financialexpress.com%2fbusiness%2fnews%2ftaural-india-aluminium-casting-plant-commences-operations%2f4134020%2f&c=17595086066895855137&mkt=en-in)
+INFO:app.ingestion.multi_source_monitor:    -> MATCH (Full Text: 2302)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Jindal India launches Rs 1,100 crore coating line at Howrah plant (http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6987e471aea44c95ad71ee146e2aed8c&url=https%3a%2f%2ftimesofindia.indiatimes.com%2fcity%2fkolkata%2fjindal-india-launches-rs1100-crore-crore-coating-line-at-howrah-plants%2farticleshow%2f128006561.cms&c=3627171305041800006&mkt=en-in)
+INFO:app.ingestion.multi_source_monitor:    -> MATCH (Full Text: 1160)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Range Rover Evoque to Roll Out of Tata’s New Tamil Nadu Plant (http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6987e471aea44c95ad71ee146e2aed8c&url=https%3a%2f%2findianautosblog.com%2frange-rover-evoque-to-roll-out-of-tatas-new-tamil-nadu-plant-p328252&c=10868503469311341768&mkt=en-in)
+DATABASE PATH: sqlite:////Users/sachinjaiswal/Desktop/Productathon/backend/database.db
+Fetching from Google News...
+Fetching from Bing News...
+INFO:     127.0.0.1:50369 - "GET /health HTTP/1.1" 200 OK
+INFO:app.ingestion.multi_source_monitor:    -> MATCH (Full Text: 1703)
+INFO:app.ingestion.multi_source_monitor:Fetching from Google News: https://news.google.com/rss/search?q=boiler%20commissioning%20India&hl=en-IN&gl=IN&ceid=IN:en
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Thermax Secures ₹580 Crore Boiler Order From Dangote Industries for Nigeria Refinery - India Infoline (https://news.google.com/rss/articles/CBMixwFBVV95cUxQc0RDaFBkV00wSWJRYjdUU0JuaGpMcUdPaDRoSzc1eVlUVm5wcVNxWmwtN1hna0ZBWDV6Sml3di1LRGtKM3lCei0tNWlMV1hPRjFrWm54VlBoVEFtak1IekFHcVowOXZGQ21WQThQM2FELXdfbjRwWl9PS2FRRHM0aFBJR2VMeERNd0VxdlN5Zm8tRTBZR2tkQy1JRHNkSFdHZF82ZjZfcUNiOGR4cG1fUDNGSm12WDM4Z19qYUw4cGo4OFAwcjNF?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 484)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Ramsarup Industries set to commission high-tech modern blast furnace and linear sinter plant - Manufacturing Today India (https://news.google.com/rss/articles/CBMifkFVX3lxTE0xT0htcU5Tb2NOY09Gc2Y5QkRqdGtEQmI5UEJQdUdzcHI5aHJQdnl0R0JINXI2TlVpOVJLYlhwbkFRMlFSemxrWGdVaUJaeERNMmc1VmU2d2YxdUVTd0RxZUNmU21odlZMdGpwa0xjR3NGSEw2QnZnUGhoZ3U2dw?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 405)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: CBI books BHEL, NTPC officials for Rs 35 cr ‘fraud’ at Ramagundam plant - Times of India (https://news.google.com/rss/articles/CBMi3gFBVV95cUxQWnZ1bmhwM1djNFp6YmFvYzdlSzF6ZFk4WXg2RXRNaHdPYTZNSmtHclVfN01haWFNbE9aQUtIRmxkalVjN0xTbGpDb3pteE1iNmUwbzJtcWpmVC03Q3dqSm5GMU5fSVF3SlRWM1VsZG1PM05KM3prNkIxd3RMZ2hhY0hwZktORS0yX2ZtOFV6QUl6TS1kWjFBR1h4UWNhN1J0ZEdvZDliNFdEc1FxNG9tb20tdS0yWU1Ob25WWHJBMkt3Uy1aZXUyYl83bE01UG1HWFlvMThuOXp5NjV4Q3fSAeMBQVVfeXFMTV8ydVpuRENTZVh5VlpTZW1abm1PLTJ3MlB6QUo1VjhXcjM5MUh5bnZYOTVsVGFWbEtIeG5QUjJ0MFlpemwxX1ZwTE9LNld3UDRuSnFKVDVsUTdJTWlNeXAya0tmdjhCSU9XdWt4Y29lVldLWkhUZkNCaUJYdHl0dVFVOVFQckNjVU9jbnpGY2MyemZGTUJvUWRhdkFqS01BaENpQXhNdDA2SVUyQ3c2TmpnZTNzUWo3LW1MYWlmVzhhV29qZjJoOVg3NG4zLWVEYVFpcGh3WTBvQnRQeGRXVFN5ODA?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 810)
+INFO:app.ingestion.multi_source_monitor:Fetching from Bing News: https://www.bing.com/news/search?q=boiler%20commissioning%20India&format=rss
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: NLC conducts boiler light-up test for NNTPP's first unit (http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6987e47b077646189b08668f5f5da129&url=https%3a%2f%2ftimesofindia.indiatimes.com%2fbusiness%2findia-business%2fnlc-conducts-boiler-light-up-test-for-nntpps-first-unit%2farticleshow%2f67310172.cms&c=13272156603163521814&mkt=en-in)
+INFO:app.ingestion.multi_source_monitor:    -> MATCH (Full Text: 1309)
+INFO:app.ingestion.multi_source_monitor:Fetching from Google News: https://news.google.com/rss/search?q=industrial%20expansion%20India&hl=en-IN&gl=IN&ceid=IN:en
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: IAFS 2026: A Co-Development Inflection Point - orfonline.org (https://news.google.com/rss/articles/CBMiigFBVV95cUxNMHBTR2pFYjg0M2FONG1rMFh0QjN3UGtZMnhWV01hX3lSSUJTM3FlM2ZacEFudDVSNzY4ZUhGNmRJdTJ6VzRMWDVXU0ZoR1RwYnY1eXE5c0diVkpVX0J2bTFONmN6a3JKNDRiR1p5WWFYaThmTktfTkRtRkZ4dVhMVHo4TngtSE1aMGc?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 362)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Budget 2026: Manufacturing takes centre stage in India’s growth blueprint - kpmg.com (https://news.google.com/rss/articles/CBMiswFBVV95cUxORW5xQTdYeEREOTJSUUYtN1dRelo4Q0JyMncxQjJpRkZZZUhWQU9LczlROTFPaEtkYXFDdTMxWkp0Wk0waGVMd1pqUmtWNnl2UWp1UVZDSDhQZmdiU3o0ZDVfd2J0Wm9McjFSUkFTSmd0YjlGMkRJbXp1MWhUQzdleXJCNHQ0aFpoWHVLRjNibjR2NzgwMkJkUkVTUmRuNUFHclhUaE5yeDF3dXZ5SUFLSUlEZw?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 441)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Odisha’s Industrial Scale and Skilled Workforce to Anchor India’s Next Growth Phase: CM Majhi - KalingaTV (https://news.google.com/rss/articles/CBMivwFBVV95cUxQZnBUUDN4cXZlOG5US2U4aktxRFU5cUItQkRtMHVWV0tlR0lxRWQ1QndkN3FCTTh0emlOUlBTa1FHMERReXdtSGdUZ0I0VnBHVnBnVmZ0MEY1YkJNMTEwalhFX1RqdWx2VlNCQXJpVElubEVCb3NtNC1NdnZJUHplYVpFeTg3ZUtZSFNQMVJRZUVLd09XTDl0cmp2bmNyQ3FUZ2Q4LWZITjhFWTg4UW9Od2t2b1NmS1owRGxlelFsUQ?oc=5)
+INFO:app.ingestion.multi_source_monitor:    -> FALLBACK (Summary: 478)
+INFO:app.ingestion.multi_source_monitor:Fetching from Bing News: https://www.bing.com/news/search?q=industrial%20expansion%20India&format=rss
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: India’s Industrial Output Climbs 7.8% in December 2025, Highest in Over Two Years (http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6987e482aaec469a943e780870314c18&url=https%3a%2f%2fwww.republicworld.com%2fbusiness%2findias-industrial-output-climbs-78-in-december-2025-highest-in-over-two-years&c=16827952512176158708&mkt=en-in)
+INFO:app.ingestion.multi_source_monitor:    -> MATCH (Full Text: 1567)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Industrial expansion in Tamil Nadu set to boost employment with 55,000 jobs expected (http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6987e482aaec469a943e780870314c18&url=https%3a%2f%2fenglish.mathrubhumi.com%2fnews%2findia%2ftamil-nadu-cabinet-approves-15-industrial-projects-34237-crore-uks7qvhi&c=17908692034955451174&mkt=en-in)
+INFO:app.ingestion.multi_source_monitor:    -> MATCH (Full Text: 2288)
+INFO:app.ingestion.multi_source_monitor:  - Analyzing: Industrial output expands 7.8% in December (http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6987e482aaec469a943e780870314c18&url=https%3a%2f%2fwww.livemint.com%2feconomy%2findia-industrial-production-december-manufacturing-mining-consumer-durables-gst-11769595565495.html&c=2045881576295439239&mkt=en-in)
+INFO:app.ingestion.multi_source_monitor:    -> MATCH (Full Text: 5108)
+INFO:app.routers.ingestion:[DEBUG] News Monitor returned: 16 signals
+INFO:app.routers.ingestion:[DEBUG] Tender Monitor returned: 14 signals
+INFO:app.routers.ingestion:Ingestion complete. Added 10 new signals.
+INFO:app.routers.ingestion:Starting Intelligence Processing...
+INFO:app.services.intelligence:Processing Signal ID 1: Mahindra to Set Up its Largest Integrated Auto & Tractor Manufacturing Facility in Maharashtra - Mahindra
+INFO:app.services.intelligence:  -> Extracted Company: Mahindra
+INFO:app.services.intelligence:  -> Inferred Product: LDO (Light Diesel Oil)
+INFO:app.services.intelligence:  -> Created Lead ID 1 (Confidence: 0.45)
+INFO:app.services.intelligence:Processing Signal ID 2: Stallion India Fluorochemicals Signs ₹200 Crore MoU with Rajasthan Government for HFO Manufacturing Plant - scanx.trade
+INFO:app.services.intelligence:  -> Extracted Company: Stallion India Fluorochemicals
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 2 (Confidence: 0.65)
+INFO:app.services.intelligence:Processing Signal ID 3: Tata Chemicals to invest Rs 515 cr in new manufacturing unit in Tamil Nadu - The Economic Times
+INFO:app.services.intelligence:  -> Extracted Company: Tata Chemicals
+INFO:app.services.intelligence:  -> Inferred Product: MTO (Mineral Turpentine Oil)
+INFO:app.services.intelligence:  -> Created Lead ID 3 (Confidence: 0.40)
+INFO:app.services.intelligence:Processing Signal ID 4: Jindal India launches Rs 1,100 crore coating line at Howrah plant
+INFO:app.services.intelligence:  -> Extracted Company: Jindal India
+INFO:app.services.intelligence:  -> Inferred Product: LDO (Light Diesel Oil)
+INFO:app.services.intelligence:  -> Created Lead ID 4 (Confidence: 0.70)
+INFO:app.services.intelligence:Processing Signal ID 5: Taural India aluminium casting plant commences operations
+INFO:app.services.intelligence:  -> Extracted Company: Taural India aluminium casting plant
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 5 (Confidence: 0.30)
+INFO:app.services.intelligence:Processing Signal ID 6: Range Rover Evoque to Roll Out of Tata’s New Tamil Nadu Plant
+INFO:app.services.intelligence:  -> Extracted Company: Jaguar Land Rover is set to begin local assembly of the Range Rover Evoque at Tata Motors
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 6 (Confidence: 0.30)
+INFO:app.services.intelligence:Processing Signal ID 7: Thermax Secures ₹580 Crore Boiler Order From Dangote Industries for Nigeria Refinery - India Infoline
+INFO:app.services.intelligence:  -> Extracted Company: Crore Boiler Order From Dangote Industries
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 7 (Confidence: 0.30)
+INFO:app.services.intelligence:Processing Signal ID 8: Thermax bags Rs. 580 crore+ utility boilers order from Dangote - Indian Chemical News
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 8 (Confidence: 0.30)
+INFO:app.services.intelligence:Processing Signal ID 9: Ramsarup Industries set to commission high-tech modern blast furnace and linear sinter plant - Manufacturing Today India
+INFO:app.services.intelligence:  -> Extracted Company: Ramsarup Industries
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 9 (Confidence: 0.15)
+INFO:app.services.intelligence:Processing Signal ID 10: NLC conducts boiler light-up test for NNTPP's first unit
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 10 (Confidence: 0.20)
+INFO:app.services.intelligence:Processing Signal ID 11: IAFS 2026: A Co-Development Inflection Point - orfonline.org
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 12: Budget 2026: Manufacturing takes centre stage in India’s growth blueprint - kpmg.com
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 13: Odisha’s Industrial Scale and Skilled Workforce to Anchor India’s Next Growth Phase: CM Majhi - KalingaTV
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 14: India’s Industrial Output Climbs 7.8% in December 2025, Highest in Over Two Years
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 15: Industrial expansion in Tamil Nadu set to boost employment with 55,000 jobs expected
+INFO:app.services.intelligence:  -> Extracted Company: state Industries
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:  -> Created Lead ID 11 (Confidence: 0.45)
+INFO:app.services.intelligence:Processing Signal ID 16: Industrial output expands 7.8% in December
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 12 (Confidence: 0.20)
+INFO:app.services.intelligence:Processing Signal ID 17: NLC India Floats Massive Tender for 2x500 MW Thermal Power Plant Expansion in Tamil Nadu - PSU Connect
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 13 (Confidence: 0.50)
+INFO:app.services.intelligence:Processing Signal ID 18: CEL Tender For 200 MWp Solar Module Line in Uttar Pradesh Project - Saur Energy
+INFO:app.services.intelligence:  -> Extracted Company: Saur Energy
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:  -> Created Lead ID 14 (Confidence: 0.40)
+INFO:app.services.intelligence:Processing Signal ID 19: Cisco manufacturing unit a testament of India's engineering capabilities: Scindia
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 20: Rockwool Group’s ₹550 crore Cheyyar plant to be operational from mid-2026
+INFO:app.services.intelligence:  -> Extracted Company: Rockwool Group
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:  -> Created Lead ID 15 (Confidence: 0.25)
+INFO:app.services.intelligence:Processing Signal ID 21: REIL Launches Tender For 22 MWp Grid-Connected Solar Projects In Government Buildings Across India - SolarQuarter
+INFO:app.services.intelligence:  -> Extracted Company: REIL
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:  -> Created Lead ID 16 (Confidence: 0.40)
+INFO:app.services.intelligence:Processing Signal ID 22: DoP Shortlists Patented, Unlaunched Drugs for Global Tender Exemption, See Full List - Medical Dialogues
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 23: Rockwool Group’s ₹550 crore Cheyyar plant to be operational from mid-2026
+INFO:app.services.intelligence:  -> Extracted Company: Rockwool Group
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:  -> Created Lead ID 17 (Confidence: 0.25)
+INFO:app.services.intelligence:Processing Signal ID 24: Tender for stage-III expansion of Ib
+Thermal by end of month: Singh Deo - The New Indian Express
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 18 (Confidence: 0.45)
+INFO:app.services.intelligence:Processing Signal ID 25: Navi Mumbai upgrade plan: CIDCO floats tender for third-runway study; feasibility report to shape future - Times of India
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 26: Favouritism? GNIDA’s Rs 241-crore trash tender under Allahabad high court scanner - Times of India
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 27: Damodar Valley Corporation Floats Tender For 14 MW Floating Solar PV Project In Odisha - SolarQuarter
+INFO:app.services.intelligence:  -> Extracted Company: Damodar Valley Corp
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:  -> Created Lead ID 19 (Confidence: 0.40)
+INFO:app.services.intelligence:Processing Signal ID 28: Jindal India launches Rs 1,100 crore coating line at Howrah plant
+INFO:app.services.intelligence:  -> Extracted Company: Jindal India
+INFO:app.services.intelligence:  -> Inferred Product: LDO (Light Diesel Oil)
+INFO:app.services.intelligence:  -> Created Lead ID 20 (Confidence: 0.70)
+INFO:app.services.intelligence:Processing Signal ID 29: Taural India aluminium casting plant commences operations
+INFO:app.services.intelligence:  -> Extracted Company: Taural India aluminium casting plant
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 21 (Confidence: 0.30)
+INFO:app.services.intelligence:Processing Signal ID 30: Range Rover Evoque to Roll Out of Tata’s New Tamil Nadu Plant
+INFO:app.services.intelligence:  -> Extracted Company: Jaguar Land Rover is set to begin local assembly of the Range Rover Evoque at Tata Motors
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 22 (Confidence: 0.30)
+INFO:app.services.intelligence:Processing Signal ID 31: India's road construction likely to slide to a 5-year low of 25-26 km per day in FY26: ICRA - The Economic Times
+INFO:app.services.intelligence:  -> Extracted Company: India's road construct
+INFO:app.services.intelligence:  -> Inferred Product: Bitumen
+INFO:app.services.intelligence:  -> Created Lead ID 23 (Confidence: 0.20)
+INFO:app.services.intelligence:Processing Signal ID 32: Press Note Details: Press Information Bureau - PIB
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 33: Govt aims to accelerate pace of highways construction to 60 km/day: Gadkari - ET Infra
+INFO:app.services.intelligence:  -> Extracted Company: Govt aims to accelerate pace of highways construct
+INFO:app.services.intelligence:  -> Inferred Product: Bitumen
+INFO:app.services.intelligence:  -> Created Lead ID 24 (Confidence: 0.20)
+INFO:app.services.intelligence:Processing Signal ID 34: India's Mega Infrastructure Push: NPG Reviews Seven Key Road Projects To Strengthen Multimodal Connectivity Under PM GatiShakti
+INFO:app.services.intelligence:  -> Extracted Company: India's Mega Infra
+INFO:app.services.intelligence:  -> Inferred Product: Bitumen
+INFO:app.services.intelligence:  -> Created Lead ID 25 (Confidence: 0.30)
+INFO:app.services.intelligence:Processing Signal ID 35: Can skilled workers transform India’s highways? NHAI plans mega training mission
+INFO:app.services.intelligence:  -> Extracted Company: the construct
+INFO:app.services.intelligence:  -> Inferred Product: Bitumen
+INFO:app.services.intelligence:  -> Created Lead ID 26 (Confidence: 0.65)
+INFO:app.services.intelligence:Processing Signal ID 36: India’s Biggest Highway Push Advances: Over 21,700 km Out Of 26,425 km Awarded Projects Under Bharatmala Pariyojana Completed
+INFO:app.services.intelligence:  -> Extracted Company: Km of roads construct
+INFO:app.services.intelligence:  -> Inferred Product: Bitumen
+INFO:app.services.intelligence:  -> Created Lead ID 27 (Confidence: 0.30)
+INFO:app.services.intelligence:Processing Signal ID 37: NLC conducts boiler light-up test for NNTPP's first unit
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 28 (Confidence: 0.20)
+INFO:app.services.intelligence:Processing Signal ID 38: Cisco manufacturing unit a testament of India's engineering capabilities: Scindia
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 39: Rockwool Group’s ₹550 crore Cheyyar plant to be operational from mid-2026
+INFO:app.services.intelligence:  -> Extracted Company: Rockwool Group
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:  -> Created Lead ID 29 (Confidence: 0.25)
+INFO:app.services.intelligence:Processing Signal ID 40: Rockwool Group’s ₹550 crore Cheyyar plant to be operational from mid-2026
+INFO:app.services.intelligence:  -> Extracted Company: Rockwool Group
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:  -> Created Lead ID 30 (Confidence: 0.25)
+INFO:app.services.intelligence:Processing Signal ID 41: Double spending? New tender for Gurgaon road projects already funded - Times of India
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> Inferred Product: Bitumen
+INFO:app.services.intelligence:  -> Created Lead ID 31 (Confidence: 0.45)
+INFO:app.services.intelligence:Processing Signal ID 42: Tender deadline pushed again for Bengaluru Tunnel Road - The New Indian Express
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> Inferred Product: Bitumen
+INFO:app.services.intelligence:  -> Created Lead ID 32 (Confidence: 0.45)
+INFO:app.services.intelligence:Processing Signal ID 43: Tender floated for 3rd line project between Khurda Road & Gangadharpur
+INFO:app.services.intelligence:  -> Extracted Company: km third line construct
+INFO:app.services.intelligence:  -> Inferred Product: Bitumen
+INFO:app.services.intelligence:  -> Created Lead ID 33 (Confidence: 0.65)
+INFO:app.services.intelligence:Processing Signal ID 44: India’s highway construction slows again due to elections, delayed land approvals
+INFO:app.services.intelligence:  -> Extracted Company: highway construct
+INFO:app.services.intelligence:  -> Inferred Product: Bitumen
+INFO:app.services.intelligence:  -> Created Lead ID 34 (Confidence: 0.20)
+INFO:app.services.intelligence:Processing Signal ID 45: BRO Invites Tender for Construction of Dong-Jachep Road (Green-Field Alignment) To Nhsl Specifications - 2024_BRO_679030_1 - The Sentinel - of this Land, for its People
+INFO:app.services.intelligence:  -> Extracted Company: BRO Invites Tender for Construct
+INFO:app.services.intelligence:  -> Inferred Product: Bitumen
+INFO:app.services.intelligence:  -> Created Lead ID 35 (Confidence: 0.50)
+INFO:app.services.intelligence:Processing Signal ID 46: MoRTH Invites Tender for Construction of New 2 Lane with paved shoulders - 2024_MoRTH_815173_1 - The Sentinel - of this Land, for its People
+INFO:app.services.intelligence:  -> Extracted Company: MoRTH Invites Tender for Construct
+INFO:app.services.intelligence:  -> Inferred Product: Bitumen
+INFO:app.services.intelligence:  -> Created Lead ID 36 (Confidence: 0.45)
+INFO:app.services.intelligence:Processing Signal ID 47: 16 road projects worth Rs 13 crore launched in Chas block
+INFO:app.services.intelligence:  -> Extracted Company: The Chas block is set to undergo significant infra
+INFO:app.services.intelligence:  -> Inferred Product: Bitumen
+INFO:app.services.intelligence:  -> Created Lead ID 37 (Confidence: 0.30)
+INFO:app.services.intelligence:Processing Signal ID 48: Adani Power emerges as lowest bidder for 3.2 GW coal tender in India's Assam state - Reuters
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> Inferred Product: LDO (Light Diesel Oil)
+INFO:app.services.intelligence:  -> Created Lead ID 38 (Confidence: 0.45)
+INFO:app.services.intelligence:Processing Signal ID 49: Taural India aluminium casting plant commences operations
+INFO:app.services.intelligence:  -> Extracted Company: Taural India aluminium casting plant
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 39 (Confidence: 0.30)
+INFO:app.services.intelligence:Processing Signal ID 50: Jindal India launches Rs 1,100 crore coating line at Howrah plant
+INFO:app.services.intelligence:  -> Extracted Company: Jindal India
+INFO:app.services.intelligence:  -> Inferred Product: LDO (Light Diesel Oil)
+INFO:app.services.intelligence:  -> Created Lead ID 40 (Confidence: 0.70)
+INFO:app.services.intelligence:Processing Signal ID 51: Range Rover Evoque to Roll Out of Tata’s New Tamil Nadu Plant
+INFO:app.services.intelligence:  -> Extracted Company: Jaguar Land Rover is set to begin local assembly of the Range Rover Evoque at Tata Motors
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 41 (Confidence: 0.30)
+INFO:app.services.intelligence:Processing Signal ID 52: CBI books BHEL, NTPC officials for Rs 35 cr ‘fraud’ at Ramagundam plant - Times of India
+INFO:app.services.intelligence:  -> Extracted Company: CBI
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:  -> Created Lead ID 42 (Confidence: 0.10)
+INFO:app.services.intelligence:Processing Signal ID 53: NLC conducts boiler light-up test for NNTPP's first unit
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 43 (Confidence: 0.20)
+INFO:app.services.intelligence:Processing Signal ID 54: India’s Industrial Output Climbs 7.8% in December 2025, Highest in Over Two Years
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 55: Industrial expansion in Tamil Nadu set to boost employment with 55,000 jobs expected
+INFO:app.services.intelligence:  -> Extracted Company: state Industries
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:  -> Created Lead ID 44 (Confidence: 0.45)
+INFO:app.services.intelligence:Processing Signal ID 56: Industrial output expands 7.8% in December
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 45 (Confidence: 0.20)
+INFO:app.services.intelligence:Processing Signal ID 57: Cisco manufacturing unit a testament of India's engineering capabilities: Scindia
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 58: Rockwool Group’s ₹550 crore Cheyyar plant to be operational from mid-2026
+INFO:app.services.intelligence:  -> Extracted Company: Rockwool Group
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:  -> Created Lead ID 46 (Confidence: 0.25)
+INFO:app.services.intelligence:Processing Signal ID 59: Rockwool Group’s ₹550 crore Cheyyar plant to be operational from mid-2026
+INFO:app.services.intelligence:  -> Extracted Company: Rockwool Group
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:  -> Created Lead ID 47 (Confidence: 0.25)
+INFO:app.services.intelligence:Processing Signal ID 60: Taural India aluminium casting plant commences operations
+INFO:app.services.intelligence:  -> Extracted Company: Taural India aluminium casting plant
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 48 (Confidence: 0.30)
+INFO:app.services.intelligence:Processing Signal ID 61: Jindal India launches Rs 1,100 crore coating line at Howrah plant
+INFO:app.services.intelligence:  -> Extracted Company: Jindal India
+INFO:app.services.intelligence:  -> Inferred Product: LDO (Light Diesel Oil)
+INFO:app.services.intelligence:  -> Created Lead ID 49 (Confidence: 0.70)
+INFO:app.services.intelligence:Processing Signal ID 62: Range Rover Evoque to Roll Out of Tata’s New Tamil Nadu Plant
+INFO:app.services.intelligence:  -> Extracted Company: Jaguar Land Rover is set to begin local assembly of the Range Rover Evoque at Tata Motors
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 50 (Confidence: 0.30)
+INFO:app.services.intelligence:Processing Signal ID 63: NLC conducts boiler light-up test for NNTPP's first unit
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 51 (Confidence: 0.20)
+INFO:app.services.intelligence:Processing Signal ID 64: India’s Industrial Output Climbs 7.8% in December 2025, Highest in Over Two Years
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 65: Industrial expansion in Tamil Nadu set to boost employment with 55,000 jobs expected
+INFO:app.services.intelligence:  -> Extracted Company: state Industries
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:  -> Created Lead ID 52 (Confidence: 0.45)
+INFO:app.services.intelligence:Processing Signal ID 66: Industrial output expands 7.8% in December
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 53 (Confidence: 0.20)
+INFO:app.services.intelligence:Processing Signal ID 67: Cisco manufacturing unit a testament of India's engineering capabilities: Scindia
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 68: Rockwool Group’s ₹550 crore Cheyyar plant to be operational from mid-2026
+INFO:app.services.intelligence:  -> Extracted Company: Rockwool Group
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:  -> Created Lead ID 54 (Confidence: 0.25)
+INFO:app.services.intelligence:Processing Signal ID 69: Rockwool Group’s ₹550 crore Cheyyar plant to be operational from mid-2026
+INFO:app.services.intelligence:  -> Extracted Company: Rockwool Group
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:  -> Created Lead ID 55 (Confidence: 0.25)
+INFO:app.services.intelligence:Processing Signal ID 70: Jindal India launches Rs 1,100 crore coating line at Howrah plant
+INFO:app.services.intelligence:  -> Extracted Company: Jindal India
+INFO:app.services.intelligence:  -> Inferred Product: LDO (Light Diesel Oil)
+INFO:app.services.intelligence:  -> Created Lead ID 56 (Confidence: 0.70)
+INFO:app.services.intelligence:Processing Signal ID 71: Taural India aluminium casting plant commences operations
+INFO:app.services.intelligence:  -> Extracted Company: Taural India aluminium casting plant
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 57 (Confidence: 0.30)
+INFO:app.services.intelligence:Processing Signal ID 72: Supertech EV commissions Karnataka plant with 12,000 annual electric two-wheeler capacity
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 73: Can skilled workers transform India’s highways? NHAI plans mega training mission
+INFO:app.services.intelligence:  -> Extracted Company: the construct
+INFO:app.services.intelligence:  -> Inferred Product: Bitumen
+INFO:app.services.intelligence:  -> Created Lead ID 58 (Confidence: 0.65)
+INFO:app.services.intelligence:Processing Signal ID 74: Pb mins review Sri Anandpur Sahib bridge projects, announce Khuralgarh Sahib road upgrade
+INFO:app.services.intelligence:  -> Extracted Company: Punjab education minister Harjot Bains and finance minister Harpal Singh Cheema on Wednesday visited the Sri Anandpur Sahib assembly constituency to review the progress of major bridge construct
+INFO:app.services.intelligence:  -> Inferred Product: Bitumen
+INFO:app.services.intelligence:  -> Created Lead ID 59 (Confidence: 0.50)
+INFO:app.services.intelligence:Processing Signal ID 75: Naidu sets 2029 deadline for Rs.1.40L-cr highway projects
+INFO:app.services.intelligence:  -> Extracted Company: bound action plan to accelerate construct
+INFO:app.services.intelligence:  -> Inferred Product: Bitumen
+INFO:app.services.intelligence:  -> Created Lead ID 60 (Confidence: 0.45)
+INFO:app.services.intelligence:Processing Signal ID 76: NLC conducts boiler light-up test for NNTPP's first unit
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 61 (Confidence: 0.20)
+INFO:app.services.intelligence:Processing Signal ID 77: Cisco manufacturing unit a testament of India's engineering capabilities: Scindia
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 78: Rockwool Group’s ₹550 crore Cheyyar plant to be operational from mid-2026
+INFO:app.services.intelligence:  -> Extracted Company: Rockwool Group
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:  -> Created Lead ID 62 (Confidence: 0.25)
+INFO:app.services.intelligence:Processing Signal ID 79: SJVN Floats Tender For 300 MW Of New Solar Projects In Punjab - Construction World
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> Inferred Product: Bitumen
+INFO:app.services.intelligence:  -> Created Lead ID 63 (Confidence: 0.45)
+INFO:app.services.intelligence:Processing Signal ID 80: Rockwool Group’s ₹550 crore Cheyyar plant to be operational from mid-2026
+INFO:app.services.intelligence:  -> Extracted Company: Rockwool Group
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:  -> Created Lead ID 64 (Confidence: 0.25)
+INFO:app.services.intelligence:Processing Signal ID 81: Tender floated for 3rd line project between Khurda Road & Gangadharpur
+INFO:app.services.intelligence:  -> Extracted Company: km third line construct
+INFO:app.services.intelligence:  -> Inferred Product: Bitumen
+INFO:app.services.intelligence:  -> Created Lead ID 65 (Confidence: 0.65)
+INFO:app.services.intelligence:Processing Signal ID 82: India’s highway construction slows again due to elections, delayed land approvals
+INFO:app.services.intelligence:  -> Extracted Company: highway construct
+INFO:app.services.intelligence:  -> Inferred Product: Bitumen
+INFO:app.services.intelligence:  -> Created Lead ID 66 (Confidence: 0.20)
+INFO:app.services.intelligence:Processing Signal ID 83: 16 road projects worth Rs 13 crore launched in Chas block
+INFO:app.services.intelligence:  -> Extracted Company: The Chas block is set to undergo significant infra
+INFO:app.services.intelligence:  -> Inferred Product: Bitumen
+INFO:app.services.intelligence:  -> Created Lead ID 67 (Confidence: 0.30)
+INFO:app.services.intelligence:Processing Signal ID 84: Taural India aluminium casting plant commences operations
+INFO:app.services.intelligence:  -> Extracted Company: Taural India aluminium casting plant
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 68 (Confidence: 0.30)
+INFO:app.services.intelligence:Processing Signal ID 85: Jindal India launches Rs 1,100 crore coating line at Howrah plant
+INFO:app.services.intelligence:  -> Extracted Company: Jindal India
+INFO:app.services.intelligence:  -> Inferred Product: LDO (Light Diesel Oil)
+INFO:app.services.intelligence:  -> Created Lead ID 69 (Confidence: 0.70)
+INFO:app.services.intelligence:Processing Signal ID 86: Range Rover Evoque to Roll Out of Tata’s New Tamil Nadu Plant
+INFO:app.services.intelligence:  -> Extracted Company: Jaguar Land Rover is set to begin local assembly of the Range Rover Evoque at Tata Motors
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 70 (Confidence: 0.30)
+INFO:app.services.intelligence:Processing Signal ID 87: NLC conducts boiler light-up test for NNTPP's first unit
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 71 (Confidence: 0.20)
+INFO:app.services.intelligence:Processing Signal ID 88: India’s Industrial Output Climbs 7.8% in December 2025, Highest in Over Two Years
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 89: Industrial expansion in Tamil Nadu set to boost employment with 55,000 jobs expected
+INFO:app.services.intelligence:  -> Extracted Company: state Industries
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:  -> Created Lead ID 72 (Confidence: 0.45)
+INFO:app.services.intelligence:Processing Signal ID 90: Industrial output expands 7.8% in December
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 73 (Confidence: 0.20)
+INFO:app.services.intelligence:Processing Signal ID 91: Cisco manufacturing unit a testament of India's engineering capabilities: Scindia
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 92: Rockwool Group’s ₹550 crore Cheyyar plant to be operational from mid-2026
+INFO:app.services.intelligence:  -> Extracted Company: Rockwool Group
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:  -> Created Lead ID 74 (Confidence: 0.25)
+INFO:app.services.intelligence:Processing Signal ID 93: Rockwool Group’s ₹550 crore Cheyyar plant to be operational from mid-2026
+INFO:app.services.intelligence:  -> Extracted Company: Rockwool Group
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:  -> Created Lead ID 75 (Confidence: 0.25)
+INFO:app.services.intelligence:Processing Signal ID 94: EPI Issues Empanelment Tender for Solar EPC Projects Across India - Mercomindia.com
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 95: Taural India aluminium casting plant commences operations
+INFO:app.services.intelligence:  -> Extracted Company: Taural India aluminium casting plant
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 76 (Confidence: 0.30)
+INFO:app.services.intelligence:Processing Signal ID 96: Jindal India launches Rs 1,100 crore coating line at Howrah plant
+INFO:app.services.intelligence:  -> Extracted Company: Jindal India
+INFO:app.services.intelligence:  -> Inferred Product: LDO (Light Diesel Oil)
+INFO:app.services.intelligence:  -> Created Lead ID 77 (Confidence: 0.70)
+INFO:app.services.intelligence:Processing Signal ID 97: Range Rover Evoque to Roll Out of Tata’s New Tamil Nadu Plant
+INFO:app.services.intelligence:  -> Extracted Company: Jaguar Land Rover is set to begin local assembly of the Range Rover Evoque at Tata Motors
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 78 (Confidence: 0.30)
+INFO:app.services.intelligence:Processing Signal ID 98: NLC conducts boiler light-up test for NNTPP's first unit
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 79 (Confidence: 0.20)
+INFO:app.services.intelligence:Processing Signal ID 99: India’s Industrial Output Climbs 7.8% in December 2025, Highest in Over Two Years
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 100: Industrial expansion in Tamil Nadu set to boost employment with 55,000 jobs expected
+INFO:app.services.intelligence:  -> Extracted Company: state Industries
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:  -> Created Lead ID 80 (Confidence: 0.45)
+INFO:app.services.intelligence:Processing Signal ID 101: Industrial output expands 7.8% in December
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 81 (Confidence: 0.20)
+INFO:app.services.intelligence:Processing Signal ID 102: Cisco manufacturing unit a testament of India's engineering capabilities: Scindia
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 103: Rockwool Group’s ₹550 crore Cheyyar plant to be operational from mid-2026
+INFO:app.services.intelligence:  -> Extracted Company: Rockwool Group
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:  -> Created Lead ID 82 (Confidence: 0.25)
+INFO:app.services.intelligence:Processing Signal ID 104: Rockwool Group’s ₹550 crore Cheyyar plant to be operational from mid-2026
+INFO:app.services.intelligence:  -> Extracted Company: Rockwool Group
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:  -> Created Lead ID 83 (Confidence: 0.25)
+INFO:app.services.intelligence:Processing Signal ID 105: Taural India aluminium casting plant commences operations
+INFO:app.services.intelligence:  -> Extracted Company: Taural India aluminium casting plant
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 84 (Confidence: 0.30)
+INFO:app.services.intelligence:Processing Signal ID 106: Jindal India launches Rs 1,100 crore coating line at Howrah plant
+INFO:app.services.intelligence:  -> Extracted Company: Jindal India
+INFO:app.services.intelligence:  -> Inferred Product: LDO (Light Diesel Oil)
+INFO:app.services.intelligence:  -> Created Lead ID 85 (Confidence: 0.70)
+INFO:app.services.intelligence:Processing Signal ID 107: Range Rover Evoque to Roll Out of Tata’s New Tamil Nadu Plant
+INFO:app.services.intelligence:  -> Extracted Company: Jaguar Land Rover is set to begin local assembly of the Range Rover Evoque at Tata Motors
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 86 (Confidence: 0.30)
+INFO:app.services.intelligence:Processing Signal ID 108: NLC conducts boiler light-up test for NNTPP's first unit
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 87 (Confidence: 0.20)
+INFO:app.services.intelligence:Processing Signal ID 109: India’s Industrial Output Climbs 7.8% in December 2025, Highest in Over Two Years
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 110: Industrial expansion in Tamil Nadu set to boost employment with 55,000 jobs expected
+INFO:app.services.intelligence:  -> Extracted Company: state Industries
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:  -> Created Lead ID 88 (Confidence: 0.45)
+INFO:app.services.intelligence:Processing Signal ID 111: Industrial output expands 7.8% in December
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> Inferred Product: Furnace Oil
+INFO:app.services.intelligence:  -> Created Lead ID 89 (Confidence: 0.20)
+INFO:app.services.intelligence:Processing Signal ID 112: Cisco manufacturing unit a testament of India's engineering capabilities: Scindia
+INFO:app.services.intelligence:  -> No company extracted
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:Processing Signal ID 113: Rockwool Group’s ₹550 crore Cheyyar plant to be operational from mid-2026
+INFO:app.services.intelligence:  -> Extracted Company: Rockwool Group
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:  -> Created Lead ID 90 (Confidence: 0.25)
+INFO:app.services.intelligence:Processing Signal ID 114: Rockwool Group’s ₹550 crore Cheyyar plant to be operational from mid-2026
+INFO:app.services.intelligence:  -> Extracted Company: Rockwool Group
+INFO:app.services.intelligence:  -> No product inferred
+INFO:app.services.intelligence:  -> Created Lead ID 91 (Confidence: 0.25)
+INFO:app.routers.ingestion:Intelligence complete. Created 114 new leads.
