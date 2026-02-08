@@ -16,7 +16,7 @@ import {
     CreditCard,
     ArrowLeft
 } from '../../../../components/Icons';
-import { COLORS } from '../../../styles/theme';
+import { COLORS } from '../../../../styles/theme';
 import Link from 'next/link';
 
 export default function LeadDossierPage() {
