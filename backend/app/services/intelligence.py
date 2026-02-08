@@ -2,6 +2,7 @@ from datetime import datetime
 from typing import List, Optional
 from sqlmodel import Session, select
 from app.models import Signal, Lead, Company, Product
+from app.services.groq_intelligence import groq_intelligence
 import re
 import logging
 
@@ -202,12 +203,27 @@ class IntelligenceService:
         if company or product:
             confidence = self.calculate_confidence(signal, product)
             
+            # Generate AI reasoning using Groq if available
+            ai_reasoning = None
+            if groq_intelligence.enabled:
+                try:
+                    groq_analysis = groq_intelligence.analyze_signal(
+                        signal.title, 
+                        signal.content_summary or signal.title
+                    )
+                    if groq_analysis:
+                        ai_reasoning = groq_intelligence.get_detailed_recommendation(groq_analysis)
+                        logger.info(f"  -> Generated AI reasoning with Groq")
+                except Exception as e:
+                    logger.warning(f"  -> Groq analysis failed: {e}")
+            
             lead = Lead(
                 signal_id=signal.id,
                 company_id=company.id if company else None,
                 status="NEW",
                 confidence_score=confidence,
-                notes=f"Auto-generated. Inferred Product: {product.name if product else 'Unknown'}"
+                notes=f"Auto-generated. Inferred Product: {product.name if product else 'Unknown'}",
+                ai_reasoning=ai_reasoning  # Use Groq-generated reasoning
             )
             self.session.add(lead)
             self.session.commit()

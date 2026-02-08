@@ -46,6 +46,16 @@ def read_leads(
         lead_dict["company_state"] = lead.company.state if lead.company else None
         lead_dict["product_name"] = lead.product.name if lead.product else None
         lead_dict["signal_title"] = lead.signal.title if lead.signal else None
+        
+        # Include signal context for AI explanation
+        if lead.signal:
+            lead_dict["signal_context"] = {
+                "title": lead.signal.title,
+                "url": lead.signal.url,
+                "summary": lead.signal.content_summary,
+                "pub_date": lead.signal.published_date
+            }
+        
         result.append(lead_dict)
         
     return result

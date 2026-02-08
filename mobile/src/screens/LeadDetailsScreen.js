@@ -3,6 +3,19 @@ import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Linking, Alert, A
 import { COLORS, SPACING, FONTS } from '../constants/theme';
 import { apiService } from '../services/api';
 
+// Utility to clean HTML tags and decode entities from text
+const cleanHtmlText = (html) => {
+    if (!html) return '';
+    // Remove HTML tags
+    let text = html.replace(/<[^>]*>/g, '');
+    // Remove URLs that might be embedded
+    text = text.replace(/https?:\/\/[^\s]+/g, '');
+    // Clean up extra whitespace
+    text = text.replace(/\s+/g, ' ').trim();
+    // Limit length
+    return text.substring(0, 500);
+};
+
 const LeadDetailsScreen = ({ route, navigation }) => {
     const { leadId, lead: initialLead } = route.params || {};
     const [lead, setLead] = useState(initialLead || null);
@@ -69,19 +82,19 @@ const LeadDetailsScreen = ({ route, navigation }) => {
     return (
         <ScrollView style={styles.container}>
             <View style={styles.header}>
-                <Text style={styles.companyName}>{lead.companyName || lead.company?.name}</Text>
-                <Text style={styles.industry}>{(lead.industry || 'General') + ' • ' + (lead.location || 'Unknown')}</Text>
+                <Text style={styles.companyName}>{lead.company_name || lead.company?.name || 'Unknown Company'}</Text>
+                <Text style={styles.industry}>{(lead.company_industry || 'General')} • {(lead.company_city || lead.company_state || 'Unknown')}</Text>
                 <View style={[styles.statusBadge, {
-                    backgroundColor: lead.status === 'Converted' ? COLORS.success :
-                        lead.status === 'Rejected' ? COLORS.danger : COLORS.warning
+                    backgroundColor: (lead.status === 'CONVERTED' || lead.status === 'Converted') ? COLORS.success :
+                        (lead.status === 'REJECTED' || lead.status === 'Rejected') ? COLORS.danger : COLORS.warning
                 }]}>
-                    <Text style={styles.statusText}>{lead.status}</Text>
+                    <Text style={styles.statusText}>{lead.status === 'NEW' ? 'New' : lead.status}</Text>
                 </View>
             </View>
 
             <View style={styles.section}>
                 <Text style={styles.sectionTitle}>Why this Lead?</Text>
-                {lead.ai_reasoning || lead.explainability ? (
+                {lead.ai_reasoning || lead.signal_context?.summary || lead.explainability ? (
                     // Handle both array (mock) and string/text (real) formats roughly
                     Array.isArray(lead.explainability) ?
                         lead.explainability.map((item, index) => (
@@ -90,7 +103,9 @@ const LeadDetailsScreen = ({ route, navigation }) => {
                                 <Text style={styles.bulletText}>{item}</Text>
                             </View>
                         )) :
-                        <Text style={styles.bulletText}>{lead.ai_reasoning || "High confidence match based on signals."}</Text>
+                        <Text style={styles.bulletText}>
+                            {lead.ai_reasoning || cleanHtmlText(lead.signal_context?.summary) || "High confidence match based on signals."}
+                        </Text>
                 ) : (
                     <Text style={styles.placeholderText}>AI analysis details unavailable.</Text>
                 )}
@@ -98,27 +113,26 @@ const LeadDetailsScreen = ({ route, navigation }) => {
 
             <View style={styles.section}>
                 <Text style={styles.sectionTitle}>Lead Dossier</Text>
-                <Text style={styles.summary}>{lead.summary || lead.notes || "No additional notes."}</Text>
+                {/* Only show notes if they're not auto-generated */}
+                {(lead.ai_reasoning || (lead.notes && !lead.notes.startsWith('Auto-generated'))) && (
+                    <Text style={styles.summary}>
+                        {lead.ai_reasoning || lead.notes}
+                    </Text>
+                )}
 
                 <Text style={styles.subTitle}>Inferred Products</Text>
                 <View style={styles.tags}>
-                    {(lead.products || [lead.product?.name]).map((p, i) => (
-                        p && <View key={i} style={styles.tag}><Text style={styles.tagText}>{p}</Text></View>
-                    ))}
+                    {lead.product_name && <View style={styles.tag}><Text style={styles.tagText}>{lead.product_name}</Text></View>}
+                    {lead.notes && lead.notes.includes('Inferred Product') && (
+                        <View style={styles.tag}><Text style={styles.tagText}>{lead.notes.split(': ')[1]}</Text></View>
+                    )}
                 </View>
 
                 <Text style={styles.subTitle}>Signals</Text>
-                {lead.signals ? lead.signals.map((s, i) => (
-                    <View key={i} style={styles.signal}>
-                        <Text style={styles.signalType}>{s.type}</Text>
-                        <Text style={styles.signalText}>{s.text}</Text>
-                    </View>
-                )) : (
-                    <View style={styles.signal}>
-                        <Text style={styles.signalType}>{lead.signal?.type || 'Signal'}</Text>
-                        <Text style={styles.signalText}>{lead.signal?.title || 'Lead generated from signal.'}</Text>
-                    </View>
-                )}
+                <View style={styles.signal}>
+                    <Text style={styles.signalType}>SIGNAL</Text>
+                    <Text style={styles.signalText}>{lead.signal_context?.title || lead.signal_title || 'Lead generated from signal.'}</Text>
+                </View>
             </View>
 
             <View style={styles.section}>

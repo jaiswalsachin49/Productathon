@@ -4,49 +4,69 @@ import { useFocusEffect } from '@react-navigation/native';
 import { COLORS, SPACING, FONTS } from '../constants/theme';
 import { apiService } from '../services/api';
 
-const LeadCard = ({ lead, onPress }) => (
-    <TouchableOpacity
-        style={[
-            styles.card,
-            lead.status === 'Rejected' && styles.rejectedCard
-        ]}
-        onPress={onPress}
-    >
-        <View style={styles.cardHeader}>
-            <Text style={styles.companyName}>{lead.company_name || lead.company?.name || 'Unknown Company'}</Text>
-            <View style={[
-                styles.badge,
-                {
-                    backgroundColor: lead.status === 'New' ? COLORS.warning :
-                        lead.status === 'Rejected' ? COLORS.danger : COLORS.success
-                }
-            ]}>
-                <Text style={styles.badgeText}>{lead.status}</Text>
+const LeadCard = ({ lead, onPress }) => {
+    // Map backend status to display format
+    const displayStatus = lead.status === 'NEW' ? 'New' :
+        lead.status === 'CONVERTED' ? 'Converted' :
+            lead.status === 'REJECTED' ? 'Rejected' : lead.status;
+
+    return (
+        <TouchableOpacity
+            style={[
+                styles.card,
+                (lead.status === 'REJECTED' || lead.status === 'Rejected') && styles.rejectedCard
+            ]}
+            onPress={onPress}
+        >
+            <View style={styles.cardHeader}>
+                <Text style={styles.companyName}>{lead.company_name || lead.company?.name || 'Unknown Company'}</Text>
+                <View style={[
+                    styles.badge,
+                    {
+                        backgroundColor: displayStatus === 'New' ? COLORS.warning :
+                            (displayStatus === 'Rejected') ? COLORS.danger : COLORS.success
+                    }
+                ]}>
+                    <Text style={styles.badgeText}>{displayStatus}</Text>
+                </View>
             </View>
-        </View>
 
-        <Text style={styles.industry}>{(lead.company_industry || lead.industry || 'General') + ' • ' + (lead.company_city || lead.location || 'Unknown')}</Text>
-
-        <View style={styles.scoreContainer}>
-            <Text style={styles.scoreLabel}>Confidence Score</Text>
-            <Text style={[styles.scoreValue, { color: (lead.confidence_score * 100) > 80 ? COLORS.success : COLORS.warning }]}>
-                {Math.round(lead.confidence_score * 100)}%
+            {/* Show signal title as subtitle */}
+            <Text style={styles.signalTitle} numberOfLines={1}>
+                {lead.signal_context?.title || lead.signal_title || 'No signal data'}
             </Text>
-        </View>
 
-        <Text style={styles.summary} numberOfLines={2}>{lead.summary || lead.ai_reasoning || 'No summary available.'}</Text>
+            <Text style={styles.industry}>
+                {(lead.company_industry || 'General')} • {(lead.company_city || lead.company_state || 'Unknown')}
+            </Text>
 
-        <View style={styles.productsContainer}>
-            {[lead.product_name || lead.product?.name].map((prod, idx) => (
-                prod && (
-                    <View key={idx} style={styles.productTag}>
-                        <Text style={styles.productText}>{prod}</Text>
+            <View style={styles.scoreContainer}>
+                <Text style={styles.scoreLabel}>Confidence Score</Text>
+                <Text style={[styles.scoreValue, { color: (lead.confidence_score * 100) > 80 ? COLORS.success : COLORS.warning }]}>
+                    {Math.round(lead.confidence_score * 100)}%
+                </Text>
+            </View>
+
+            {/* Show AI reasoning as summary */}
+            {lead.ai_reasoning && (
+                <Text style={styles.summary} numberOfLines={2}>{lead.ai_reasoning}</Text>
+            )}
+
+            <View style={styles.productsContainer}>
+                {lead.product_name && (
+                    <View style={styles.productTag}>
+                        <Text style={styles.productText}>{lead.product_name}</Text>
                     </View>
-                )
-            ))}
-        </View>
-    </TouchableOpacity>
-);
+                )}
+                {lead.notes && lead.notes.includes('Inferred Product') && (
+                    <View style={styles.productTag}>
+                        <Text style={styles.productText}>{lead.notes.split(': ')[1]}</Text>
+                    </View>
+                )}
+            </View>
+        </TouchableOpacity>
+    );
+};
 
 const LeadsListScreen = ({ navigation }) => {
     const [leads, setLeads] = useState([]);
@@ -177,6 +197,12 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: COLORS.text,
         flex: 1,
+    },
+    signalTitle: {
+        fontSize: FONTS.small,
+        color: COLORS.textSecondary,
+        marginTop: SPACING.xs,
+        marginBottom: SPACING.xs,
     },
     badge: {
         paddingHorizontal: SPACING.s,
