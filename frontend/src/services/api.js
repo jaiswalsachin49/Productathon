@@ -177,6 +177,10 @@ class APIService {
     async getOfficerLeads(region) {
         return this.getLeads({ limit: 100 });
     }
+
+    async getOfficers() {
+        return this.request('/auth/officers');
+    }
 }
 
 // Singleton instance

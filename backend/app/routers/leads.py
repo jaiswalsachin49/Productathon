@@ -15,14 +15,17 @@ def read_leads(
     offset: int = 0,
     limit: int = 100,
     status: Optional[str] = None,
-    product_id: Optional[int] = None
+    product_id: Optional[int] = None,
+    assigned_officer: Optional[str] = None
 ):
     query = select(Lead).offset(offset).limit(limit).order_by(Lead.id.desc())
     
-    if status:
+    if status is not None:
         query = query.where(Lead.status == status)
-    if product_id:
+    if product_id is not None:
         query = query.where(Lead.product_id == product_id)
+    if assigned_officer is not None:
+        query = query.where(Lead.assigned_officer == assigned_officer)
         
     leads = session.exec(query).all()
     
