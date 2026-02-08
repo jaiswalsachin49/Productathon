@@ -1,25 +1,80 @@
 'use client';
 
 import { COLORS } from '../../../styles/theme';
+import SalesManagerLayout from '../../../components/SalesManagerLayout';
+import Link from 'next/link';
+
+// --- Icons ---
+const SignalIcon = ({ color = '#333' }) => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" strokeOpacity="0.5" />
+        <circle cx="12" cy="12" r="3" fill={color} fillOpacity="0.1" />
+    </svg>
+);
+
+const FuelIcon = ({ color = '#333' }) => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3 22v-8a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v8"></path>
+        <path d="M18 10h2a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-2"></path>
+        <path d="M14 22v-6a2 2 0 0 0-2-2"></path>
+        <path d="M11 5a3 3 0 0 0-6 0v7h6V5z"></path>
+        <path d="M8 3v2"></path>
+    </svg>
+);
+
+const OilIcon = ({ color = '#333' }) => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2.69l5.74 5.74c1.88 1.88 2.26 4.79.84 7.15-1.42 2.37-4.12 3.42-6.58 3.42s-5.16-1.05-6.58-3.42c-1.42-2.36-1.04-5.27.84-7.15L12 2.69z"></path>
+        <path d="M12 18.5a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13z" opacity="0.3"></path>
+    </svg>
+);
+
+const MapPinIcon = ({ color = '#333' }) => (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+        <circle cx="12" cy="10" r="3"></circle>
+    </svg>
+);
+
+const ConfidenceRing = ({ score, size = 100, stroke = 6 }) => {
+    const radius = (size - stroke) / 2;
+    const circumference = radius * 2 * Math.PI;
+    const offset = circumference - (score / 100) * circumference;
+
+    return (
+        <div style={{ position: 'relative', width: size, height: size, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <svg width={size} height={size} style={{ transform: 'rotate(-90deg)' }}>
+                <circle cx={size / 2} cy={size / 2} r={radius} stroke="#F0F0F0" strokeWidth={stroke} fill="transparent" />
+                <circle cx={size / 2} cy={size / 2} r={radius} stroke={COLORS.hpclBlue} strokeWidth={stroke} fill="transparent" strokeDasharray={circumference} strokeDashoffset={offset} strokeLinecap="round" />
+            </svg>
+            <div style={{ position: 'absolute', textAlign: 'center' }}>
+                <div style={{ fontSize: '24px', fontWeight: '700', color: COLORS.hpclBlue, lineHeight: 1 }}>{score}%</div>
+                <div style={{ fontSize: '9px', color: '#999', marginTop: '2px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Confidence</div>
+            </div>
+        </div>
+    );
+};
 
 export default function LeadDossier() {
     const lead = {
         company: 'ABC Logistics Pvt Ltd',
         industry: 'Transport & Logistics',
-        region: 'West Region-Mumbai Hub',
-        priority: 'High',
+        region: 'West Region - Mumbai Hub',
         lastUpdated: 'Oct 24, 2023',
         conversionConfidence: 82,
         assignedOfficer: 'Amit Shahane',
         estimatedValue: '₹1.2 Cr - ₹1.5 Cr',
-        industryRank: 'Top 5% (Mumbai)',
-        signalStrength: 'Very High',
+        industryRank: 'Top 5%',
     };
 
     const signal = {
         title: 'Major Fleet Expansion Detected',
-        description: 'The company recently registered 52 new heavy commercial vehicles (Bharat Benz 5528TT) in the Mumbai RTO. This represents a 35% increase in their total fleet size. This signal suggests a sudden and significant spike in upcoming fuel and high-performance lubricant demand.',
-        image: '🚛',
+        bullets: [
+            'Registered 52 new heavy commercial vehicles (Bharat Benz 5528TT).',
+            'Represents 35% increase in total fleet size.',
+            'Direct indicator of immediate fuel and lubricant demand spike.'
+        ],
         source: 'RTO Public Registry',
         category: 'Asset Purchase',
     };
@@ -27,409 +82,239 @@ export default function LeadDossier() {
     const products = [
         {
             name: 'HP Turbo Diesel',
-            description: 'High-performance fuel for heavy-duty engines.',
-            quote: 'Strategic fit for the new fleet expansion to ensure maximum engine life and fuel efficiency during the initial break-in period.',
-            icon: '⛽',
+            fit: 'Strategic Fit',
+            reason: 'Matches new Bharat Benz fleet specs strictly. Perfect entry point.',
+            Icon: FuelIcon,
         },
         {
             name: 'Milcy Turbo',
-            description: 'Premium engine oil for BS-VI commercial vehicles.',
-            quote: 'Bundled maintenance package recommended. High potential for long-term contract given the vehicle volume.',
-            icon: '🛢️',
+            fit: 'Cross-Sell Opportunity',
+            reason: 'High potential for long-term maintenance contract.',
+            Icon: OilIcon,
         },
     ];
 
     const notes = [
         {
-            date: 'Oct 22, 2023',
+            date: 'Oct 22',
             officer: 'Amit Shahane',
-            note: 'Met with the Procurement Head. They are currently evaluating competitors but our pricing for high-volume diesel is very attractive to them.',
-            badge: 'VISIT',
+            action: 'Site Visit',
+            detail: 'Evaluated storage capacity. Competitor pricing is aggressive but they prefer our supply reliability.',
         },
         {
-            date: 'Oct 18, 2023',
+            date: 'Oct 18',
             officer: 'Amit Shahane',
-            note: 'Initial contact established. Confirmed the 50+ vehicle purchase. Scheduled in-person demo for lubricants.',
-            badge: 'CALL',
+            action: 'Initial Call',
+            detail: 'Confirmed vehicle purchase news. Scheduled demo.',
+        },
+        {
+            date: 'Oct 15',
+            officer: 'System',
+            action: 'Signal Detected',
+            detail: 'Automated signal generated from RTO database integration.',
         },
     ];
 
+    const handleExport = () => {
+        window.print();
+    };
+
     return (
-        <div style={{ minHeight: '100vh', background: '#F5F7FA' }}>
-            {/* Navbar */}
-            <nav style={{
-                background: '#FFFFFF',
-                borderBottom: '1px solid #E0E0E0',
-                padding: '0 24px',
-                height: '56px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-            }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <div style={{
-                            width: '32px',
-                            height: '32px',
-                            background: COLORS.hpclBlue,
-                            borderRadius: '6px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            color: '#FFFFFF',
-                            fontSize: '16px',
-                            fontWeight: '800',
-                        }}>
-                            H
-                        </div>
-                        <span style={{ fontSize: '15px', fontWeight: '700', color: '#1A1A1A' }}>
-                            HPCL Manager Portal
-                        </span>
-                    </div>
+        <SalesManagerLayout>
+            <style jsx global>{`
+                @keyframes pulse-dot {
+                    0% { box-shadow: 0 0 0 0 rgba(227, 30, 36, 0.4); transform: scale(1); }
+                    70% { box-shadow: 0 0 0 6px rgba(227, 30, 36, 0); transform: scale(1.1); }
+                    100% { box-shadow: 0 0 0 0 rgba(227, 30, 36, 0); transform: scale(1); }
+                }
+                @media print {
+                    nav, button { display: none !important; }
+                    body { background: white; }
+                }
+            `}</style>
 
-                    <div style={{ display: 'flex', gap: '24px' }}>
-                        <a href="/sales-manager/dashboard" style={{
-                            fontSize: '14px',
-                            color: '#666666',
-                            textDecoration: 'none',
-                            fontWeight: '500',
-                        }}>Dashboard</a>
-                        <a href="/sales-manager/team-leads" style={{
-                            fontSize: '14px',
-                            color: '#1A1A1A',
-                            textDecoration: 'none',
-                            fontWeight: '600',
-                            borderBottom: '2px solid #4A90E2',
-                            paddingBottom: '4px',
-                        }}>Leads</a>
-                        <a href="#" style={{
-                            fontSize: '14px',
-                            color: '#666666',
-                            textDecoration: 'none',
-                            fontWeight: '500',
-                        }}>Analytics</a>
-                        <a href="#" style={{
-                            fontSize: '14px',
-                            color: '#666666',
-                            textDecoration: 'none',
-                            fontWeight: '500',
-                        }}>Regional Reports</a>
-                    </div>
-                </div>
+            <div style={{ padding: '32px 40px', maxWidth: '1200px', margin: '0 auto' }}>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                    <div style={{ position: 'relative' }}>
-                        <input
-                            type="text"
-                            placeholder="Search accounts or officers..."
-                            style={{
-                                width: '240px',
-                                padding: '8px 12px 8px 36px',
-                                borderRadius: '6px',
-                                border: '1px solid #E0E0E0',
-                                fontSize: '13px',
-                                outline: 'none',
-                            }}
-                        />
-                        <span style={{
-                            position: 'absolute',
-                            left: '12px',
-                            top: '50%',
-                            transform: 'translateY(-50%)',
-                            fontSize: '14px',
-                            color: '#999999',
-                        }}>🔍</span>
-                    </div>
-                    <div style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '8px',
-                        fontSize: '13px',
-                    }}>
-                        <span style={{ fontWeight: '600', color: '#1A1A1A' }}>Rajesh Kumar</span>
-                        <span style={{ color: '#999999' }}>Regional Manager, West</span>
-                        <div style={{
-                            width: '32px',
-                            height: '32px',
-                            borderRadius: '50%',
-                            background: '#4A90E2',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            color: '#FFFFFF',
-                            fontSize: '13px',
-                            fontWeight: '700',
-                            marginLeft: '8px',
-                        }}>RK</div>
-                    </div>
-                </div>
-            </nav>
-
-            {/* Main Content */}
-            <div style={{ padding: '24px' }}>
-                {/* Breadcrumb */}
-                <div style={{
-                    fontSize: '13px',
-                    color: '#666666',
-                    marginBottom: '16px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '8px',
-                }}>
-                    <a href="/sales-manager/team-leads" style={{ color: COLORS.hpclBlue, textDecoration: 'none' }}>
-                        Regional Leads
-                    </a>
-                    <span>›</span>
-                    <span>Mumbai District</span>
-                </div>
-
-                {/* Header */}
+                {/* --- 1. Header (Restructured & Lightened) --- */}
                 <div style={{
                     display: 'flex',
                     justifyContent: 'space-between',
-                    alignItems: 'start',
-                    marginBottom: '24px',
+                    alignItems: 'end', // Align bottom for cleaner metadata look
+                    marginBottom: '40px',
+                    borderBottom: '1px solid #E0E0E0',
+                    paddingBottom: '24px'
                 }}>
                     <div>
-                        <h1 style={{
-                            fontSize: '36px',
-                            fontWeight: '700',
-                            color: '#1A1A1A',
-                            marginBottom: '8px',
-                        }}>
-                            {lead.company}
-                        </h1>
-                        <p style={{ fontSize: '15px', color: '#666666', marginBottom: '12px' }}>
-                            {lead.industry} · {lead.region}
-                        </p>
-                    </div>
-                    <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-                        <div style={{
-                            background: '#FFE5E6',
-                            color: '#E31E24',
-                            padding: '8px 16px',
-                            borderRadius: '6px',
-                            fontSize: '13px',
-                            fontWeight: '700',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '6px',
-                        }}>
-                            ● High Priority Lead
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
+                            <h1 style={{ fontSize: '28px', fontWeight: '700', color: '#1A1A1A', margin: 0, letterSpacing: '-0.5px' }}>
+                                {lead.company}
+                            </h1>
+                            <div style={{
+                                background: '#FFF1F1',
+                                color: '#E31E24',
+                                padding: '2px 8px',
+                                borderRadius: '4px',
+                                fontSize: '10px',
+                                fontWeight: '600',
+                                letterSpacing: '0.5px',
+                                textTransform: 'uppercase'
+                            }}>
+                                High Priority
+                            </div>
                         </div>
-                        <div style={{ fontSize: '13px', color: '#999999' }}>
+                        <div style={{ fontSize: '13px', color: '#666', display: 'flex', gap: '8px', alignItems: 'center' }}>
+                            <span>{lead.industry}</span>
+                            <span style={{ color: '#DDD' }}>|</span>
+                            <span>{lead.region}</span>
+                        </div>
+                    </div>
+
+                    <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+                        <div style={{ fontSize: '12px', color: '#999', marginRight: '16px' }}>
                             Last updated: {lead.lastUpdated}
                         </div>
+                        <Link href="/sales-manager/reassign-lead">
+                            <button style={{
+                                padding: '8px 16px',
+                                background: '#FFF',
+                                border: '1px solid #DDD',
+                                borderRadius: '6px',
+                                color: '#333',
+                                fontSize: '13px',
+                                fontWeight: '500',
+                                cursor: 'pointer',
+                            }}>
+                                Edit Lead
+                            </button>
+                        </Link>
+                        <button onClick={handleExport} style={{
+                            padding: '8px 16px',
+                            background: '#F8F9FA',
+                            border: '1px solid #F8F9FA',
+                            borderRadius: '6px',
+                            color: '#333',
+                            fontSize: '13px',
+                            fontWeight: '500',
+                            cursor: 'pointer',
+                        }}>
+                            Export
+                        </button>
                     </div>
                 </div>
 
-                {/* Main Grid */}
-                <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: '1.5fr 1fr',
-                    gap: '20px',
-                }}>
+                {/* --- Main Content Grid --- */}
+                <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '40px' }}>
+
                     {/* Left Column */}
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                        {/* Detected Signal */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
+
+                        {/* 2. Detected Signal (Clean, No Blue Header) */}
                         <div style={{
                             background: '#FFFFFF',
-                            borderRadius: '12px',
-                            overflow: 'hidden',
-                            boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+                            borderRadius: '8px',
+                            border: '1px solid #E0E0E0',
+                            padding: '24px',
                         }}>
-                            <div style={{
-                                background: COLORS.hpclBlue,
-                                color: '#FFFFFF',
-                                padding: '14px 20px',
-                                fontSize: '14px',
-                                fontWeight: '700',
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '8px',
-                            }}>
-                                📡 Detected Signal
-                            </div>
-                            <div style={{ padding: '24px' }}>
-                                <div style={{ display: 'flex', gap: '20px' }}>
-                                    <div style={{
-                                        width: '180px',
-                                        height: '140px',
-                                        background: '#F0F0F0',
-                                        borderRadius: '8px',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        fontSize: '64px',
-                                        flexShrink: 0,
-                                    }}>
-                                        {signal.image}
-                                    </div>
-                                    <div style={{ flex: 1 }}>
-                                        <h3 style={{
-                                            fontSize: '20px',
-                                            fontWeight: '700',
-                                            color: '#1A1A1A',
-                                            marginBottom: '12px',
-                                        }}>
+                            <div style={{ display: 'flex', gap: '20px', alignItems: 'start' }}>
+                                <div style={{
+                                    width: '40px', height: '40px', background: '#F5F9FF', borderRadius: '8px',
+                                    display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0
+                                }}>
+                                    <SignalIcon color={COLORS.hpclBlue} />
+                                </div>
+                                <div style={{ flex: 1 }}>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                                        <h3 style={{ fontSize: '16px', fontWeight: '700', color: '#1A1A1A', margin: 0 }}>
                                             {signal.title}
                                         </h3>
-                                        <p style={{
-                                            fontSize: '14px',
-                                            color: '#666666',
-                                            lineHeight: '1.6',
-                                            marginBottom: '16px',
-                                        }}>
-                                            {signal.description}
-                                        </p>
-                                        <div style={{ display: 'flex', gap: '16px', fontSize: '12px' }}>
-                                            <div>
-                                                <span style={{ color: '#999999', textTransform: 'uppercase', fontWeight: '600' }}>SOURCE</span>
-                                                <div style={{ color: COLORS.hpclBlue, fontWeight: '600', marginTop: '4px' }}>
-                                                    {signal.source}
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <span style={{ color: '#999999', textTransform: 'uppercase', fontWeight: '600' }}>CATEGORY</span>
-                                                <div style={{ color: COLORS.hpclBlue, fontWeight: '600', marginTop: '4px' }}>
-                                                    {signal.category}
-                                                </div>
-                                            </div>
+                                        <div style={{ fontSize: '10px', fontWeight: '700', color: '#999', textTransform: 'uppercase', letterSpacing: '0.5px', marginTop: '4px' }}>
+                                            Detected Signal
                                         </div>
+                                    </div>
+                                    <ul style={{ paddingLeft: '16px', margin: '0 0 16px 0' }}>
+                                        {signal.bullets.map((bullet, idx) => (
+                                            <li key={idx} style={{ fontSize: '14px', color: '#444', marginBottom: '4px', lineHeight: '1.5' }}>
+                                                {bullet}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    <div style={{ fontSize: '12px', color: '#888', borderTop: '1px solid #F5F5F5', paddingTop: '12px' }}>
+                                        Source: <span style={{ color: '#333', fontWeight: '500' }}>{signal.source}</span>
+                                        <span style={{ margin: '0 8px', color: '#EEE' }}>|</span>
+                                        Category: <span style={{ color: '#333', fontWeight: '500' }}>{signal.category}</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        {/* Recommended Products */}
-                        <div style={{
-                            background: '#FFFFFF',
-                            borderRadius: '12px',
-                            overflow: 'hidden',
-                            boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
-                        }}>
-                            <div style={{
-                                background: COLORS.hpclBlue,
-                                color: '#FFFFFF',
-                                padding: '14px 20px',
-                                fontSize: '14px',
-                                fontWeight: '700',
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '8px',
-                            }}>
-                                📦 Recommended HPCL Products
-                            </div>
-                            <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                                {products.map((product, idx) => (
-                                    <div key={idx} style={{
-                                        border: '1px solid #E0E0E0',
-                                        borderRadius: '8px',
-                                        padding: '16px',
-                                    }}>
-                                        <div style={{ display: 'flex', alignItems: 'start', gap: '12px', marginBottom: '12px' }}>
-                                            <div style={{
-                                                width: '40px',
-                                                height: '40px',
-                                                background: '#F0F8FF',
-                                                borderRadius: '8px',
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                                fontSize: '20px',
-                                                flexShrink: 0,
-                                            }}>
-                                                {product.icon}
-                                            </div>
-                                            <div style={{ flex: 1 }}>
-                                                <h4 style={{ fontSize: '16px', fontWeight: '700', color: '#1A1A1A', marginBottom: '4px' }}>
-                                                    {product.name}
-                                                </h4>
-                                                <p style={{ fontSize: '13px', color: '#666666' }}>
-                                                    {product.description}
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div style={{
-                                            background: '#F8F9FA',
-                                            borderLeft: '3px solid #4A90E2',
-                                            padding: '12px',
-                                            borderRadius: '4px',
-                                            fontSize: '13px',
-                                            color: '#333333',
-                                            fontStyle: 'italic',
+                        {/* 3. Recommended Actions (Decision Cards) */}
+                        <div>
+                            <h4 style={{ fontSize: '12px', fontWeight: '700', color: '#888', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                                Recommended Decision
+                            </h4>
+                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+                                {products.map((product, idx) => {
+                                    const Icon = product.Icon;
+                                    return (
+                                        <div key={idx} style={{
+                                            background: '#FFFFFF',
+                                            borderRadius: '8px',
+                                            border: '1px solid #E0E0E0',
+                                            padding: '20px',
                                         }}>
-                                            "{product.quote}"
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '16px' }}>
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                                                    <div style={{
+                                                        width: '32px', height: '32px', background: '#F5F7FA', borderRadius: '6px',
+                                                        display: 'flex', alignItems: 'center', justifyContent: 'center'
+                                                    }}>
+                                                        <Icon color="#555" />
+                                                    </div>
+                                                    <span style={{ fontSize: '15px', fontWeight: '700', color: '#1A1A1A' }}>{product.name}</span>
+                                                </div>
+                                                <div style={{
+                                                    background: '#E8F5E9', color: '#2E7D32', padding: '2px 6px',
+                                                    borderRadius: '4px', fontSize: '9px', fontWeight: '700', textTransform: 'uppercase'
+                                                }}>
+                                                    High Relevance
+                                                </div>
+                                            </div>
+                                            <p style={{ fontSize: '13px', color: '#444', lineHeight: '1.5', margin: 0 }}>
+                                                <span style={{ color: '#1A1A1A', fontWeight: '600' }}>Why: </span>
+                                                {product.reason}
+                                            </p>
                                         </div>
-                                    </div>
-                                ))}
+                                    );
+                                })}
                             </div>
                         </div>
 
-                        {/* Sales Officer Notes */}
-                        <div style={{
-                            background: '#FFFFFF',
-                            borderRadius: '12px',
-                            overflow: 'hidden',
-                            boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
-                        }}>
-                            <div style={{
-                                background: COLORS.hpclBlue,
-                                color: '#FFFFFF',
-                                padding: '14px 20px',
-                                fontSize: '14px',
-                                fontWeight: '700',
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '8px',
-                            }}>
-                                📝 Sales Officer Notes
-                            </div>
-                            <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                        {/* 5. Engagement History (Timeline) */}
+                        <div>
+                            <h4 style={{ fontSize: '12px', fontWeight: '700', color: '#888', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                                Progression
+                            </h4>
+                            <div style={{ background: '#FFFFFF', borderRadius: '8px', border: '1px solid #E0E0E0', padding: '24px 24px 8px 24px' }}>
                                 {notes.map((note, idx) => (
-                                    <div key={idx} style={{
-                                        display: 'flex',
-                                        gap: '12px',
-                                        paddingBottom: idx < notes.length - 1 ? '16px' : '0',
-                                        borderBottom: idx < notes.length - 1 ? '1px solid #F0F0F0' : 'none',
-                                    }}>
+                                    <div key={idx} style={{ display: 'flex', gap: '24px', position: 'relative', marginBottom: '24px' }}>
+                                        {idx !== notes.length - 1 && (
+                                            <div style={{ position: 'absolute', left: '7px', top: '20px', bottom: '-40px', width: '1px', background: '#E0E0E0' }}></div>
+                                        )}
                                         <div style={{
-                                            width: '40px',
-                                            height: '40px',
-                                            borderRadius: '50%',
-                                            background: note.badge === 'VISIT' ? '#E8F5E9' : '#E3F2FD',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center',
-                                            color: note.badge === 'VISIT' ? '#28A745' : '#4A90E2',
-                                            fontSize: '18px',
-                                            flexShrink: 0,
-                                        }}>
-                                            ●
-                                        </div>
+                                            width: '15px', height: '15px', borderRadius: '50%',
+                                            background: idx === 0 ? COLORS.hpclRed : '#F5F5F5',
+                                            border: idx === 0 ? `3px solid ${COLORS.hpclRed}` : '3px solid white',
+                                            boxShadow: idx === 0 ? 'none' : '0 0 0 1px #E0E0E0',
+                                            marginTop: '4px', flexShrink: 0, zIndex: 1,
+                                            animation: idx === 0 ? 'pulse-dot 2s infinite' : 'none',
+                                        }}></div>
                                         <div style={{ flex: 1 }}>
-                                            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                                                <div>
-                                                    <div style={{ fontSize: '13px', color: '#999999' }}>{note.date}</div>
-                                                    <div style={{ fontSize: '14px', fontWeight: '600', color: '#1A1A1A' }}>
-                                                        {note.officer}
-                                                    </div>
-                                                </div>
-                                                <div style={{
-                                                    background: note.badge === 'VISIT' ? '#E8F5E9' : '#E3F2FD',
-                                                    color: note.badge === 'VISIT' ? '#28A745' : '#4A90E2',
-                                                    padding: '4px 10px',
-                                                    borderRadius: '4px',
-                                                    fontSize: '11px',
-                                                    fontWeight: '700',
-                                                    height: 'fit-content',
-                                                }}>
-                                                    {note.badge}
-                                                </div>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
+                                                <span style={{ fontSize: '14px', fontWeight: '700', color: '#1A1A1A' }}>{note.action}</span>
+                                                <span style={{ fontSize: '11px', color: '#999', fontWeight: '500' }}>{note.date}</span>
                                             </div>
-                                            <p style={{ fontSize: '14px', color: '#333333', lineHeight: '1.6' }}>
-                                                {note.note}
-                                            </p>
+                                            <div style={{ fontSize: '13px', color: '#555', lineHeight: '1.4' }}>{note.detail}</div>
+                                            <div style={{ fontSize: '11px', color: '#BBB', marginTop: '4px' }}>by {note.officer}</div>
                                         </div>
                                     </div>
                                 ))}
@@ -437,165 +322,64 @@ export default function LeadDossier() {
                         </div>
                     </div>
 
-                    {/* Right Column */}
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                        {/* Lead Metadata */}
+                    {/* Right Column: Intelligence Sidebar */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+
+                        {/* 3. Lead Metadata (Rebalanced) */}
                         <div style={{
                             background: '#FFFFFF',
                             borderRadius: '12px',
-                            overflow: 'hidden',
-                            boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+                            boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
+                            padding: '32px 24px',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            borderTop: `4px solid ${COLORS.hpclBlue}`
                         }}>
-                            <div style={{
-                                background: COLORS.hpclBlue,
-                                color: '#FFFFFF',
-                                padding: '14px 20px',
-                                fontSize: '14px',
-                                fontWeight: '700',
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '8px',
-                            }}>
-                                ℹ️ Lead Metadata
-                            </div>
-                            <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                                {/* Conversion Confidence */}
+                            <ConfidenceRing score={lead.conversionConfidence} />
+                            <div style={{ height: '1px', width: '100%', background: '#F5F5F5', margin: '24px 0' }}></div>
+
+                            <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '20px' }}>
                                 <div>
-                                    <div style={{
-                                        display: 'flex',
-                                        justifyContent: 'space-between',
-                                        marginBottom: '8px',
-                                    }}>
-                                        <span style={{ fontSize: '13px', color: '#666666', fontWeight: '600' }}>
-                                            Conversion Confidence
-                                        </span>
-                                        <span style={{ fontSize: '16px', fontWeight: '700', color: COLORS.hpclBlue }}>
-                                            {lead.conversionConfidence}%
-                                        </span>
-                                    </div>
-                                    <div style={{
-                                        width: '100%',
-                                        height: '8px',
-                                        background: '#F0F0F0',
-                                        borderRadius: '4px',
-                                        overflow: 'hidden',
-                                    }}>
-                                        <div style={{
-                                            width: `${lead.conversionConfidence}%`,
-                                            height: '100%',
-                                            background: COLORS.hpclBlue,
-                                            borderRadius: '4px',
-                                        }} />
-                                    </div>
+                                    <div style={{ fontSize: '10px', color: '#999', fontWeight: '700', letterSpacing: '0.5px', marginBottom: '4px' }}>EST. VALUE</div>
+                                    <div style={{ fontSize: '16px', fontWeight: '700', color: '#1A1A1A' }}>{lead.estimatedValue}</div>
                                 </div>
-
-                                {/* Other Metadata */}
-                                <div style={{
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    gap: '16px',
-                                }}>
-                                    <div>
-                                        <div style={{ fontSize: '13px', color: '#999999', marginBottom: '4px' }}>
-                                            Assigned Officer
-                                        </div>
-                                        <div style={{ fontSize: '15px', fontWeight: '600', color: '#1A1A1A' }}>
-                                            {lead.assignedOfficer}
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <div style={{ fontSize: '13px', color: '#999999', marginBottom: '4px' }}>
-                                            Est. Annual Value
-                                        </div>
-                                        <div style={{ fontSize: '15px', fontWeight: '600', color: '#1A1A1A' }}>
-                                            {lead.estimatedValue}
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <div style={{ fontSize: '13px', color: '#999999', marginBottom: '4px' }}>
-                                            Industry Rank
-                                        </div>
-                                        <div style={{ fontSize: '15px', fontWeight: '600', color: '#28A745' }}>
-                                            {lead.industryRank}
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <div style={{ fontSize: '13px', color: '#999999', marginBottom: '4px' }}>
-                                            Signal Strength
-                                        </div>
-                                        <div style={{
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            gap: '6px',
-                                            fontSize: '15px',
-                                            fontWeight: '600',
-                                            color: COLORS.hpclBlue,
-                                        }}>
-                                            <span style={{ fontSize: '12px' }}>📊</span>
-                                            {lead.signalStrength}
-                                        </div>
+                                <div>
+                                    <div style={{ fontSize: '10px', color: '#999', fontWeight: '700', letterSpacing: '0.5px', marginBottom: '4px' }}>ASSIGNED TO</div>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                        <div style={{ width: '20px', height: '20px', borderRadius: '50%', background: '#E3F2FD', color: COLORS.hpclBlue, fontSize: '9px', fontWeight: '700', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>AS</div>
+                                        <div style={{ fontSize: '13px', fontWeight: '600', color: '#333' }}>{lead.assignedOfficer}</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        {/* Location Map */}
+                        {/* 4. Map Section (Reduced Dominance) */}
                         <div style={{
                             background: '#FFFFFF',
                             borderRadius: '12px',
                             overflow: 'hidden',
-                            boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+                            border: '1px solid #E0E0E0',
+                            height: '160px', // Reduced height
+                            position: 'relative'
                         }}>
                             <div style={{
-                                height: '300px',
-                                background: 'linear-gradient(135deg, #E8F0FE 0%, #F0F8FF 100%)',
-                                display: 'flex',
-                                flexDirection: 'column',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                position: 'relative',
+                                width: '100%', height: '100%',
+                                background: '#F5F7FA',
+                                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                backgroundImage: 'radial-gradient(#E1E4E8 1px, transparent 1px)',
+                                backgroundSize: '12px 12px'
                             }}>
-                                <div style={{
-                                    fontSize: '64px',
-                                    marginBottom: '16px',
-                                }}>
-                                    📍
-                                </div>
-                                <div style={{
-                                    background: '#FFFFFF',
-                                    padding: '10px 20px',
-                                    borderRadius: '8px',
-                                    boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: '8px',
-                                }}>
-                                    <span style={{ fontSize: '12px' }}>📍</span>
-                                    <span style={{ fontSize: '14px', fontWeight: '600', color: '#1A1A1A' }}>
-                                        Navi Mumbai Industrial Zone
-                                    </span>
+                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
+                                    <MapPinIcon color={COLORS.hpclRed} />
+                                    <span style={{ fontSize: '11px', fontWeight: '600', color: '#555' }}>Mumbai Hub</span>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
-
-            {/* Footer */}
-            <div style={{
-                padding: '16px 24px',
-                borderTop: '1px solid #E0E0E0',
-                background: '#FFFFFF',
-                marginTop: '24px',
-                fontSize: '11px',
-                color: '#999999',
-                textAlign: 'center',
-            }}>
-                HPCL LEAD INTEL ENGINE · V2.4.0 · CONFIDENTIAL MANAGER VIEW
-            </div>
-        </div>
+        </SalesManagerLayout>
     );
 }
