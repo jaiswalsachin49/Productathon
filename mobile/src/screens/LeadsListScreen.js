@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet, RefreshControl } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet, RefreshControl, ActivityIndicator } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { COLORS, SPACING, FONTS } from '../constants/theme';
-import { storageService } from '../services/storage';
+import { apiService } from '../services/api';
 
 const LeadCard = ({ lead, onPress }) => (
     <TouchableOpacity
@@ -13,7 +13,7 @@ const LeadCard = ({ lead, onPress }) => (
         onPress={onPress}
     >
         <View style={styles.cardHeader}>
-            <Text style={styles.companyName}>{lead.companyName}</Text>
+            <Text style={styles.companyName}>{lead.company_name || lead.company?.name || 'Unknown Company'}</Text>
             <View style={[
                 styles.badge,
                 {
@@ -25,22 +25,24 @@ const LeadCard = ({ lead, onPress }) => (
             </View>
         </View>
 
-        <Text style={styles.industry}>{lead.industry} • {lead.location}</Text>
+        <Text style={styles.industry}>{(lead.company_industry || lead.industry || 'General') + ' • ' + (lead.company_city || lead.location || 'Unknown')}</Text>
 
         <View style={styles.scoreContainer}>
             <Text style={styles.scoreLabel}>Confidence Score</Text>
-            <Text style={[styles.scoreValue, { color: lead.matchScore > 80 ? COLORS.success : COLORS.warning }]}>
-                {lead.matchScore}%
+            <Text style={[styles.scoreValue, { color: (lead.confidence_score * 100) > 80 ? COLORS.success : COLORS.warning }]}>
+                {Math.round(lead.confidence_score * 100)}%
             </Text>
         </View>
 
-        <Text style={styles.summary} numberOfLines={2}>{lead.summary}</Text>
+        <Text style={styles.summary} numberOfLines={2}>{lead.summary || lead.ai_reasoning || 'No summary available.'}</Text>
 
         <View style={styles.productsContainer}>
-            {lead.products.map((prod, idx) => (
-                <View key={idx} style={styles.productTag}>
-                    <Text style={styles.productText}>{prod}</Text>
-                </View>
+            {[lead.product_name || lead.product?.name].map((prod, idx) => (
+                prod && (
+                    <View key={idx} style={styles.productTag}>
+                        <Text style={styles.productText}>{prod}</Text>
+                    </View>
+                )
             ))}
         </View>
     </TouchableOpacity>
@@ -49,17 +51,25 @@ const LeadCard = ({ lead, onPress }) => (
 const LeadsListScreen = ({ navigation }) => {
     const [leads, setLeads] = useState([]);
     const [refreshing, setRefreshing] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const loadLeads = async () => {
-        await storageService.init();
-        const data = await storageService.getLeads();
-        const sorted = data.sort((a, b) => {
+        try {
+            const data = await apiService.getLeads();
             // Sort logic: New first, then by score
-            if (a.status === 'New' && b.status !== 'New') return -1;
-            if (a.status !== 'New' && b.status === 'New') return 1;
-            return b.matchScore - a.matchScore;
-        });
-        setLeads(sorted);
+            const sorted = data.sort((a, b) => {
+                if (a.status === 'New' && b.status !== 'New') return -1;
+                if (a.status !== 'New' && b.status === 'New') return 1;
+                const scoreA = a.matchScore || (a.confidence_score * 100);
+                const scoreB = b.matchScore || (b.confidence_score * 100);
+                return scoreB - scoreA;
+            });
+            setLeads(sorted);
+        } catch (error) {
+            console.error("Failed to load leads", error);
+        } finally {
+            setLoading(false);
+        }
     };
 
     useFocusEffect(
@@ -74,8 +84,13 @@ const LeadsListScreen = ({ navigation }) => {
         setRefreshing(false);
     };
 
-    // Filter out Rejected leads to move them to bottom or keep them? 
-    // User asked to show them in red, implying they should be visible.
+    if (loading && !refreshing) {
+        return (
+            <View style={[styles.container, styles.center]}>
+                <ActivityIndicator size="large" color={COLORS.primary} />
+            </View>
+        );
+    }
 
     return (
         <View style={styles.container}>
@@ -86,11 +101,11 @@ const LeadsListScreen = ({ navigation }) => {
 
             <FlatList
                 data={leads}
-                keyExtractor={item => item.id}
+                keyExtractor={item => item.id.toString()}
                 renderItem={({ item }) => (
                     <LeadCard
                         lead={item}
-                        onPress={() => navigation.navigate('LeadDetails', { leadId: item.id })}
+                        onPress={() => navigation.navigate('LeadDetails', { leadId: item.id, lead: item })}
                     />
                 )}
                 contentContainerStyle={styles.listContent}
@@ -111,6 +126,11 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: COLORS.background,
+    },
+    center: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        flex: 1,
     },
     header: {
         backgroundColor: COLORS.primary,

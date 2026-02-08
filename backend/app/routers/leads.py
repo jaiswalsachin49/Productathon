@@ -31,6 +31,9 @@ def read_leads(
     for lead in leads:
         lead_dict = lead.model_dump()
         lead_dict["company_name"] = lead.company.name if lead.company else None
+        lead_dict["company_industry"] = lead.company.industry if lead.company else None
+        lead_dict["company_city"] = lead.company.city if lead.company else None
+        lead_dict["company_state"] = lead.company.state if lead.company else None
         lead_dict["product_name"] = lead.product.name if lead.product else None
         lead_dict["signal_title"] = lead.signal.title if lead.signal else None
         result.append(lead_dict)
@@ -45,6 +48,9 @@ def read_lead(lead_id: int, session: Session = Depends(get_session)):
         
     lead_dict = lead.model_dump()
     lead_dict["company_name"] = lead.company.name if lead.company else None
+    lead_dict["company_industry"] = lead.company.industry if lead.company else None
+    lead_dict["company_city"] = lead.company.city if lead.company else None
+    lead_dict["company_state"] = lead.company.state if lead.company else None
     lead_dict["product_name"] = lead.product.name if lead.product else None
     
     # Include signals details for context
