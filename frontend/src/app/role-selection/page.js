@@ -52,6 +52,7 @@ export default function RoleSelection() {
                             // WebkitTextFillColor: 'transparent',
                             marginBottom: '16px',
                             letterSpacing: '-0.5px',
+                            color: 'rgba(233, 235, 237, 1)',
                         }}>
                             Select Your Role
                         </h1>
